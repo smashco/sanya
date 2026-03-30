@@ -454,30 +454,79 @@ footer{
 /* ─────────────────────────────
    MOBILE
 ───────────────────────────── */
-@media(max-width:580px){
-  .hero{padding:40px 18px 56px}
-  .h-label{font-size:.7rem;letter-spacing:.2em}
-  .badge-num{font-size:1.85rem}
-  .tn-split{grid-template-columns:1fr 32px 1fr;padding:0 14px}
-  .tn-photo img{height:clamp(165px,44vw,220px)}
-  .tn-vl{flex:0;height:36px}
-  .ev-grid{grid-template-columns:1fr;padding:0 14px}
+@media(max-width:600px){
+  /* ── HERO ── */
+  .hero{padding:36px 16px 52px}
+  .h-label{font-size:.64rem;letter-spacing:.14em}
+  .h-marathi{font-size:.82rem}
+  .h-sub{font-size:.92rem;margin-bottom:24px}
+  .badge-num{font-size:1.8rem}
+  .shri{letter-spacing:.12em}
+  .names{margin-bottom:8px}
+
+  /* ── THEN & NOW — stack vertically ── */
+  .tn-split{
+    display:flex;flex-direction:column;align-items:stretch;
+    gap:10px;padding:0 16px;
+  }
+  .tn-photo img{height:clamp(200px,62vw,270px)}
+  .tn-mid{
+    flex-direction:row;justify-content:center;
+    padding:4px 0;gap:12px;
+  }
+  .tn-vl{
+    flex:0;width:40px;height:1px;
+    background:linear-gradient(to right,transparent,var(--gold),transparent);
+  }
+  .tn-yrs{writing-mode:horizontal-tb;text-orientation:mixed;font-size:.55rem;letter-spacing:.08em}
+
+  /* ── INVITATION ── */
+  .inv-section{padding:0 16px 40px}
+  .inv-body{font-size:1.05rem;line-height:1.85}
+
+  /* ── EVENT DETAILS ── */
+  .ev-section{padding:0 16px 44px}
+  .ev-grid{grid-template-columns:1fr;padding:0}
   .ev-sep{display:none}
-  .ev-box{padding:8px 10px}
-  .mom-grid{grid-template-columns:1fr 1fr;gap:8px;padding:0 14px}
-  .mom-ph img{height:clamp(140px,38vw,190px)}
-  .rsvp-card{padding:26px 16px 24px}
-  .rsvp-choices{flex-direction:column;align-items:center}
-  .rsvp-choice{width:100%;max-width:280px}
-  .rsvp-choice label{justify-content:center}
-  .rsvp-btn{width:100%;max-width:280px;padding:16px}
-  .section-orn{padding:36px 18px 32px}
-  .pait-div svg{height:22px}
+  .ev-box{
+    padding:14px 8px;
+    border-bottom:1px solid rgba(139,105,20,.18);
+  }
+  .ev-box:last-child{border-bottom:none}
+  .maps-link{margin-top:10px;font-size:.58rem}
+
+  /* ── TAGLINE ── */
+  .tagline-section{padding:0 16px 40px}
+
+  /* ── MOMENTS — single column ── */
+  .moments{padding:0 16px 44px}
+  .mom-grid{grid-template-columns:1fr;gap:10px}
+  .mom-ph img{height:clamp(220px,66vw,320px);object-position:center center}
+
+  /* ── RSVP ── */
+  .rsvp-section{padding:0 16px 52px}
+  .rsvp-card{padding:24px 14px 22px}
+  .rsvp-choices{flex-direction:column;align-items:stretch;gap:10px}
+  .rsvp-choice{width:100%}
+  .rsvp-choice label{justify-content:center;padding:15px 20px}
+  .rsvp-btn{width:100%;padding:16px}
+  .rsvp-btn-wrap{margin-top:18px}
+
+  /* ── SHARED ── */
+  .section-orn{padding:32px 16px 28px}
+  .pait-div svg{height:20px}
+  footer{padding:26px 14px 38px}
+  .foot-main{font-size:.48rem;letter-spacing:.22em}
 }
-@media(max-width:360px){
-  .name{font-size:1.45rem!important}.name.sm{font-size:1.15rem!important}
-  .hero-arch{width:72vw}
-  .hero-arch img{height:68vw}
+
+@media(max-width:380px){
+  .name{font-size:1.38rem!important}
+  .name.sm{font-size:1.1rem!important}
+  .hero-arch{width:68vw}
+  .hero-arch img{height:64vw}
+  .h-label{letter-spacing:.1em;font-size:.6rem}
+  .badge-num{font-size:1.6rem}
+  .rsvp-card::before{inset:2px}
 }
 </style>
 </head>
