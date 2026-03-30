@@ -1343,11 +1343,23 @@
   revealEls.forEach(el => observer.observe(el));
 
   /* ---------- RSVP ---------- */
+  const APPS_SCRIPT_URL = 'PASTE_YOUR_APPS_SCRIPT_URL_HERE';
+
   function submitRSVP(e) {
     e.preventDefault();
-    const name = document.getElementById('rsvp-name').value.trim();
+    const name       = document.getElementById('rsvp-name').value.trim();
     const attendance = document.querySelector('input[name="attendance"]:checked');
+    const guests     = document.getElementById('rsvp-guests').value || 1;
     if (!name || !attendance) return;
+
+    const btn = document.querySelector('.rsvp-btn');
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+
+    fetch(APPS_SCRIPT_URL, {
+      method: 'POST',
+      body: JSON.stringify({ name, attendance: attendance.value, guests })
+    }).catch(() => {}); // fire-and-forget, don't block UI
 
     const form = document.getElementById('rsvp-form');
     const msg  = document.getElementById('rsvp-confirm-msg');
