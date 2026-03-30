@@ -3,33 +3,31 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>How We Made It — Ruta & Anant Silver Jubilee Invitation</title>
+<title>How We Built It — Ruta & Anant Silver Jubilee Invitation</title>
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --ivory:   #F8F3E8;
-  --cream:   #FAF7F0;
-  --brown:   #2C1A10;
-  --brown2:  #5A3A25;
-  --green:   #5C7A3E;
-  --green2:  #7A9E55;
-  --gold:    #C9A96E;
-  --gold2:   #E8D4A8;
-  --silver:  #A8B8C8;
-  --ink:     #1A1A2E;
+  --ivory:  #F8F3E8;
+  --cream:  #FAF7F0;
+  --brown:  #2C1A10;
+  --brown2: #5A3A25;
+  --green:  #5C7A3E;
+  --green2: #7A9E55;
+  --gold:   #C9A96E;
+  --gold2:  #E8D4A8;
+  --ink:    #1A1A2E;
 }
 
 body {
-  background: #E8E2D8;
+  background: #DDD8CE;
   font-family: 'Lato', sans-serif;
   color: var(--brown);
   font-size: 11pt;
   line-height: 1.65;
 }
 
-/* ──────────── PAGE LAYOUT ──────────── */
 .page {
   width: 210mm;
   min-height: 297mm;
@@ -40,540 +38,332 @@ body {
   page-break-after: always;
 }
 
-/* ──────────── COVER PAGE ──────────── */
+/* ── COVER ── */
 .cover {
   background: var(--brown);
+  min-height: 297mm;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 0;
-  min-height: 297mm;
-}
-
-.cover-bg {
-  position: absolute;
-  inset: 0;
-  overflow: hidden;
-}
-
-.cover-content {
   position: relative;
-  z-index: 2;
-  padding: 60px 50px;
 }
+.cover-bg { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+.cover-content { position: relative; z-index: 2; padding: 60px 50px; }
 
 .cover-eyebrow {
-  font-family: 'Lato', sans-serif;
-  font-size: 0.62rem;
+  font-size: 0.6rem;
   letter-spacing: 0.4em;
   text-transform: uppercase;
   color: var(--gold);
-  margin-bottom: 28px;
+  margin-bottom: 24px;
 }
-
 .cover-title {
   font-family: 'Playfair Display', serif;
-  font-size: 3.2rem;
+  font-size: 3rem;
   line-height: 1.15;
   color: white;
-  margin-bottom: 12px;
+  margin-bottom: 10px;
 }
-
-.cover-title em {
-  color: var(--gold);
-  font-style: italic;
-}
-
+.cover-title em { color: var(--gold); font-style: italic; }
 .cover-sub {
   font-family: 'Playfair Display', serif;
-  font-size: 1.1rem;
+  font-size: 1rem;
   font-style: italic;
-  color: rgba(255,255,255,0.65);
-  margin-bottom: 48px;
+  color: rgba(255,255,255,0.55);
+  margin-bottom: 44px;
 }
-
 .cover-rule {
-  width: 80px;
-  height: 1px;
+  width: 80px; height: 1px;
   background: linear-gradient(90deg, transparent, var(--gold), transparent);
-  margin: 0 auto 48px;
+  margin: 0 auto 44px;
 }
-
-.cover-meta {
+.cover-pills {
   display: flex;
-  gap: 48px;
+  gap: 32px;
   justify-content: center;
+  flex-wrap: wrap;
 }
-
-.cover-meta-item {
+.cover-pill {
   text-align: center;
 }
-
-.cover-meta-num {
+.cover-pill-num {
   font-family: 'Playfair Display', serif;
-  font-size: 2.2rem;
+  font-size: 2rem;
   color: var(--gold);
   line-height: 1;
 }
-
-.cover-meta-label {
-  font-size: 0.65rem;
-  letter-spacing: 0.3em;
+.cover-pill-label {
+  font-size: 0.6rem;
+  letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.5);
+  color: rgba(255,255,255,0.4);
   margin-top: 4px;
 }
-
 .cover-footer {
   position: absolute;
-  bottom: 36px;
-  left: 0; right: 0;
+  bottom: 32px; left: 0; right: 0;
   text-align: center;
-  font-size: 0.65rem;
+  font-size: 0.62rem;
   letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.3);
+  color: rgba(255,255,255,0.25);
 }
 
-/* ──────────── INNER PAGES ──────────── */
+/* ── INNER PAGE ── */
 .page-inner {
-  padding: 52px 52px 48px;
+  padding: 50px 52px 48px;
   min-height: 297mm;
   position: relative;
 }
-
-/* page header strip */
 .page-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 44px;
-  padding-bottom: 14px;
-  border-bottom: 1px solid rgba(92,122,62,0.2);
+  margin-bottom: 36px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(92,122,62,0.18);
 }
-
 .page-header-title {
-  font-family: 'Lato', sans-serif;
-  font-size: 0.6rem;
+  font-size: 0.58rem;
   letter-spacing: 0.35em;
   text-transform: uppercase;
   color: var(--green);
 }
-
 .page-header-num {
   font-family: 'Playfair Display', serif;
-  font-size: 1.1rem;
+  font-size: 1rem;
   color: var(--gold);
 }
 
-/* section heading */
-h2.section-heading {
+h2.sh {
   font-family: 'Playfair Display', serif;
-  font-size: 1.9rem;
+  font-size: 1.85rem;
   color: var(--brown);
   margin-bottom: 6px;
   line-height: 1.2;
 }
-
-h2.section-heading span {
-  color: var(--green);
-}
-
-.section-intro {
+h2.sh span { color: var(--green); }
+.si {
   font-size: 0.88rem;
   color: var(--brown2);
-  margin-bottom: 32px;
-  max-width: 520px;
+  margin-bottom: 28px;
+  max-width: 500px;
   line-height: 1.7;
 }
 
-/* ──────────── BRIEF SECTION ──────────── */
-.brief-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-  margin-bottom: 32px;
-}
-
-.brief-card {
+/* ── ANALOGY CARDS ── */
+.analogy-card {
+  display: flex;
+  gap: 18px;
+  align-items: flex-start;
   background: var(--cream);
-  border-left: 3px solid var(--gold);
-  border-radius: 0 8px 8px 0;
-  padding: 16px 18px;
+  border-radius: 12px;
+  padding: 18px 20px;
+  margin-bottom: 14px;
+  border-left: 4px solid var(--gold);
 }
-
-.brief-card-label {
-  font-size: 0.6rem;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: var(--green);
-  font-weight: 700;
-  margin-bottom: 6px;
-}
-
-.brief-card-value {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.05rem;
-  color: var(--brown);
-}
-
-/* ──────────── TIMELINE ──────────── */
-.timeline {
-  position: relative;
-  margin: 0 0 32px 0;
-}
-
-.timeline::before {
-  content: '';
-  position: absolute;
-  left: 22px;
-  top: 0; bottom: 0;
-  width: 2px;
-  background: linear-gradient(to bottom, var(--gold), var(--green), var(--gold));
-}
-
-.timeline-item {
-  display: flex;
-  gap: 20px;
-  margin-bottom: 24px;
-  position: relative;
-}
-
-.timeline-dot {
-  width: 46px;
-  height: 46px;
-  border-radius: 50%;
-  background: var(--brown);
-  border: 2px solid var(--gold);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.analogy-emoji {
+  font-size: 2rem;
+  line-height: 1;
   flex-shrink: 0;
-  z-index: 1;
-  color: var(--gold);
-  font-family: 'Playfair Display', serif;
-  font-size: 1rem;
-  font-weight: 700;
+  width: 44px;
+  text-align: center;
 }
-
-.timeline-body {
-  padding-top: 8px;
-}
-
-.timeline-step {
-  font-size: 0.6rem;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 2px;
-}
-
-.timeline-title {
+.analogy-title {
   font-family: 'Playfair Display', serif;
   font-size: 1rem;
   color: var(--brown);
   margin-bottom: 3px;
 }
-
-.timeline-desc {
+.analogy-tech {
+  font-family: 'Fira Code', monospace;
+  font-size: 0.65rem;
+  background: var(--brown);
+  color: var(--gold);
+  padding: 1px 7px;
+  border-radius: 4px;
+  display: inline-block;
+  margin-bottom: 5px;
+}
+.analogy-simple {
   font-size: 0.8rem;
   color: var(--brown2);
-  line-height: 1.55;
+  line-height: 1.5;
 }
 
-/* ──────────── DESIGN CARDS ──────────── */
-.designs-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
-  margin-bottom: 28px;
-}
-
-.design-card {
-  border-radius: 10px;
-  overflow: hidden;
-  border: 1px solid rgba(0,0,0,0.08);
-  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
-}
-
-.design-card-swatch {
-  height: 56px;
-  display: flex;
-  align-items: center;
-  padding: 0 16px;
-  gap: 8px;
-}
-
-.swatch-dot {
-  width: 10px; height: 10px;
-  border-radius: 50%;
-  border: 1px solid rgba(255,255,255,0.3);
-}
-
-.design-card-version {
-  margin-left: auto;
-  font-size: 0.6rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  opacity: 0.7;
-  color: white;
-}
-
-.design-card-body {
-  padding: 12px 14px;
-  background: white;
-}
-
-.design-card-name {
-  font-family: 'Playfair Display', serif;
-  font-size: 0.95rem;
-  margin-bottom: 3px;
-}
-
-.design-card-desc {
-  font-size: 0.72rem;
-  color: var(--brown2);
-  line-height: 1.4;
-}
-
-.winner-badge {
-  display: inline-block;
-  background: var(--gold);
-  color: white;
-  font-size: 0.55rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  padding: 2px 7px;
-  border-radius: 20px;
-  margin-left: 6px;
-  font-weight: 700;
-  vertical-align: middle;
-}
-
-/* ──────────── TECH FEATURES ──────────── */
-.features-list {
+/* ── STEP BLOCKS ── */
+.step-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 14px;
-  margin-bottom: 28px;
+  margin: 22px 0;
 }
-
-.feature-item {
+.step-block {
+  border-radius: 10px;
+  overflow: hidden;
+  border: 1px solid rgba(92,122,62,0.12);
+}
+.step-block-header {
+  background: var(--green);
+  color: white;
+  padding: 9px 14px;
+  font-size: 0.68rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 700;
   display: flex;
-  gap: 12px;
-  align-items: flex-start;
+  align-items: center;
+  gap: 8px;
 }
-
-.feature-icon {
-  width: 36px;
-  height: 36px;
-  border-radius: 8px;
-  background: var(--cream);
-  border: 1px solid rgba(92,122,62,0.2);
+.step-num {
+  background: rgba(255,255,255,0.2);
+  width: 20px; height: 20px;
+  border-radius: 50%;
   display: flex;
   align-items: center;
   justify-content: center;
+  font-size: 0.7rem;
+  font-weight: 700;
+  font-family: 'Playfair Display', serif;
   flex-shrink: 0;
 }
-
-.feature-body {}
-
-.feature-title {
-  font-weight: 700;
-  font-size: 0.82rem;
-  color: var(--brown);
-  margin-bottom: 2px;
-}
-
-.feature-desc {
-  font-size: 0.72rem;
+.step-block-body {
+  padding: 12px 14px;
+  font-size: 0.78rem;
   color: var(--brown2);
-  line-height: 1.4;
+  line-height: 1.5;
 }
 
-/* ──────────── CODE BLOCK ──────────── */
+/* ── CODE BLOCK ── */
 .code-block {
   background: var(--ink);
-  border-radius: 8px;
+  border-radius: 10px;
   padding: 16px 18px;
   margin: 16px 0;
-  overflow: hidden;
 }
-
+.code-label {
+  font-size: 0.58rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.3);
+  margin-bottom: 8px;
+}
 .code-block pre {
   font-family: 'Fira Code', monospace;
-  font-size: 0.7rem;
-  line-height: 1.6;
+  font-size: 0.68rem;
+  line-height: 1.65;
   color: #A8D8A8;
   white-space: pre-wrap;
 }
+.kw  { color: #C792EA; }
+.fn  { color: #82AAFF; }
+.str { color: #C3E88D; }
+.cm  { color: #546E7A; }
+.num { color: #F78C6C; }
 
-.code-block pre .kw  { color: #C792EA; }
-.code-block pre .fn  { color: #82AAFF; }
-.code-block pre .str { color: #C3E88D; }
-.code-block pre .cm  { color: #546E7A; }
-
-/* ──────────── AI SKILLS BOX ──────────── */
-.skill-box {
-  background: var(--brown);
-  border-radius: 12px;
-  padding: 22px 24px;
-  margin-bottom: 20px;
-  color: white;
-}
-
-.skill-box-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 1rem;
-  color: var(--gold);
-  margin-bottom: 4px;
-}
-
-.skill-box-sub {
-  font-size: 0.7rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.4);
-  margin-bottom: 14px;
-}
-
-.skill-box-body {
-  font-size: 0.8rem;
-  color: rgba(255,255,255,0.8);
-  line-height: 1.6;
-}
-
-.skill-tag {
-  display: inline-block;
-  background: rgba(201,169,110,0.2);
-  border: 1px solid rgba(201,169,110,0.4);
-  color: var(--gold);
-  font-size: 0.62rem;
-  letter-spacing: 0.15em;
-  padding: 2px 8px;
-  border-radius: 20px;
-  margin: 2px;
-  text-transform: uppercase;
-}
-
-/* ──────────── PARALLEL AGENT DIAGRAM ──────────── */
-.agent-diagram {
+/* ── FLOW DIAGRAM ── */
+.flow {
   background: var(--cream);
   border-radius: 12px;
-  padding: 24px;
-  margin: 20px 0;
-  border: 1px solid rgba(92,122,62,0.15);
+  padding: 22px 24px;
+  margin: 18px 0;
+  border: 1px solid rgba(92,122,62,0.12);
 }
-
-.agent-row {
+.flow-label {
+  font-size: 0.6rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--green);
+  font-weight: 700;
+  margin-bottom: 14px;
+}
+.flow-row {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 10px;
+  gap: 8px;
+  margin-bottom: 8px;
+  flex-wrap: wrap;
 }
-
-.agent-box {
+.flow-box {
   background: var(--brown);
-  color: var(--gold);
-  border-radius: 6px;
-  padding: 6px 12px;
-  font-family: 'Fira Code', monospace;
-  font-size: 0.7rem;
-  white-space: nowrap;
-}
-
-.agent-arrow {
-  color: var(--gold);
-  font-size: 0.9rem;
-  flex-shrink: 0;
-}
-
-.agent-output {
-  background: var(--green);
   color: white;
   border-radius: 6px;
-  padding: 4px 10px;
+  padding: 6px 12px;
+  font-size: 0.72rem;
+  white-space: nowrap;
+}
+.flow-box.green { background: var(--green); }
+.flow-box.gold  { background: var(--gold); color: var(--brown); font-weight: 700; }
+.flow-arrow {
+  color: var(--gold);
+  font-size: 1rem;
+  flex-shrink: 0;
+}
+.flow-note {
   font-size: 0.68rem;
-  flex: 1;
-}
-
-.agent-label {
-  font-size: 0.65rem;
   color: var(--brown2);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  font-weight: 700;
-  margin-bottom: 8px;
+  font-style: italic;
+  margin-top: 4px;
 }
 
-/* ──────────── STATS ROW ──────────── */
+/* ── STATS ROW ── */
 .stats-row {
   display: flex;
-  gap: 16px;
-  margin: 28px 0;
+  gap: 12px;
+  margin: 24px 0;
 }
-
 .stat-pill {
   flex: 1;
   background: var(--cream);
-  border-radius: 12px;
-  padding: 18px 16px;
+  border-radius: 10px;
+  padding: 16px 12px;
   text-align: center;
   border-top: 3px solid var(--gold);
 }
-
-.stat-pill-num {
+.stat-num {
   font-family: 'Playfair Display', serif;
-  font-size: 2rem;
+  font-size: 1.8rem;
   color: var(--green);
   line-height: 1;
 }
-
-.stat-pill-label {
-  font-size: 0.62rem;
-  letter-spacing: 0.2em;
+.stat-label {
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--brown2);
   margin-top: 4px;
 }
 
-/* ──────────── CLOSING ──────────── */
-.closing-quote {
+/* ── CLOSING ── */
+.closing {
   background: var(--brown);
-  color: white;
   border-radius: 12px;
-  padding: 32px 36px;
+  padding: 30px 34px;
   text-align: center;
   margin-top: 24px;
+  color: white;
 }
-
-.closing-quote blockquote {
+.closing blockquote {
   font-family: 'Playfair Display', serif;
-  font-size: 1.25rem;
+  font-size: 1.15rem;
   font-style: italic;
-  line-height: 1.6;
   color: var(--gold2);
-  margin-bottom: 16px;
+  line-height: 1.65;
+  margin-bottom: 14px;
 }
-
-.closing-quote cite {
-  font-size: 0.7rem;
-  letter-spacing: 0.25em;
+.closing cite {
+  font-size: 0.65rem;
+  letter-spacing: 0.22em;
   text-transform: uppercase;
-  color: rgba(255,255,255,0.4);
+  color: rgba(255,255,255,0.35);
   font-style: normal;
 }
 
-/* decorative leaf */
-.leaf-deco {
-  position: absolute;
-  opacity: 0.06;
-  pointer-events: none;
-}
+/* ── LEAF DECO ── */
+.leaf-deco { position: absolute; opacity: 0.05; pointer-events: none; }
 
-/* ──────────── PRINT ──────────── */
 @media print {
   body { background: white; }
   .page { margin: 0; box-shadow: none; }
@@ -582,181 +372,120 @@ h2.section-heading span {
 </head>
 <body>
 
-<!-- ═══════════════════════════════════════════════════
-     PAGE 1 — COVER
-═══════════════════════════════════════════════════ -->
-<div class="page cover">
 
-  <!-- Background botanical SVG -->
+<!-- ════════════════════ COVER ════════════════════ -->
+<div class="page cover">
   <div class="cover-bg">
-    <svg width="100%" height="100%" viewBox="0 0 595 842" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg" opacity="0.07">
-      <!-- Corner leaves top-left -->
+    <svg width="100%" height="100%" viewBox="0 0 595 842" xmlns="http://www.w3.org/2000/svg" opacity="0.08">
       <g fill="#C9A96E">
-        <path d="M0 0 Q40 60 20 120 Q-10 60 0 0Z"/>
-        <path d="M20 0 Q70 40 50 100 Q10 55 20 0Z"/>
-        <path d="M50 0 Q90 30 75 80 Q35 45 50 0Z"/>
-        <path d="M0 20 Q60 50 40 110 Q-5 65 0 20Z"/>
+        <path d="M0 0 Q50 70 25 140 Q-15 70 0 0Z"/>
+        <path d="M25 0 Q80 45 60 115 Q15 65 25 0Z"/>
+        <path d="M60 0 Q105 35 90 90 Q45 52 60 0Z"/>
+        <path d="M0 25 Q70 60 48 130 Q-8 78 0 25Z"/>
       </g>
-      <!-- Corner leaves top-right -->
       <g fill="#C9A96E" transform="translate(595,0) scale(-1,1)">
-        <path d="M0 0 Q40 60 20 120 Q-10 60 0 0Z"/>
-        <path d="M20 0 Q70 40 50 100 Q10 55 20 0Z"/>
-        <path d="M50 0 Q90 30 75 80 Q35 45 50 0Z"/>
+        <path d="M0 0 Q50 70 25 140 Q-15 70 0 0Z"/>
+        <path d="M25 0 Q80 45 60 115 Q15 65 25 0Z"/>
+        <path d="M60 0 Q105 35 90 90 Q45 52 60 0Z"/>
       </g>
-      <!-- Corner leaves bottom-left -->
       <g fill="#C9A96E" transform="translate(0,842) scale(1,-1)">
-        <path d="M0 0 Q40 60 20 120 Q-10 60 0 0Z"/>
-        <path d="M20 0 Q70 40 50 100 Q10 55 20 0Z"/>
-        <path d="M50 0 Q90 30 75 80 Q35 45 50 0Z"/>
+        <path d="M0 0 Q50 70 25 140 Q-15 70 0 0Z"/>
+        <path d="M25 0 Q80 45 60 115 Q15 65 25 0Z"/>
+        <path d="M60 0 Q105 35 90 90 Q45 52 60 0Z"/>
       </g>
-      <!-- Corner leaves bottom-right -->
       <g fill="#C9A96E" transform="translate(595,842) scale(-1,-1)">
-        <path d="M0 0 Q40 60 20 120 Q-10 60 0 0Z"/>
-        <path d="M20 0 Q70 40 50 100 Q10 55 20 0Z"/>
-        <path d="M50 0 Q90 30 75 80 Q35 45 50 0Z"/>
+        <path d="M0 0 Q50 70 25 140 Q-15 70 0 0Z"/>
+        <path d="M25 0 Q80 45 60 115 Q15 65 25 0Z"/>
+        <path d="M60 0 Q105 35 90 90 Q45 52 60 0Z"/>
       </g>
-      <!-- Center botanical wreath outline -->
-      <circle cx="297" cy="421" r="160" stroke="#C9A96E" stroke-width="1" fill="none" stroke-dasharray="6 8"/>
-      <circle cx="297" cy="421" r="180" stroke="#C9A96E" stroke-width="0.5" fill="none" stroke-dasharray="2 12"/>
-      <!-- Scattered leaves -->
-      <path d="M200 300 Q180 270 195 250 Q210 275 200 300Z" fill="#7A9E55"/>
-      <path d="M380 260 Q400 235 415 250 Q398 272 380 260Z" fill="#5C7A3E"/>
-      <path d="M160 540 Q140 515 152 495 Q168 518 160 540Z" fill="#7A9E55"/>
-      <path d="M430 560 Q450 535 462 550 Q445 572 430 560Z" fill="#5C7A3E"/>
-      <path d="M250 580 Q230 555 242 535 Q258 558 250 580Z" fill="#7A9E55"/>
-      <path d="M340 580 Q360 555 372 570 Q355 592 340 580Z" fill="#5C7A3E"/>
+      <circle cx="297" cy="421" r="155" stroke="#C9A96E" stroke-width="1" fill="none" stroke-dasharray="5 9"/>
+      <circle cx="297" cy="421" r="175" stroke="#C9A96E" stroke-width="0.4" fill="none" stroke-dasharray="2 14"/>
+      <path d="M210 310 Q192 282 206 262 Q222 285 210 310Z" fill="#7A9E55"/>
+      <path d="M385 265 Q407 240 421 255 Q404 278 385 265Z" fill="#5C7A3E"/>
+      <path d="M165 540 Q145 515 158 494 Q175 518 165 540Z" fill="#7A9E55"/>
+      <path d="M430 565 Q452 540 465 555 Q447 578 430 565Z" fill="#5C7A3E"/>
     </svg>
-    <!-- Gold horizontal lines -->
-    <svg width="100%" height="100%" viewBox="0 0 595 842" xmlns="http://www.w3.org/2000/svg" style="position:absolute;top:0;left:0;">
-      <line x1="40" y1="140" x2="555" y2="140" stroke="#C9A96E" stroke-width="0.5" opacity="0.3"/>
-      <line x1="40" y1="700" x2="555" y2="700" stroke="#C9A96E" stroke-width="0.5" opacity="0.3"/>
+    <svg width="100%" height="100%" viewBox="0 0 595 842" xmlns="http://www.w3.org/2000/svg" style="position:absolute;top:0;left:0">
+      <line x1="44" y1="145" x2="551" y2="145" stroke="#C9A96E" stroke-width="0.5" opacity="0.3"/>
+      <line x1="44" y1="697" x2="551" y2="697" stroke="#C9A96E" stroke-width="0.5" opacity="0.3"/>
     </svg>
   </div>
 
   <div class="cover-content">
-    <div class="cover-eyebrow">A Case Study in AI-Assisted Design</div>
-
-    <div class="cover-title">How We <em>Made</em><br>the Invitation</div>
+    <div class="cover-eyebrow">Technical Documentation</div>
+    <div class="cover-title">How We <em>Built</em><br>the Invitation</div>
     <div class="cover-sub">Ruta &amp; Anant Todkar — Silver Jubilee Anniversary</div>
-
     <div class="cover-rule"></div>
-
-    <div class="cover-meta">
-      <div class="cover-meta-item">
-        <div class="cover-meta-num">10</div>
-        <div class="cover-meta-label">Designs Created</div>
-      </div>
-      <div class="cover-meta-item">
-        <div class="cover-meta-num">1</div>
-        <div class="cover-meta-label">Live Invitation</div>
-      </div>
-      <div class="cover-meta-item">
-        <div class="cover-meta-num">∞</div>
-        <div class="cover-meta-label">RSVP Storage</div>
-      </div>
-      <div class="cover-meta-item">
-        <div class="cover-meta-num">AI</div>
-        <div class="cover-meta-label">Parallel Agents</div>
-      </div>
+    <div class="cover-pills">
+      <div class="cover-pill"><div class="cover-pill-num">10</div><div class="cover-pill-label">Designs</div></div>
+      <div class="cover-pill"><div class="cover-pill-num">1</div><div class="cover-pill-label">Final Site</div></div>
+      <div class="cover-pill"><div class="cover-pill-num">0</div><div class="cover-pill-label">Cost</div></div>
+      <div class="cover-pill"><div class="cover-pill-num">∞</div><div class="cover-pill-label">Live Forever</div></div>
     </div>
   </div>
-
   <div class="cover-footer">smashco.github.io/sanya &nbsp;·&nbsp; April 12, 2025 &nbsp;·&nbsp; Midland, Ghansoli</div>
 </div>
 
 
-<!-- ═══════════════════════════════════════════════════
-     PAGE 2 — THE BRIEF
-═══════════════════════════════════════════════════ -->
+<!-- ════════════════════ PAGE 1 — WHAT IS IT? ════════════════════ -->
 <div class="page">
 <div class="page-inner">
 
-  <!-- leaf decoration -->
-  <svg class="leaf-deco" style="top:-20px;right:-20px;width:160px" viewBox="0 0 160 160" fill="none">
+  <svg class="leaf-deco" style="top:-20px;right:-20px;width:150px" viewBox="0 0 160 160" fill="none">
     <path d="M80 0 Q140 20 160 80 Q100 120 40 100 Q0 40 80 0Z" fill="#5C7A3E"/>
     <path d="M80 0 Q120 40 110 100 Q60 80 80 0Z" fill="#7A9E55"/>
   </svg>
 
   <div class="page-header">
-    <span class="page-header-title">How We Made It — Silver Jubilee Invitation</span>
+    <span class="page-header-title">Technical Documentation — Silver Jubilee Invitation</span>
     <span class="page-header-num">01</span>
   </div>
 
-  <h2 class="section-heading">The <span>Brief</span></h2>
-  <p class="section-intro">
-    Every great invitation starts with a story. Here is what we knew before writing a single line of code.
-  </p>
+  <h2 class="sh">What <span>Is It?</span></h2>
+  <p class="si">A digital wedding anniversary invitation — opened on any phone or computer, no app needed, works forever. Let's break down every piece like you're five.</p>
 
-  <div class="brief-grid">
-    <div class="brief-card">
-      <div class="brief-card-label">Couple</div>
-      <div class="brief-card-value">Ruta &amp; Anant Todkar</div>
-    </div>
-    <div class="brief-card">
-      <div class="brief-card-label">Occasion</div>
-      <div class="brief-card-value">Silver Jubilee — 25 Years</div>
-    </div>
-    <div class="brief-card">
-      <div class="brief-card-label">Date &amp; Venue</div>
-      <div class="brief-card-value">April 12 · Midland, Ghansoli</div>
-    </div>
-    <div class="brief-card">
-      <div class="brief-card-label">Live URL</div>
-      <div class="brief-card-value" style="font-size:0.82rem">smashco.github.io/sanya</div>
-    </div>
-    <div class="brief-card">
-      <div class="brief-card-label">Background Music</div>
-      <div class="brief-card-value" style="font-size:0.85rem">Saathiya — Tu Kya Kiya</div>
-    </div>
-    <div class="brief-card">
-      <div class="brief-card-label">Platform</div>
-      <div class="brief-card-value">GitHub Pages (free, forever)</div>
+  <div class="analogy-card">
+    <div class="analogy-emoji">🏠</div>
+    <div>
+      <div class="analogy-title">The Website Itself</div>
+      <div class="analogy-tech">HTML / CSS / JavaScript</div>
+      <div class="analogy-simple"><strong>HTML</strong> is like the bricks of a house — it puts text, photos, and buttons on screen. <strong>CSS</strong> is the paint and furniture — it makes everything look beautiful with colors, fonts, and animations. <strong>JavaScript</strong> is the electricity — it makes things move, play music, and respond when you tap.</div>
     </div>
   </div>
 
-  <!-- Stats -->
-  <div class="stats-row">
-    <div class="stat-pill"><div class="stat-pill-num">100%</div><div class="stat-pill-label">Pure HTML/CSS/JS</div></div>
-    <div class="stat-pill"><div class="stat-pill-num">0</div><div class="stat-pill-label">Frameworks Used</div></div>
-    <div class="stat-pill"><div class="stat-pill-num">4</div><div class="stat-pill-label">Real Photos</div></div>
-    <div class="stat-pill"><div class="stat-pill-num">₹0</div><div class="stat-pill-label">Hosting Cost</div></div>
+  <div class="analogy-card">
+    <div class="analogy-emoji">📦</div>
+    <div>
+      <div class="analogy-title">Where It Lives</div>
+      <div class="analogy-tech">GitHub Pages</div>
+      <div class="analogy-simple">Imagine a free locker on the internet that holds your files and shows them to the whole world. GitHub Pages is exactly that — free forever, no monthly fee, no server to manage. Every time we saved a change it went live in under 2 minutes.</div>
+    </div>
   </div>
 
-  <!-- Timeline -->
-  <h2 class="section-heading" style="font-size:1.4rem;margin-bottom:20px">Build <span>Timeline</span></h2>
+  <div class="analogy-card">
+    <div class="analogy-emoji">🎵</div>
+    <div>
+      <div class="analogy-title">Background Music (Saathiya)</div>
+      <div class="analogy-tech">Web Audio API</div>
+      <div class="analogy-simple">Phones are sneaky — they block music from auto-playing so ads can't annoy you. We worked around this: the song waits silently, then the moment you tap or scroll anywhere on the page, it starts. An animated equalizer (4 bouncing bars) shows it's playing.</div>
+    </div>
+  </div>
 
-  <div class="timeline">
-    <div class="timeline-item">
-      <div class="timeline-dot">1</div>
-      <div class="timeline-body">
-        <div class="timeline-step">Phase 1</div>
-        <div class="timeline-title">Initial Invitation — Gold & Dark Theme</div>
-        <div class="timeline-desc">Built the first version with deep dark background, gold typography, Maharashtrian elements, Devanagari script. Optimized for mobile — stacked layouts, responsive typography using CSS clamp().</div>
-      </div>
+  <div class="analogy-card">
+    <div class="analogy-emoji">📷</div>
+    <div>
+      <div class="analogy-title">The Couple Photos</div>
+      <div class="analogy-tech">CSS object-fit + blur layers</div>
+      <div class="analogy-simple">Photos come in all shapes. To make any photo fit a perfect circle without ugly white gaps, we stack two copies — the back copy is the same photo, heavily blurred and zoomed in to fill the gaps. The front copy is sharp and shows the actual subject. Like frosted glass behind a picture frame.</div>
     </div>
-    <div class="timeline-item">
-      <div class="timeline-dot">2</div>
-      <div class="timeline-body">
-        <div class="timeline-step">Phase 2</div>
-        <div class="timeline-title">Music + Lyrics Added</div>
-        <div class="timeline-desc">Integrated Saathiya background music with animated equalizer bars. Used Web Audio API autoplay with first-gesture fallback for mobile browsers (which block autoplay by default).</div>
-      </div>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-dot">3</div>
-      <div class="timeline-body">
-        <div class="timeline-step">Phase 3</div>
-        <div class="timeline-title">10 Parallel Designs in One Session</div>
-        <div class="timeline-desc">Dispatched 5 parallel AI agents simultaneously, each building 2 designs. All 10 designs completed and deployed at /v1 through /v10 in a single commit. Client chose v2 Botanical Garden.</div>
-      </div>
-    </div>
-    <div class="timeline-item">
-      <div class="timeline-dot">4</div>
-      <div class="timeline-body">
-        <div class="timeline-step">Phase 4</div>
-        <div class="timeline-title">Polish, Photo Tuning & RSVP Backend</div>
-        <div class="timeline-desc">Photo blur backgrounds, circle sizing, crop positions tuned per photo. RSVP data wired to Google Sheets via Apps Script. Live viewer at /dataofsanya.</div>
-      </div>
+  </div>
+
+  <div class="analogy-card">
+    <div class="analogy-emoji">📋</div>
+    <div>
+      <div class="analogy-title">RSVP Form</div>
+      <div class="analogy-tech">Google Apps Script + Google Sheets</div>
+      <div class="analogy-simple">When a guest fills the form and clicks Confirm, their name, attendance, and guest count is sent to a tiny program running in the cloud (Google Apps Script). That program writes a new row into a Google Spreadsheet — permanently, with a timestamp. The host can view all responses at <em>/dataofsanya</em>.</div>
     </div>
   </div>
 
@@ -764,427 +493,395 @@ h2.section-heading span {
 </div>
 
 
-<!-- ═══════════════════════════════════════════════════
-     PAGE 3 — THE 10 DESIGNS
-═══════════════════════════════════════════════════ -->
+<!-- ════════════════════ PAGE 2 — HOW IT WAS BUILT ════════════════════ -->
 <div class="page">
 <div class="page-inner">
 
   <div class="page-header">
-    <span class="page-header-title">How We Made It — Silver Jubilee Invitation</span>
+    <span class="page-header-title">Technical Documentation — Silver Jubilee Invitation</span>
     <span class="page-header-num">02</span>
   </div>
 
-  <h2 class="section-heading">10 <span>Designs</span> — All Different</h2>
-  <p class="section-intro">
-    We built ten completely unique invitation styles using parallel AI agents. Each has its own palette, motion, typography, and cultural identity. Client chose <strong>v2</strong>.
-  </p>
+  <h2 class="sh">How It Was <span>Built</span></h2>
+  <p class="si">Step by step — from blank page to 10 live designs. No design software, no templates. Every pixel hand-coded.</p>
 
-  <div class="designs-grid">
-
-    <div class="design-card">
-      <div class="design-card-swatch" style="background: linear-gradient(135deg, #030614, #0E1A3D);">
-        <div class="swatch-dot" style="background:#C9A96E"></div>
-        <div class="swatch-dot" style="background:#A0B0D0"></div>
-        <div class="swatch-dot" style="background:#E8E0C8"></div>
-        <div class="design-card-version">V1</div>
-      </div>
-      <div class="design-card-body">
-        <div class="design-card-name">Celestial Night</div>
-        <div class="design-card-desc">Deep navy with 140 JS-generated twinkling stars, rotating constellation ring, silver &amp; gold palette. Dramatic and cosmic.</div>
-      </div>
+  <div class="step-grid">
+    <div class="step-block">
+      <div class="step-block-header"><div class="step-num">1</div>Structure the page (HTML)</div>
+      <div class="step-block-body">Wrote all the sections: hero, Then &amp; Now, Event Details, Moments, Quote, RSVP, Footer. Each section is a &lt;section&gt; tag — like chapters in a book.</div>
     </div>
-
-    <div class="design-card">
-      <div class="design-card-swatch" style="background: linear-gradient(135deg, #5C7A3E, #2C1A10);">
-        <div class="swatch-dot" style="background:#F8F3E8"></div>
-        <div class="swatch-dot" style="background:#C9A96E"></div>
-        <div class="swatch-dot" style="background:#7A9E55"></div>
-        <div class="design-card-version">V2 ✦</div>
-      </div>
-      <div class="design-card-body">
-        <div class="design-card-name">Botanical Garden <span class="winner-badge">Selected</span></div>
-        <div class="design-card-desc">Warm ivory with botanical SVG borders, animated leaf wreath, green &amp; gold palette. Timeless and elegant.</div>
-      </div>
+    <div class="step-block">
+      <div class="step-block-header"><div class="step-num">2</div>Style everything (CSS)</div>
+      <div class="step-block-body">Applied fonts from Google Fonts (Playfair Display, Lato, Noto Devanagari), colors, spacing, animations. CSS variables let us change the whole color scheme by editing 9 lines.</div>
     </div>
-
-    <div class="design-card">
-      <div class="design-card-swatch" style="background: linear-gradient(135deg, #0D0D0D, #1A1400);">
-        <div class="swatch-dot" style="background:#D4AF37"></div>
-        <div class="swatch-dot" style="background:#8B7536"></div>
-        <div class="swatch-dot" style="background:#F0E6C8"></div>
-        <div class="design-card-version">V3</div>
-      </div>
-      <div class="design-card-body">
-        <div class="design-card-name">Art Deco Gatsby</div>
-        <div class="design-card-desc">Near-black with rotating 30s sunburst SVG, geometric gold frames, chevron dividers. Roaring Twenties glamour.</div>
-      </div>
+    <div class="step-block">
+      <div class="step-block-header"><div class="step-num">3</div>Draw the decorations (SVG)</div>
+      <div class="step-block-body">Every botanical border, leaf wreath, and corner accent is a hand-drawn SVG shape in code — not an image file. SVGs scale perfectly to any screen size.</div>
     </div>
-
-    <div class="design-card">
-      <div class="design-card-swatch" style="background: linear-gradient(135deg, #4A0E1A, #1A0A2E);">
-        <div class="swatch-dot" style="background:#C9A96E"></div>
-        <div class="swatch-dot" style="background:#D4186C"></div>
-        <div class="swatch-dot" style="background:#F0E0B0"></div>
-        <div class="design-card-version">V4</div>
-      </div>
-      <div class="design-card-body">
-        <div class="design-card-name">Royal Mughal</div>
-        <div class="design-card-desc">Deep crimson with Mughal horseshoe arch clip-path, jali lattice SVGs, kalash motif, prominent Devanagari script.</div>
-      </div>
+    <div class="step-block">
+      <div class="step-block-header"><div class="step-num">4</div>Add motion (JavaScript)</div>
+      <div class="step-block-body">IntersectionObserver watches when each section enters the screen and adds a "visible" class — triggering CSS slide-up animations as you scroll.</div>
     </div>
-
-    <div class="design-card">
-      <div class="design-card-swatch" style="background: linear-gradient(135deg, #FAFAF8, #F0EEE8);">
-        <div class="swatch-dot" style="background:#1A1A1A"></div>
-        <div class="swatch-dot" style="background:#888"></div>
-        <div class="swatch-dot" style="background:#C9A96E"></div>
-        <div class="design-card-version">V5</div>
-      </div>
-      <div class="design-card-body">
-        <div class="design-card-name">Pure Minimalist</div>
-        <div class="design-card-desc">Near-white with DM Serif Display huge stacked names, table-style event details, near-monochrome palette. Understated luxury.</div>
-      </div>
+    <div class="step-block">
+      <div class="step-block-header"><div class="step-num">5</div>Add music</div>
+      <div class="step-block-body">Linked the MP3 file stored in /audio/. JavaScript tries to play immediately (works on desktop), and also listens for any touch/click/scroll to start on mobile.</div>
     </div>
-
-    <div class="design-card">
-      <div class="design-card-swatch" style="background: linear-gradient(135deg, #F2E8D5, #D8C8A8);">
-        <div class="swatch-dot" style="background:#8B1A1A"></div>
-        <div class="swatch-dot" style="background:#C9A96E"></div>
-        <div class="swatch-dot" style="background:#4A3020"></div>
-        <div class="design-card-version">V6</div>
-      </div>
-      <div class="design-card-body">
-        <div class="design-card-name">Vintage Parchment</div>
-        <div class="design-card-desc">Aged paper texture with SVG wax seal, oval portrait photos, postmark graphic, slight CSS rotation for handplaced feel.</div>
-      </div>
+    <div class="step-block">
+      <div class="step-block-header"><div class="step-num">6</div>Deploy to the internet</div>
+      <div class="step-block-body">Used Git to push all files to GitHub. GitHub Pages automatically published the site. A .nojekyll file tells GitHub not to process the files — just serve them as-is.</div>
     </div>
+  </div>
 
-    <div class="design-card">
-      <div class="design-card-swatch" style="background: linear-gradient(135deg, #021E22, #0A3A40);">
-        <div class="swatch-dot" style="background:#00B4D8"></div>
-        <div class="swatch-dot" style="background:#48CAE4"></div>
-        <div class="swatch-dot" style="background:#C9A96E"></div>
-        <div class="design-card-version">V7</div>
-      </div>
-      <div class="design-card-body">
-        <div class="design-card-name">Peacock Teal</div>
-        <div class="design-card-desc">Deep teal with large animated peacock feather SVGs, concentric ellipse eye motifs, iridescent shimmer on the couple names.</div>
-      </div>
+  <!-- How scroll animations work -->
+  <div class="flow" style="margin-top:6px">
+    <div class="flow-label">How scroll reveal animations work</div>
+    <div class="flow-row">
+      <div class="flow-box">Page loads</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box">All sections start invisible (opacity: 0)</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box green">Viewport watches each section</div>
     </div>
-
-    <div class="design-card">
-      <div class="design-card-swatch" style="background: linear-gradient(135deg, #FFF5F8, #FFE0EC);">
-        <div class="swatch-dot" style="background:#E8A0B0"></div>
-        <div class="swatch-dot" style="background:#C06080"></div>
-        <div class="swatch-dot" style="background:#3A1A28"></div>
-        <div class="design-card-version">V8</div>
-      </div>
-      <div class="design-card-body">
-        <div class="design-card-name">Cherry Blossom</div>
-        <div class="design-card-desc">Soft pink with 35 JS-generated falling petal SVGs, blossom branch in the hero, circular photo with rotating blossom wreath.</div>
-      </div>
+    <div class="flow-row">
+      <div class="flow-box green">Section enters screen</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box">.visible class added</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box gold">Fades in + slides up ✦</div>
     </div>
+    <div class="flow-note">This uses a built-in browser tool called IntersectionObserver — no extra code library needed.</div>
+  </div>
 
-    <div class="design-card">
-      <div class="design-card-swatch" style="background: linear-gradient(135deg, #F5F0E8, #E8E0D0);">
-        <div class="swatch-dot" style="background:#1A1A1A"></div>
-        <div class="swatch-dot" style="background:#888880"></div>
-        <div class="swatch-dot" style="background:#C9A96E"></div>
-        <div class="design-card-version">V9</div>
-      </div>
-      <div class="design-card-body">
-        <div class="design-card-name">Marble Luxe</div>
-        <div class="design-card-desc">SVG feTurbulence marble texture with 8 hand-drawn vein paths. Two-column hero, ghost "XXV", inverted black RSVP card.</div>
-      </div>
+  <!-- Mobile note -->
+  <div style="background:var(--cream);border-radius:10px;padding:16px 18px;margin-top:14px;border-left:4px solid var(--green)">
+    <div style="font-weight:700;font-size:0.82rem;margin-bottom:4px">📱 Mobile-First Design</div>
+    <div style="font-size:0.78rem;color:var(--brown2);line-height:1.55">
+      The invitation works on any screen size. We used <strong>CSS clamp()</strong> for font sizes — instead of a fixed size like 32px, we wrote <code style="background:var(--brown);color:var(--gold);padding:1px 5px;border-radius:3px;font-family:'Fira Code',monospace;font-size:0.72rem">clamp(1.6rem, 5vw, 2.4rem)</code> which means "between 1.6 and 2.4, scale based on screen width." Two-column layouts collapse to single column on phones using <strong>CSS Grid</strong> with a breakpoint at 600px.
     </div>
-
-    <div class="design-card">
-      <div class="design-card-swatch" style="background: linear-gradient(135deg, #040F08, #0A2010);">
-        <div class="swatch-dot" style="background:#C9A96E"></div>
-        <div class="swatch-dot" style="background:#5C7A3E"></div>
-        <div class="swatch-dot" style="background:#A0D090"></div>
-        <div class="design-card-version">V10</div>
-      </div>
-      <div class="design-card-body">
-        <div class="design-card-name">Emerald Forest</div>
-        <div class="design-card-desc">Near-black forest green with canvas-based firefly particles, botanical corners, spinning leaf wreath, Devanagari Saathiya verse.</div>
-      </div>
-    </div>
-
   </div>
 
 </div>
 </div>
 
 
-<!-- ═══════════════════════════════════════════════════
-     PAGE 4 — TECHNICAL BUILD
-═══════════════════════════════════════════════════ -->
+<!-- ════════════════════ PAGE 3 — THE 10 DESIGNS ════════════════════ -->
 <div class="page">
 <div class="page-inner">
 
-  <!-- leaf decoration -->
-  <svg class="leaf-deco" style="bottom:40px;left:-30px;width:180px;transform:rotate(30deg)" viewBox="0 0 160 160" fill="none">
+  <svg class="leaf-deco" style="bottom:30px;right:-20px;width:160px;transform:rotate(180deg)" viewBox="0 0 160 160" fill="none">
     <path d="M80 0 Q140 20 160 80 Q100 120 40 100 Q0 40 80 0Z" fill="#5C7A3E"/>
   </svg>
 
   <div class="page-header">
-    <span class="page-header-title">How We Made It — Silver Jubilee Invitation</span>
+    <span class="page-header-title">Technical Documentation — Silver Jubilee Invitation</span>
     <span class="page-header-num">03</span>
   </div>
 
-  <h2 class="section-heading">Technical <span>Craft</span></h2>
-  <p class="section-intro">Every detail was hand-coded. No UI builders, no Webflow, no WordPress. Pure HTML, CSS, and JavaScript — fast, free, and permanent.</p>
+  <h2 class="sh">The <span>10 Designs</span></h2>
+  <p class="si">Ten completely different invitation styles, each hosted at its own URL (/v1 through /v10). All built in a single session. Client chose v2.</p>
 
-  <div class="features-list">
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:13px">
 
-    <div class="feature-item">
-      <div class="feature-icon">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5C7A3E" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+    <div style="border-radius:10px;overflow:hidden;border:1px solid rgba(0,0,0,0.07)">
+      <div style="height:48px;background:linear-gradient(135deg,#030614,#0E1A3D);display:flex;align-items:center;padding:0 14px;gap:7px">
+        <span style="width:9px;height:9px;border-radius:50%;background:#C9A96E;border:1px solid rgba(255,255,255,0.3)"></span>
+        <span style="width:9px;height:9px;border-radius:50%;background:#A0B0D0;border:1px solid rgba(255,255,255,0.3)"></span>
+        <span style="width:9px;height:9px;border-radius:50%;background:#E8E0C8;border:1px solid rgba(255,255,255,0.3)"></span>
+        <span style="margin-left:auto;font-size:0.58rem;letter-spacing:0.2em;color:rgba(255,255,255,0.6);text-transform:uppercase">V1</span>
       </div>
-      <div class="feature-body">
-        <div class="feature-title">CSS Scroll Animations</div>
-        <div class="feature-desc">IntersectionObserver triggers reveal-up, reveal-left, reveal-right on every section as you scroll down.</div>
+      <div style="padding:10px 13px;background:white">
+        <div style="font-family:'Playfair Display',serif;font-size:0.9rem;margin-bottom:2px">Celestial Night</div>
+        <div style="font-size:0.7rem;color:var(--brown2)">140 JS-generated twinkling stars, deep navy, rotating constellation ring</div>
       </div>
     </div>
 
-    <div class="feature-item">
-      <div class="feature-icon">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5C7A3E" stroke-width="2"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+    <div style="border-radius:10px;overflow:hidden;border:2px solid var(--gold)">
+      <div style="height:48px;background:linear-gradient(135deg,#5C7A3E,#2C1A10);display:flex;align-items:center;padding:0 14px;gap:7px">
+        <span style="width:9px;height:9px;border-radius:50%;background:#F8F3E8;border:1px solid rgba(255,255,255,0.3)"></span>
+        <span style="width:9px;height:9px;border-radius:50%;background:#C9A96E;border:1px solid rgba(255,255,255,0.3)"></span>
+        <span style="width:9px;height:9px;border-radius:50%;background:#7A9E55;border:1px solid rgba(255,255,255,0.3)"></span>
+        <span style="margin-left:auto;font-size:0.58rem;letter-spacing:0.2em;color:var(--gold);text-transform:uppercase;font-weight:700">V2 ✦ CHOSEN</span>
       </div>
-      <div class="feature-body">
-        <div class="feature-title">Background Music (Saathiya)</div>
-        <div class="feature-desc">Web Audio API with animated equalizer bars. Mobile-safe: plays on first user gesture (tap, scroll, keydown).</div>
-      </div>
-    </div>
-
-    <div class="feature-item">
-      <div class="feature-icon">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5C7A3E" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
-      </div>
-      <div class="feature-body">
-        <div class="feature-title">RSVP → Google Sheets</div>
-        <div class="feature-desc">Form submits via fetch POST to Google Apps Script web app. Data saved permanently with timestamp, name, attendance, guest count.</div>
+      <div style="padding:10px 13px;background:white">
+        <div style="font-family:'Playfair Display',serif;font-size:0.9rem;margin-bottom:2px">Botanical Garden</div>
+        <div style="font-size:0.7rem;color:var(--brown2)">Warm ivory, SVG leaf wreath, botanical borders, green &amp; gold palette</div>
       </div>
     </div>
 
-    <div class="feature-item">
-      <div class="feature-icon">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5C7A3E" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
+    <div style="border-radius:10px;overflow:hidden;border:1px solid rgba(0,0,0,0.07)">
+      <div style="height:48px;background:linear-gradient(135deg,#0D0D0D,#1A1400);display:flex;align-items:center;padding:0 14px;gap:7px">
+        <span style="width:9px;height:9px;border-radius:50%;background:#D4AF37;border:1px solid rgba(255,255,255,0.3)"></span>
+        <span style="width:9px;height:9px;border-radius:50%;background:#8B7536;border:1px solid rgba(255,255,255,0.3)"></span>
+        <span style="width:9px;height:9px;border-radius:50%;background:#F0E6C8;border:1px solid rgba(255,255,255,0.3)"></span>
+        <span style="margin-left:auto;font-size:0.58rem;letter-spacing:0.2em;color:rgba(255,255,255,0.6);text-transform:uppercase">V3</span>
       </div>
-      <div class="feature-body">
-        <div class="feature-title">Responsive Typography</div>
-        <div class="feature-desc">CSS clamp() for fluid font sizes across all screen widths. No media query hacks — scales smoothly from mobile to desktop.</div>
-      </div>
-    </div>
-
-    <div class="feature-item">
-      <div class="feature-icon">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5C7A3E" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
-      </div>
-      <div class="feature-body">
-        <div class="feature-title">Animated Leaf Wreath</div>
-        <div class="feature-desc">SVG wreath swaying ±1° on a 6s ease-in-out loop. Sized and centered mathematically to hug the circular photo frame exactly.</div>
+      <div style="padding:10px 13px;background:white">
+        <div style="font-family:'Playfair Display',serif;font-size:0.9rem;margin-bottom:2px">Art Deco Gatsby</div>
+        <div style="font-size:0.7rem;color:var(--brown2)">Rotating 30s sunburst SVG, geometric gold frames, near-black background</div>
       </div>
     </div>
 
-    <div class="feature-item">
-      <div class="feature-icon">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5C7A3E" stroke-width="2"><path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z"/><line x1="4" y1="22" x2="4" y2="15"/></svg>
+    <div style="border-radius:10px;overflow:hidden;border:1px solid rgba(0,0,0,0.07)">
+      <div style="height:48px;background:linear-gradient(135deg,#4A0E1A,#1A0A2E);display:flex;align-items:center;padding:0 14px;gap:7px">
+        <span style="width:9px;height:9px;border-radius:50%;background:#C9A96E;border:1px solid rgba(255,255,255,0.3)"></span>
+        <span style="width:9px;height:9px;border-radius:50%;background:#D4186C;border:1px solid rgba(255,255,255,0.3)"></span>
+        <span style="width:9px;height:9px;border-radius:50%;background:#F0E0B0;border:1px solid rgba(255,255,255,0.3)"></span>
+        <span style="margin-left:auto;font-size:0.58rem;letter-spacing:0.2em;color:rgba(255,255,255,0.6);text-transform:uppercase">V4</span>
       </div>
-      <div class="feature-body">
-        <div class="feature-title">Blurred Photo Backgrounds</div>
-        <div class="feature-desc">Same image duplicated as a background layer with filter:blur(40px) + scale(1.3) — fills the circle clip with matching color tones, no white gaps.</div>
-      </div>
-    </div>
-
-    <div class="feature-item">
-      <div class="feature-icon">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5C7A3E" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
-      </div>
-      <div class="feature-body">
-        <div class="feature-title">GitHub Pages Hosting</div>
-        <div class="feature-desc">Deployed free on GitHub Pages with .nojekyll to bypass Jekyll processing (prevents Liquid template errors from other markdown files).</div>
+      <div style="padding:10px 13px;background:white">
+        <div style="font-family:'Playfair Display',serif;font-size:0.9rem;margin-bottom:2px">Royal Mughal</div>
+        <div style="font-size:0.7rem;color:var(--brown2)">Horseshoe arch clip-path, jali lattice SVG, kalash motif, Devanagari script</div>
       </div>
     </div>
 
-    <div class="feature-item">
-      <div class="feature-icon">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#5C7A3E" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+    <div style="border-radius:10px;overflow:hidden;border:1px solid rgba(0,0,0,0.07)">
+      <div style="height:48px;background:linear-gradient(135deg,#FAFAF8,#EEEEE8);display:flex;align-items:center;padding:0 14px;gap:7px">
+        <span style="width:9px;height:9px;border-radius:50%;background:#1A1A1A;border:1px solid rgba(0,0,0,0.2)"></span>
+        <span style="width:9px;height:9px;border-radius:50%;background:#888;border:1px solid rgba(0,0,0,0.2)"></span>
+        <span style="width:9px;height:9px;border-radius:50%;background:#C9A96E;border:1px solid rgba(0,0,0,0.2)"></span>
+        <span style="margin-left:auto;font-size:0.58rem;letter-spacing:0.2em;color:rgba(0,0,0,0.4);text-transform:uppercase">V5</span>
       </div>
-      <div class="feature-body">
-        <div class="feature-title">Live RSVP Dashboard</div>
-        <div class="feature-desc">Admin-only page at /dataofsanya reads all Sheet entries via GET, shows attendance stats, guest totals, and timestamped response table.</div>
+      <div style="padding:10px 13px;background:white">
+        <div style="font-family:'Playfair Display',serif;font-size:0.9rem;margin-bottom:2px">Pure Minimalist</div>
+        <div style="font-size:0.7rem;color:var(--brown2)">Near-white, giant stacked names, table-style details, monochrome palette</div>
       </div>
     </div>
 
-  </div>
+    <div style="border-radius:10px;overflow:hidden;border:1px solid rgba(0,0,0,0.07)">
+      <div style="height:48px;background:linear-gradient(135deg,#F2E8D5,#D8C8A8);display:flex;align-items:center;padding:0 14px;gap:7px">
+        <span style="width:9px;height:9px;border-radius:50%;background:#8B1A1A;border:1px solid rgba(0,0,0,0.2)"></span>
+        <span style="width:9px;height:9px;border-radius:50%;background:#C9A96E;border:1px solid rgba(0,0,0,0.2)"></span>
+        <span style="width:9px;height:9px;border-radius:50%;background:#4A3020;border:1px solid rgba(0,0,0,0.2)"></span>
+        <span style="margin-left:auto;font-size:0.58rem;letter-spacing:0.2em;color:rgba(0,0,0,0.4);text-transform:uppercase">V6</span>
+      </div>
+      <div style="padding:10px 13px;background:white">
+        <div style="font-family:'Playfair Display',serif;font-size:0.9rem;margin-bottom:2px">Vintage Parchment</div>
+        <div style="font-size:0.7rem;color:var(--brown2)">SVG wax seal with drip shapes, aged paper texture, oval portrait frames</div>
+      </div>
+    </div>
 
-  <!-- Code sample -->
-  <div class="code-block">
-    <pre><span class="cm">// Music autoplay — works on mobile via first gesture fallback</span>
-<span class="kw">const</span> audio = document.getElementById(<span class="str">'bgAudio'</span>);
-audio.volume = <span class="str">0.32</span>;
-<span class="kw">const</span> <span class="fn">startAudio</span> = () => {
-  audio.<span class="fn">play</span>().catch(() => {});
-  [<span class="str">'click'</span>,<span class="str">'touchstart'</span>,<span class="str">'keydown'</span>,<span class="str">'scroll'</span>].forEach(e =>
-    document.<span class="fn">removeEventListener</span>(e, startAudio));
-};
-[<span class="str">'click'</span>,<span class="str">'touchstart'</span>,<span class="str">'keydown'</span>,<span class="str">'scroll'</span>].forEach(e =>
-  document.<span class="fn">addEventListener</span>(e, startAudio, {once:<span class="kw">true</span>}));</pre>
+    <div style="border-radius:10px;overflow:hidden;border:1px solid rgba(0,0,0,0.07)">
+      <div style="height:48px;background:linear-gradient(135deg,#021E22,#0A3A40);display:flex;align-items:center;padding:0 14px;gap:7px">
+        <span style="width:9px;height:9px;border-radius:50%;background:#00B4D8;border:1px solid rgba(255,255,255,0.3)"></span>
+        <span style="width:9px;height:9px;border-radius:50%;background:#48CAE4;border:1px solid rgba(255,255,255,0.3)"></span>
+        <span style="width:9px;height:9px;border-radius:50%;background:#C9A96E;border:1px solid rgba(255,255,255,0.3)"></span>
+        <span style="margin-left:auto;font-size:0.58rem;letter-spacing:0.2em;color:rgba(255,255,255,0.6);text-transform:uppercase">V7</span>
+      </div>
+      <div style="padding:10px 13px;background:white">
+        <div style="font-family:'Playfair Display',serif;font-size:0.9rem;margin-bottom:2px">Peacock Teal</div>
+        <div style="font-size:0.7rem;color:var(--brown2)">Large animated peacock feather SVGs, concentric ellipse eyes, iridescent shimmer</div>
+      </div>
+    </div>
+
+    <div style="border-radius:10px;overflow:hidden;border:1px solid rgba(0,0,0,0.07)">
+      <div style="height:48px;background:linear-gradient(135deg,#FFF5F8,#FFE0EC);display:flex;align-items:center;padding:0 14px;gap:7px">
+        <span style="width:9px;height:9px;border-radius:50%;background:#E8A0B0;border:1px solid rgba(0,0,0,0.1)"></span>
+        <span style="width:9px;height:9px;border-radius:50%;background:#C06080;border:1px solid rgba(0,0,0,0.1)"></span>
+        <span style="width:9px;height:9px;border-radius:50%;background:#3A1A28;border:1px solid rgba(0,0,0,0.1)"></span>
+        <span style="margin-left:auto;font-size:0.58rem;letter-spacing:0.2em;color:rgba(0,0,0,0.35);text-transform:uppercase">V8</span>
+      </div>
+      <div style="padding:10px 13px;background:white">
+        <div style="font-family:'Playfair Display',serif;font-size:0.9rem;margin-bottom:2px">Cherry Blossom</div>
+        <div style="font-size:0.7rem;color:var(--brown2)">35 JS-generated falling SVG petals, blossom branch hero, rotating wreath</div>
+      </div>
+    </div>
+
+    <div style="border-radius:10px;overflow:hidden;border:1px solid rgba(0,0,0,0.07)">
+      <div style="height:48px;background:linear-gradient(135deg,#F5F0E8,#E8E0D0);display:flex;align-items:center;padding:0 14px;gap:7px">
+        <span style="width:9px;height:9px;border-radius:50%;background:#1A1A1A;border:1px solid rgba(0,0,0,0.2)"></span>
+        <span style="width:9px;height:9px;border-radius:50%;background:#888880;border:1px solid rgba(0,0,0,0.2)"></span>
+        <span style="width:9px;height:9px;border-radius:50%;background:#C9A96E;border:1px solid rgba(0,0,0,0.2)"></span>
+        <span style="margin-left:auto;font-size:0.58rem;letter-spacing:0.2em;color:rgba(0,0,0,0.35);text-transform:uppercase">V9</span>
+      </div>
+      <div style="padding:10px 13px;background:white">
+        <div style="font-family:'Playfair Display',serif;font-size:0.9rem;margin-bottom:2px">Marble Luxe</div>
+        <div style="font-size:0.7rem;color:var(--brown2)">SVG feTurbulence marble texture, 8 hand-drawn vein paths, ghost "XXV"</div>
+      </div>
+    </div>
+
+    <div style="border-radius:10px;overflow:hidden;border:1px solid rgba(0,0,0,0.07)">
+      <div style="height:48px;background:linear-gradient(135deg,#040F08,#0A2010);display:flex;align-items:center;padding:0 14px;gap:7px">
+        <span style="width:9px;height:9px;border-radius:50%;background:#C9A96E;border:1px solid rgba(255,255,255,0.3)"></span>
+        <span style="width:9px;height:9px;border-radius:50%;background:#5C7A3E;border:1px solid rgba(255,255,255,0.3)"></span>
+        <span style="width:9px;height:9px;border-radius:50%;background:#A0D090;border:1px solid rgba(255,255,255,0.3)"></span>
+        <span style="margin-left:auto;font-size:0.58rem;letter-spacing:0.2em;color:rgba(255,255,255,0.6);text-transform:uppercase">V10</span>
+      </div>
+      <div style="padding:10px 13px;background:white">
+        <div style="font-family:'Playfair Display',serif;font-size:0.9rem;margin-bottom:2px">Emerald Forest</div>
+        <div style="font-size:0.7rem;color:var(--brown2)">Canvas-based firefly particles, botanical corners, Devanagari Saathiya verse</div>
+      </div>
+    </div>
+
   </div>
 
 </div>
 </div>
 
 
-<!-- ═══════════════════════════════════════════════════
-     PAGE 5 — AI SKILLS
-═══════════════════════════════════════════════════ -->
+<!-- ════════════════════ PAGE 4 — DATA & CODE ════════════════════ -->
 <div class="page">
 <div class="page-inner">
 
   <div class="page-header">
-    <span class="page-header-title">How We Made It — Silver Jubilee Invitation</span>
+    <span class="page-header-title">Technical Documentation — Silver Jubilee Invitation</span>
     <span class="page-header-num">04</span>
   </div>
 
-  <h2 class="section-heading">The AI <span>Superpower</span></h2>
-  <p class="section-intro">
-    This project was built using Claude Code with GODSKILL — a compiled set of advanced AI workflow skills. Three skills were central to how we worked.
-  </p>
+  <h2 class="sh">Data & <span>Code</span></h2>
+  <p class="si">The two trickiest parts: making music work on mobile, and saving RSVP data forever. Here's exactly how both work.</p>
 
-  <!-- Skill 1 -->
-  <div class="skill-box">
-    <div class="skill-box-title">dispatching-parallel-agents</div>
-    <div class="skill-box-sub">From GODSKILL — Antigravity Superpower</div>
-    <div class="skill-box-body">
-      When asked to create 10 completely different designs simultaneously, we used the parallel dispatch pattern — spinning up 5 independent AI agents in parallel, each responsible for 2 designs. No agent shared context with another. All 10 completed and committed in a single push.
-    </div>
+  <!-- Music -->
+  <div style="margin-bottom:8px;font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--brown)">🎵 Mobile-Safe Music Autoplay</div>
+  <div style="font-size:0.8rem;color:var(--brown2);margin-bottom:10px;line-height:1.55">
+    Browsers block music from auto-playing. Our solution: <strong>try to play immediately</strong> (works on desktop), and <strong>also attach listeners</strong> for the first tap, scroll, or keypress on mobile. Once triggered, all listeners remove themselves so it only fires once.
   </div>
 
-  <!-- Parallel agent diagram -->
-  <div class="agent-diagram">
-    <div class="agent-label">Parallel Agent Dispatch — 10 Designs in One Session</div>
+  <div class="code-block">
+    <div class="code-label">JavaScript — audio/index.html</div>
+    <pre><span class="kw">const</span> audio = document.<span class="fn">getElementById</span>(<span class="str">'bgAudio'</span>);
+audio.volume = <span class="num">0.32</span>;
 
-    <div class="agent-row">
-      <div class="agent-box">Agent 1</div>
-      <div class="agent-arrow">→</div>
-      <div class="agent-output">v1 Celestial Night + v2 Botanical Garden</div>
-    </div>
-    <div class="agent-row">
-      <div class="agent-box">Agent 2</div>
-      <div class="agent-arrow">→</div>
-      <div class="agent-output">v3 Art Deco Gatsby + v4 Royal Mughal</div>
-    </div>
-    <div class="agent-row">
-      <div class="agent-box">Agent 3</div>
-      <div class="agent-arrow">→</div>
-      <div class="agent-output">v5 Pure Minimalist + v6 Vintage Parchment</div>
-    </div>
-    <div class="agent-row">
-      <div class="agent-box">Agent 4</div>
-      <div class="agent-arrow">→</div>
-      <div class="agent-output">v7 Peacock Teal + v8 Cherry Blossom</div>
-    </div>
-    <div class="agent-row" style="margin-bottom:0">
-      <div class="agent-box">Agent 5</div>
-      <div class="agent-arrow">→</div>
-      <div class="agent-output">v9 Marble Luxe + v10 Emerald Forest</div>
-    </div>
+<span class="cm">// Try immediately (works on desktop)</span>
+audio.<span class="fn">play</span>().<span class="fn">catch</span>(() => {});
+
+<span class="cm">// Fallback: wait for first user gesture on mobile</span>
+<span class="kw">const</span> <span class="fn">start</span> = () => {
+  audio.<span class="fn">play</span>().<span class="fn">catch</span>(() => {});
+  [<span class="str">'click'</span>, <span class="str">'touchstart'</span>, <span class="str">'scroll'</span>].<span class="fn">forEach</span>(e =>
+    document.<span class="fn">removeEventListener</span>(e, start));
+};
+[<span class="str">'click'</span>, <span class="str">'touchstart'</span>, <span class="str">'scroll'</span>].<span class="fn">forEach</span>(e =>
+  document.<span class="fn">addEventListener</span>(e, start, { once: <span class="kw">true</span> }));</pre>
   </div>
 
-  <!-- Skill 2 -->
-  <div class="skill-box" style="margin-top:18px">
-    <div class="skill-box-title">brainstorming</div>
-    <div class="skill-box-sub">From GODSKILL — Superpowers SDLC</div>
-    <div class="skill-box-body">
-      Before writing code, we explored the brief — couple names, occasion, cultural identity (Maharashtrian), song choice, color palette preference, photo availability. This ensured every design decision had intent, not guesswork.
+  <!-- RSVP Flow -->
+  <div style="margin:20px 0 8px;font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--brown)">📋 RSVP → Google Sheets Flow</div>
+
+  <div class="flow">
+    <div class="flow-label">What happens when a guest clicks "Confirm Attendance"</div>
+    <div class="flow-row">
+      <div class="flow-box">Guest fills form</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box">JS collects name + attendance + guests</div>
     </div>
+    <div class="flow-row">
+      <div class="flow-box green">fetch() sends POST request</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box">Google Apps Script receives it</div>
+    </div>
+    <div class="flow-row">
+      <div class="flow-box">Apps Script adds timestamp</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box gold">New row saved in Google Sheet ✦</div>
+    </div>
+    <div class="flow-row">
+      <div class="flow-box green">Form fades out</div>
+      <div class="flow-arrow">→</div>
+      <div class="flow-box">Personalised confirmation shown to guest</div>
+    </div>
+    <div class="flow-note">The host visits /dataofsanya — the page fetches all rows via GET and renders a live table with stats.</div>
   </div>
 
-  <!-- Skill 3 -->
-  <div class="skill-box">
-    <div class="skill-box-title">iterative-polish / mobile-first thinking</div>
-    <div class="skill-box-sub">Applied AI Workflow Pattern</div>
-    <div class="skill-box-body">
-      Each feature went through client feedback loops. Mobile layout, photo crop positions, circle sizing, blur intensity — all tuned in real-time via short feedback cycles. "little bit more", "take camera up", "perfect" — each became a precise CSS change, tested, and pushed live instantly.
-    </div>
-  </div>
+  <!-- Blur trick -->
+  <div style="margin:18px 0 8px;font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--brown)">🔵 The Circular Photo Blur Trick</div>
 
-  <!-- Tags -->
-  <div style="margin-top:16px">
-    <span class="skill-tag">parallel-agents</span>
-    <span class="skill-tag">brainstorming</span>
-    <span class="skill-tag">mobile-first</span>
-    <span class="skill-tag">git-workflow</span>
-    <span class="skill-tag">css-mastery</span>
-    <span class="skill-tag">web-audio-api</span>
-    <span class="skill-tag">google-apps-script</span>
-    <span class="skill-tag">svg-art</span>
-    <span class="skill-tag">github-pages</span>
-    <span class="skill-tag">intersection-observer</span>
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
+    <div style="background:var(--cream);border-radius:10px;padding:14px 16px">
+      <div style="font-weight:700;font-size:0.8rem;margin-bottom:6px">The Problem</div>
+      <div style="font-size:0.75rem;color:var(--brown2);line-height:1.5">
+        Photos are rectangular. A circle crop creates white/empty gaps on the sides if the photo is portrait-shaped. <code style="background:var(--brown);color:var(--gold);padding:1px 4px;border-radius:3px;font-size:0.68rem;font-family:'Fira Code',monospace">object-fit:contain</code> shows the full photo but leaves gaps.
+      </div>
+    </div>
+    <div style="background:var(--cream);border-radius:10px;padding:14px 16px">
+      <div style="font-weight:700;font-size:0.8rem;margin-bottom:6px">The Solution</div>
+      <div style="font-size:0.75rem;color:var(--brown2);line-height:1.5">
+        Stack two layers inside <code style="background:var(--brown);color:var(--gold);padding:1px 4px;border-radius:3px;font-size:0.68rem;font-family:'Fira Code',monospace">overflow:hidden</code> circle. Bottom layer: same image, <code style="background:var(--brown);color:var(--gold);padding:1px 4px;border-radius:3px;font-size:0.68rem;font-family:'Fira Code',monospace">blur(40px) scale(1.3)</code>. Top layer: sharp photo. The blurred layer fills all gaps with matching tones.
+      </div>
+    </div>
   </div>
 
 </div>
 </div>
 
 
-<!-- ═══════════════════════════════════════════════════
-     PAGE 6 — CLOSING
-═══════════════════════════════════════════════════ -->
+<!-- ════════════════════ PAGE 5 — FINAL SUMMARY ════════════════════ -->
 <div class="page">
-<div class="page-inner" style="display:flex;flex-direction:column;justify-content:center;min-height:297mm">
+<div class="page-inner" style="display:flex;flex-direction:column;min-height:297mm">
 
   <div class="page-header">
-    <span class="page-header-title">How We Made It — Silver Jubilee Invitation</span>
+    <span class="page-header-title">Technical Documentation — Silver Jubilee Invitation</span>
     <span class="page-header-num">05</span>
   </div>
 
-  <h2 class="section-heading">The <span>Final Result</span></h2>
-  <p class="section-intro">
-    A fully custom digital invitation — no templates, no subscriptions, no monthly fees. Built with care, deployed in hours, and live forever.
-  </p>
+  <h2 class="sh">What's <span>Inside</span></h2>
+  <p class="si">A complete summary of every technology used, and where each one lives.</p>
 
-  <!-- Final stats -->
-  <div class="stats-row" style="margin-bottom:32px">
-    <div class="stat-pill"><div class="stat-pill-num">10</div><div class="stat-pill-label">Unique Designs</div></div>
-    <div class="stat-pill"><div class="stat-pill-num">1</div><div class="stat-pill-label">Chosen Design</div></div>
-    <div class="stat-pill"><div class="stat-pill-num">∞</div><div class="stat-pill-label">RSVP Data Saved</div></div>
-    <div class="stat-pill"><div class="stat-pill-num">0</div><div class="stat-pill-label">Cost to Host</div></div>
+  <div class="stats-row">
+    <div class="stat-pill"><div class="stat-num">1</div><div class="stat-label">HTML File<br>per design</div></div>
+    <div class="stat-pill"><div class="stat-num">10</div><div class="stat-label">Design<br>Versions</div></div>
+    <div class="stat-pill"><div class="stat-num">4</div><div class="stat-label">Real<br>Photos</div></div>
+    <div class="stat-pill"><div class="stat-num">1</div><div class="stat-label">MP3<br>Music File</div></div>
   </div>
 
-  <!-- Features list summary -->
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:36px">
-    <div style="background:var(--cream);border-radius:8px;padding:12px 16px;border-left:3px solid var(--green)">
-      <div style="font-weight:700;font-size:0.82rem;margin-bottom:3px">✦ Botanical Garden Theme</div>
-      <div style="font-size:0.72rem;color:var(--brown2)">Ivory background · leaf wreath · gold accents · Playfair Display</div>
-    </div>
-    <div style="background:var(--cream);border-radius:8px;padding:12px 16px;border-left:3px solid var(--green)">
-      <div style="font-weight:700;font-size:0.82rem;margin-bottom:3px">✦ Saathiya Background Music</div>
-      <div style="font-size:0.72rem;color:var(--brown2)">Autoplay with mobile fallback · animated equalizer bars</div>
-    </div>
-    <div style="background:var(--cream);border-radius:8px;padding:12px 16px;border-left:3px solid var(--green)">
-      <div style="font-weight:700;font-size:0.82rem;margin-bottom:3px">✦ 4 Real Couple Photos</div>
-      <div style="font-size:0.72rem;color:var(--brown2)">Vintage · Traditional · Candid · Casual — all tuned by subject position</div>
-    </div>
-    <div style="background:var(--cream);border-radius:8px;padding:12px 16px;border-left:3px solid var(--green)">
-      <div style="font-weight:700;font-size:0.82rem;margin-bottom:3px">✦ RSVP to Google Sheets</div>
-      <div style="font-size:0.72rem;color:var(--brown2)">Permanent storage · live dashboard · guest count · timestamps</div>
-    </div>
-    <div style="background:var(--cream);border-radius:8px;padding:12px 16px;border-left:3px solid var(--green)">
-      <div style="font-weight:700;font-size:0.82rem;margin-bottom:3px">✦ Fully Mobile Optimised</div>
-      <div style="font-size:0.72rem;color:var(--brown2)">Responsive at all breakpoints · touch-friendly · fast loading</div>
-    </div>
-    <div style="background:var(--cream);border-radius:8px;padding:12px 16px;border-left:3px solid var(--green)">
-      <div style="font-weight:700;font-size:0.82rem;margin-bottom:3px">✦ Bilingual — EN + मराठी</div>
-      <div style="font-size:0.72rem;color:var(--brown2)">Noto Serif Devanagari · Saathiya verse · Marathi subtext throughout</div>
+  <!-- Tech stack table -->
+  <div style="background:var(--cream);border-radius:12px;overflow:hidden;margin-bottom:20px">
+    <div style="background:var(--green);color:white;padding:10px 18px;font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;font-weight:700">Technology Stack</div>
+    <div style="padding:4px 0">
+      <div style="display:flex;padding:9px 18px;border-bottom:1px solid rgba(92,122,62,0.1);gap:12px">
+        <div style="width:140px;font-weight:700;font-size:0.8rem;flex-shrink:0">HTML5</div>
+        <div style="font-size:0.78rem;color:var(--brown2)">Page structure — sections, forms, images, audio element</div>
+      </div>
+      <div style="display:flex;padding:9px 18px;border-bottom:1px solid rgba(92,122,62,0.1);gap:12px">
+        <div style="width:140px;font-weight:700;font-size:0.8rem;flex-shrink:0">CSS3</div>
+        <div style="font-size:0.78rem;color:var(--brown2)">Variables, Grid, Flexbox, clamp(), keyframe animations, filters, clip-path</div>
+      </div>
+      <div style="display:flex;padding:9px 18px;border-bottom:1px solid rgba(92,122,62,0.1);gap:12px">
+        <div style="width:140px;font-weight:700;font-size:0.8rem;flex-shrink:0">JavaScript (ES6)</div>
+        <div style="font-size:0.78rem;color:var(--brown2)">IntersectionObserver, Web Audio API, fetch(), DOM manipulation</div>
+      </div>
+      <div style="display:flex;padding:9px 18px;border-bottom:1px solid rgba(92,122,62,0.1);gap:12px">
+        <div style="width:140px;font-weight:700;font-size:0.8rem;flex-shrink:0">SVG</div>
+        <div style="font-size:0.78rem;color:var(--brown2)">Botanical borders, leaf wreaths, corner accents, wax seal, all inline — scales perfectly</div>
+      </div>
+      <div style="display:flex;padding:9px 18px;border-bottom:1px solid rgba(92,122,62,0.1);gap:12px">
+        <div style="width:140px;font-weight:700;font-size:0.8rem;flex-shrink:0">Google Fonts</div>
+        <div style="font-size:0.78rem;color:var(--brown2)">Playfair Display · Lato · Cormorant Garamond · Noto Serif Devanagari</div>
+      </div>
+      <div style="display:flex;padding:9px 18px;border-bottom:1px solid rgba(92,122,62,0.1);gap:12px">
+        <div style="width:140px;font-weight:700;font-size:0.8rem;flex-shrink:0">GitHub Pages</div>
+        <div style="font-size:0.78rem;color:var(--brown2)">Free static hosting — files pushed via Git, site auto-publishes in &lt;2 min</div>
+      </div>
+      <div style="display:flex;padding:9px 18px;border-bottom:1px solid rgba(92,122,62,0.1);gap:12px">
+        <div style="width:140px;font-weight:700;font-size:0.8rem;flex-shrink:0">Google Apps Script</div>
+        <div style="font-size:0.78rem;color:var(--brown2)">Serverless function — receives RSVP POST, writes row to Google Sheet</div>
+      </div>
+      <div style="display:flex;padding:9px 18px;gap:12px">
+        <div style="width:140px;font-weight:700;font-size:0.8rem;flex-shrink:0">Google Sheets</div>
+        <div style="font-size:0.78rem;color:var(--brown2)">Permanent RSVP database — every response stored with timestamp forever</div>
+      </div>
     </div>
   </div>
 
-  <!-- Closing quote -->
-  <div class="closing-quote">
+  <!-- File structure -->
+  <div class="code-block" style="margin-bottom:20px">
+    <div class="code-label">File Structure — GitHub Repository</div>
+    <pre><span class="str">sanya/</span>
+├── <span class="fn">index.html</span>          <span class="cm">← Main invitation (v2 Botanical Garden)</span>
+├── <span class="fn">.nojekyll</span>           <span class="cm">← Tells GitHub: don't process, just serve</span>
+├── <span class="str">photo/</span>
+│   ├── <span class="fn">vintage.jpg</span>     <span class="cm">← Hero circle photo</span>
+│   ├── <span class="fn">traditional.jpg</span>
+│   ├── <span class="fn">candid.jpg</span>
+│   └── <span class="fn">casual.jpg</span>
+├── <span class="str">audio/</span>
+│   └── <span class="fn">saathiya.mp3</span>    <span class="cm">← Background music</span>
+├── <span class="str">v1/</span> … <span class="str">v10/</span>         <span class="cm">← 10 alternate designs</span>
+└── <span class="str">dataofsanya/</span>
+    └── <span class="fn">index.html</span>      <span class="cm">← Live RSVP dashboard</span></pre>
+  </div>
+
+  <!-- Closing -->
+  <div class="closing" style="margin-top:auto">
     <blockquote>
       "In the garden of life, the most beautiful blooms are those<br>
       nurtured with patience, tended with love, and shared<br>
@@ -1193,22 +890,20 @@ audio.volume = <span class="str">0.32</span>;
     <cite>— From the Invitation · smashco.github.io/sanya</cite>
   </div>
 
-  <!-- Bottom decoration -->
-  <div style="text-align:center;margin-top:36px">
-    <svg width="120" height="24" viewBox="0 0 120 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path d="M0 12 Q30 4 60 12 Q90 20 120 12" stroke="#C9A96E" stroke-width="1" fill="none"/>
-      <circle cx="60" cy="12" r="3" fill="#C9A96E"/>
-      <path d="M55 7 Q60 0 65 7 Q60 10 55 7Z" fill="#5C7A3E"/>
-      <path d="M48 10 Q52 4 57 9 Q52 12 48 10Z" fill="#5C7A3E" opacity="0.7"/>
-      <path d="M72 10 Q68 4 63 9 Q68 12 72 10Z" fill="#5C7A3E" opacity="0.7"/>
+  <div style="text-align:center;margin-top:24px">
+    <svg width="100" height="20" viewBox="0 0 100 20" fill="none">
+      <path d="M0 10 Q25 3 50 10 Q75 17 100 10" stroke="#C9A96E" stroke-width="1" fill="none"/>
+      <circle cx="50" cy="10" r="2.5" fill="#C9A96E"/>
+      <path d="M46 6 Q50 0 54 6 Q50 8 46 6Z" fill="#5C7A3E"/>
     </svg>
-    <div style="font-size:0.6rem;letter-spacing:0.3em;text-transform:uppercase;color:rgba(44,26,16,0.35);margin-top:12px">
-      Built with Claude Code · GODSKILL · GitHub Pages · Google Sheets
+    <div style="font-size:0.58rem;letter-spacing:0.28em;text-transform:uppercase;color:rgba(44,26,16,0.3);margin-top:10px">
+      HTML · CSS · JavaScript · SVG · GitHub Pages · Google Sheets
     </div>
   </div>
 
 </div>
 </div>
+
 
 </body>
 </html>
