@@ -354,6 +354,9 @@
       position: relative;
       overflow: hidden;
       user-select: none;
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+      min-height: 48px;
     }
     .rsvp-choice label::before {
       content: '';
@@ -460,14 +463,76 @@
       to { background-position: 200% center; }
     }
 
+    /* ── Mobile optimisation ── */
     @media (max-width: 600px) {
-      .frame-inner { padding: 40px 24px 36px; }
+      /* frame */
+      .page-frame  { padding: 6px; }
+      .frame-border { padding: 4px; }
+      .frame-inner  { padding: 32px 22px 30px; }
+
+      /* paithani bands overlap content on small screens — hide */
+      .paithani-band { display: none; }
+
+      /* torana: fluid width */
+      .torana-wrap svg { width: 100%; height: auto; }
+
+      /* header text */
+      .pre-header  { font-size: .6rem; letter-spacing: .22em; }
+      .shri-line   { font-size: 1rem; }
+      .year-num    { font-size: 2rem; }
+      .headline    { font-size: .85rem; letter-spacing: .14em; }
+      .marathi-sub { font-size: .85rem; }
+      .celebrating { font-size: 1rem; }
+
+      /* rings */
+      .rings-svg { width: 68px; height: auto; }
+
+      /* names */
+      .name      { font-size: 1.65rem !important; }
+      .name-sub  { font-size: 1.3rem  !important; }
+      .name-deva { font-size: .9rem;  }
+
+      /* intro / tagline */
+      .intro   { font-size: 1rem; }
+      .tagline { font-size: 1rem; line-height: 1.65; }
+      .welcome-deva { font-size: .9rem; }
+
+      /* details grid: single column */
       .details-grid {
         grid-template-columns: 1fr;
-        gap: 20px;
+        gap: 18px;
       }
-      .detail-sep { display: none; }
-      .rsvp-wrap { padding: 28px 20px 24px; }
+      .detail-sep   { display: none; }
+      .detail-box   { padding: 6px 8px; }
+      .detail-value { font-size: 1rem; }
+      .detail-note  { font-size: .8rem; }
+
+      /* RSVP: stack cards, full-width tap targets */
+      .rsvp-wrap    { padding: 24px 16px 22px; }
+      .rsvp-choices { flex-direction: column; align-items: center; }
+      .rsvp-choice  { width: 100%; max-width: 290px; }
+      .rsvp-choice label {
+        justify-content: center;
+        min-height: 52px;
+        padding: 14px 20px;
+      }
+      .rsvp-btn {
+        width: 100%;
+        max-width: 290px;
+        padding: 16px 20px;
+        touch-action: manipulation;
+      }
+
+      /* footer */
+      .footer-flourish { font-size: .5rem; letter-spacing: .25em; margin-top: 32px; }
+    }
+
+    /* very small phones */
+    @media (max-width: 360px) {
+      .frame-inner { padding: 26px 16px 24px; }
+      .name { font-size: 1.35rem !important; }
+      .name-sub { font-size: 1.1rem !important; }
+      .year-num { font-size: 1.7rem; }
     }
   </style>
 </head>
@@ -576,7 +641,7 @@
 
       <!-- Torana arch -->
       <div class="fade-up torana-wrap">
-        <svg width="320" height="60" viewBox="0 0 320 60" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg width="320" height="60" viewBox="0 0 320 60" fill="none" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;">
           <defs>
             <linearGradient id="tg" x1="0" y1="0" x2="1" y2="0">
               <stop offset="0%" stop-color="transparent"/>
