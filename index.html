@@ -99,21 +99,36 @@
     }
 
     /* Photo with leaf wreath */
-    .hero-photo-wrap {
+    .hero-photo-outer {
       position: relative;
       width: 220px;
       height: 220px;
       margin: 0 auto 32px;
     }
 
+    .hero-photo-wrap {
+      position: absolute;
+      inset: 0;
+      border-radius: 50%;
+      overflow: hidden;
+      box-shadow: 0 8px 40px rgba(44,26,16,0.15), 0 2px 12px rgba(92,122,62,0.12);
+    }
+
+    .hero-blur-bg {
+      position: absolute;
+      inset: 0;
+      background: url('photo/vintage.jpg') center/cover no-repeat;
+      filter: blur(18px);
+      transform: scale(1.2);
+      z-index: 1;
+    }
+
     .hero-photo {
-      width: 220px;
-      height: 220px;
+      width: 100%;
+      height: 100%;
       border-radius: 50%;
       object-fit: contain;
       object-position: center center;
-      border: 4px solid var(--ivory);
-      box-shadow: 0 8px 40px rgba(44,26,16,0.15), 0 2px 12px rgba(92,122,62,0.12);
       position: relative;
       z-index: 2;
     }
@@ -124,7 +139,7 @@
       width: calc(100% + 44px);
       height: calc(100% + 44px);
       pointer-events: none;
-      z-index: 1;
+      z-index: 3;
       animation: wreathSway 6s ease-in-out infinite alternate;
     }
 
@@ -881,7 +896,11 @@
     <div class="hero-tagline">A Celebration of Love &amp; Life</div>
 
     <!-- Photo with leaf wreath -->
+    <div class="hero-photo-outer">
     <div class="hero-photo-wrap">
+      <div class="hero-blur-bg"></div>
+      <img class="hero-photo" src="photo/vintage.jpg" alt="Ruta & Anant" />
+    </div>
       <!-- Leaf wreath SVG -->
       <svg class="leaf-wreath" viewBox="0 0 264 264" fill="none" xmlns="http://www.w3.org/2000/svg">
         <!-- Circular wreath of leaves -->
@@ -921,8 +940,7 @@
           <circle cx="132" cy="132" r="115" stroke="rgba(92,122,62,0.12)" stroke-width="1" stroke-dasharray="4 6"/>
         </g>
       </svg>
-      <img class="hero-photo" src="photo/vintage.jpg" alt="Ruta & Anant" />
-    </div>
+    </div><!-- end hero-photo-outer -->
 
     <!-- Names -->
     <h1 class="hero-names">
