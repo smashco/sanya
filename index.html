@@ -435,6 +435,88 @@ body::before{
 .rsvp-confirm p{font-size:1.1rem;font-style:italic;color:var(--gl)}
 
 /* ─────────────────────────────
+   ══ SONG VERSE ══
+───────────────────────────── */
+.verse-section{
+  position:relative;z-index:1;
+  padding:0 22px 52px;text-align:center;
+  max-width:var(--max);margin:0 auto;
+}
+.verse-note{
+  font-size:.8rem;color:var(--gold);opacity:.6;
+  margin-bottom:18px;display:block;
+  animation:pulseN 2.5s ease-in-out infinite;
+}
+@keyframes pulseN{0%,100%{opacity:.4;transform:scale(1)}50%{opacity:.85;transform:scale(1.12)}}
+.verse-main{
+  font-family:'Noto Serif Devanagari',serif;
+  font-size:clamp(1.1rem,3.2vw,1.42rem);font-weight:400;
+  color:var(--gl);line-height:1.85;
+  margin-bottom:14px;
+  text-shadow:0 0 28px rgba(201,169,110,.18);
+}
+.verse-accent{
+  display:block;font-size:.78rem;
+  color:var(--muted);font-style:italic;
+  font-family:'Cormorant Garamond',serif;
+  letter-spacing:.08em;margin-top:4px;opacity:.7;
+}
+.verse-sub{
+  font-family:'Noto Serif Devanagari',serif;
+  font-size:clamp(.88rem,2.5vw,1rem);
+  color:var(--gold);opacity:.72;
+  line-height:1.85;margin-bottom:6px;
+}
+.verse-en{
+  font-size:.78rem;font-style:italic;font-family:'Cormorant Garamond',serif;
+  color:var(--muted);opacity:.6;letter-spacing:.06em;margin-top:10px;display:block;
+}
+
+/* ─────────────────────────────
+   ══ MUSIC BUTTON ══
+───────────────────────────── */
+.music-btn{
+  position:fixed;bottom:28px;right:22px;z-index:200;
+  width:48px;height:48px;border-radius:50%;
+  border:1px solid rgba(201,169,110,.5);
+  background:rgba(7,6,10,.82);
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  gap:0;backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  transition:border-color .3s,box-shadow .3s,transform .2s;
+  padding:0;
+}
+.music-btn:hover{
+  border-color:var(--gold);
+  box-shadow:0 0 20px rgba(201,169,110,.22);
+  transform:scale(1.06);
+}
+/* wave bars */
+.music-btn .bars{display:flex;align-items:flex-end;gap:2.5px;height:16px}
+.music-btn .bars span{
+  display:block;width:2.5px;border-radius:2px;
+  background:var(--gold);height:5px;
+  transition:background .3s;
+}
+/* static state */
+.music-btn .bars span:nth-child(1){height:7px}
+.music-btn .bars span:nth-child(2){height:12px}
+.music-btn .bars span:nth-child(3){height:5px}
+.music-btn .bars span:nth-child(4){height:10px}
+/* playing — animate bars */
+.music-btn.playing .bars span:nth-child(1){animation:bar 1.0s .0s ease-in-out infinite alternate}
+.music-btn.playing .bars span:nth-child(2){animation:bar 1.0s .2s ease-in-out infinite alternate}
+.music-btn.playing .bars span:nth-child(3){animation:bar 1.0s .4s ease-in-out infinite alternate}
+.music-btn.playing .bars span:nth-child(4){animation:bar 1.0s .1s ease-in-out infinite alternate}
+@keyframes bar{from{height:4px}to{height:14px}}
+.music-btn.playing{border-color:var(--gold);box-shadow:0 0 18px rgba(201,169,110,.2)}
+/* muted icon (shown when not playing) */
+.music-btn .icon-mute{display:flex;align-items:center;justify-content:center;color:var(--muted)}
+.music-btn .icon-mute svg{display:block}
+.music-btn.playing .icon-mute{display:none}
+.music-btn:not(.playing) .bars{display:none}
+.music-btn.playing .bars{display:flex}
+
+/* ─────────────────────────────
    ══ FOOTER ══
 ───────────────────────────── */
 footer{
@@ -515,11 +597,16 @@ footer{
   .rsvp-btn{width:100%;padding:16px}
   .rsvp-btn-wrap{margin-top:18px}
 
+  /* ── VERSE ── */
+  .verse-section{padding:0 16px 40px}
+  .verse-main{font-size:1.1rem}
+
   /* ── SHARED ── */
   .section-orn{padding:32px 16px 28px}
   .pait-div svg{height:20px}
   footer{padding:26px 14px 38px}
   .foot-main{font-size:.48rem;letter-spacing:.22em}
+  .music-btn{bottom:20px;right:16px;width:44px;height:44px}
 }
 
 @media(max-width:380px){
@@ -534,6 +621,11 @@ footer{
 </style>
 </head>
 <body>
+
+<!-- background music -->
+<audio id="bgMusic" loop preload="auto">
+  <source src="audio/saathiya-tune-kya-kiya-video-song-love-salman-khan-revathi-ishtar-music-3_bprPAg98.mp3" type="audio/mpeg"/>
+</audio>
 
 <!-- gold dust -->
 <div class="dust" id="dust"></div>
@@ -796,6 +888,24 @@ footer{
 </div>
 
 <!-- ═══════════════════════════════
+     SONG VERSE
+═══════════════════════════════ -->
+<div class="verse-section">
+  <span class="verse-note reveal up d1">♪</span>
+  <p class="verse-main reveal up d2">
+    साथिया ये तुने क्या किया
+    <span class="verse-accent">Saathiya — what have you done to my heart</span>
+  </p>
+  <p class="verse-sub reveal up d3">
+    दो रंग मिलने के बाद होते नहीं है जुदा
+  </p>
+  <p class="verse-sub reveal up d4">
+    मैंने किया है तुमसे प्यार
+  </p>
+  <span class="verse-en reveal up d5">Two souls — after meeting, never apart · I have loved you</span>
+</div>
+
+<!-- ═══════════════════════════════
      MOMENTS
 ═══════════════════════════════ -->
 <section class="moments">
@@ -869,6 +979,19 @@ footer{
   <div class="foot-d">॥ शुभं भवतु ॥</div>
 </footer>
 
+<!-- music toggle button -->
+<button class="music-btn" id="musicBtn" aria-label="Toggle background music" title="Toggle music">
+  <div class="icon-mute">
+    <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+      <path d="M3 6.5H6L10 3V15L6 11.5H3V6.5Z" stroke="#9A8766" stroke-width="1.3" stroke-linejoin="round"/>
+      <path d="M13 6C14.2 7 14.8 8 14.8 9C14.8 10 14.2 11 13 12" stroke="#9A8766" stroke-width="1.3" stroke-linecap="round"/>
+    </svg>
+  </div>
+  <div class="bars">
+    <span></span><span></span><span></span><span></span>
+  </div>
+</button>
+
 <script>
 /* ── DUST ── */
 (()=>{
@@ -886,6 +1009,36 @@ footer{
     es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}});
   },{threshold:.12,rootMargin:'0px 0px -30px 0px'});
   document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+})();
+
+/* ── MUSIC ── */
+(()=>{
+  const audio=document.getElementById('bgMusic');
+  const btn=document.getElementById('musicBtn');
+  audio.volume=0.32;
+
+  const tryPlay=()=>audio.play().then(()=>btn.classList.add('playing')).catch(()=>{});
+
+  // Try autoplay immediately
+  tryPlay();
+
+  // Fallback: start on first user gesture (covers mobile)
+  const onGesture=()=>{
+    if(audio.paused) tryPlay();
+    document.removeEventListener('touchstart',onGesture,{passive:true});
+    document.removeEventListener('click',onGesture);
+  };
+  document.addEventListener('touchstart',onGesture,{passive:true});
+  document.addEventListener('click',onGesture);
+
+  // Manual toggle
+  btn.addEventListener('click',e=>{
+    e.stopPropagation();
+    if(audio.paused){audio.play();btn.classList.add('playing')}
+    else{audio.pause();btn.classList.remove('playing')}
+  });
+  audio.addEventListener('play',()=>btn.classList.add('playing'));
+  audio.addEventListener('pause',()=>btn.classList.remove('playing'));
 })();
 
 /* ── RSVP ── */
