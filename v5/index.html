@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ruta &amp; Anant Todkar — 25th Silver Jubilee</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&family=Noto+Serif+Devanagari:wght@400;600&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --bg:       #FAFAF8;
+      --text:     #111111;
+      --mid:      #555555;
+      --light:    #888888;
+      --gold:     #8B6914;
+      --gold-line:#C9A96E;
+      --max:      560px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 400;
+      font-size: 15px;
+      line-height: 1.7;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Layout wrapper ── */
+    .wrapper {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+
+    /* ── Scroll reveal ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.72s ease, transform 0.72s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ════════════════════════════════════
+       HERO
+    ════════════════════════════════════ */
+    .hero {
+      padding: 72px 0 64px;
+      text-align: center;
+    }
+
+    .hero-top-rule {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold-line), transparent);
+      margin-bottom: 52px;
+    }
+
+    .hero-years {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 40px;
+    }
+
+    .hero-name-block {
+      line-height: 0.92;
+      margin-bottom: 6px;
+    }
+
+    .hero-name-first,
+    .hero-name-and,
+    .hero-name-second {
+      display: block;
+      font-family: 'DM Serif Display', serif;
+      font-weight: 400;
+      color: var(--text);
+      letter-spacing: -0.01em;
+    }
+
+    .hero-name-first  { font-size: clamp(64px, 18vw, 96px); line-height: 0.9; }
+    .hero-name-and    { font-size: clamp(28px,  8vw, 44px); color: var(--gold); line-height: 1.2; margin: 8px 0; }
+    .hero-name-second { font-size: clamp(64px, 18vw, 96px); line-height: 0.9; }
+
+    .hero-surname {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.38em;
+      text-transform: uppercase;
+      color: var(--light);
+      margin-top: 20px;
+      margin-bottom: 36px;
+    }
+
+    .hero-mid-rule {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold-line), transparent);
+      margin-bottom: 32px;
+    }
+
+    .hero-occasion {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--mid);
+      margin-bottom: 8px;
+    }
+
+    .hero-marathi {
+      font-family: 'Noto Serif Devanagari', serif;
+      font-size: 16px;
+      color: var(--gold);
+      letter-spacing: 0.04em;
+    }
+
+    .hero-date {
+      margin-top: 12px;
+      font-size: 13px;
+      color: var(--mid);
+      letter-spacing: 0.08em;
+    }
+
+    /* ════════════════════════════════════
+       SECTION SHARED
+    ════════════════════════════════════ */
+    section {
+      padding: 64px 0;
+    }
+
+    .section-label {
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--light);
+      margin-bottom: 32px;
+    }
+
+    .thin-rule {
+      width: 100%;
+      height: 1px;
+      background-color: #E0DDD8;
+      margin: 32px 0;
+    }
+
+    .gold-rule {
+      width: 48px;
+      height: 1px;
+      background-color: var(--gold-line);
+      margin: 0 auto 32px;
+    }
+
+    /* ════════════════════════════════════
+       PHOTOS
+    ════════════════════════════════════ */
+    .photos-section { text-align: center; }
+
+    .photo-main-wrap {
+      display: inline-block;
+      position: relative;
+      margin-bottom: 10px;
+    }
+
+    .photo-main {
+      display: block;
+      width: 100%;
+      max-width: 380px;
+      aspect-ratio: 1;
+      object-fit: cover;
+      border: 1px solid var(--text);
+      filter: sepia(0.55) contrast(1.05) brightness(0.96);
+      transition: filter 0.4s ease;
+    }
+    .photo-main:hover { filter: sepia(0.15) contrast(1.02) brightness(1.0); }
+
+    .photo-caption {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      color: var(--light);
+      margin-top: 12px;
+      text-transform: uppercase;
+    }
+
+    .photo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .photo-grid img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      border: 1px solid #CCCCCC;
+      filter: brightness(0.97);
+      transition: filter 0.4s ease;
+    }
+    .photo-grid img:hover { filter: brightness(1.03); }
+
+    .photo-grid-caption {
+      font-size: 10px;
+      letter-spacing: 0.16em;
+      color: var(--light);
+      margin-top: 8px;
+      text-transform: uppercase;
+    }
+
+    /* ════════════════════════════════════
+       EVENT DETAILS
+    ════════════════════════════════════ */
+    .details-section { }
+
+    .details-table {
+      width: 100%;
+      border-collapse: collapse;
+    }
+
+    .details-table tr {
+      border-bottom: 1px solid #E4E1DC;
+    }
+
+    .details-table tr:first-child {
+      border-top: 1px solid #E4E1DC;
+    }
+
+    .details-table td {
+      padding: 18px 0;
+      vertical-align: top;
+    }
+
+    .details-table td:first-child {
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--light);
+      width: 100px;
+      padding-right: 20px;
+      padding-top: 20px;
+    }
+
+    .details-table td:last-child {
+      font-size: 14px;
+      color: var(--text);
+    }
+
+    .detail-primary {
+      font-family: 'DM Serif Display', serif;
+      font-size: 18px;
+      color: var(--text);
+      line-height: 1.2;
+      margin-bottom: 4px;
+    }
+
+    .detail-secondary {
+      font-size: 13px;
+      color: var(--mid);
+      line-height: 1.6;
+    }
+
+    .detail-accent {
+      color: var(--gold);
+      font-weight: 500;
+    }
+
+    /* ════════════════════════════════════
+       MESSAGE
+    ════════════════════════════════════ */
+    .message-section {
+      text-align: center;
+      padding: 48px 0;
+    }
+
+    .message-quote {
+      font-family: 'DM Serif Display', serif;
+      font-style: italic;
+      font-size: clamp(18px, 4.5vw, 24px);
+      color: var(--text);
+      line-height: 1.55;
+      margin-bottom: 16px;
+    }
+
+    .message-attr {
+      font-size: 11px;
+      letter-spacing: 0.18em;
+      color: var(--light);
+      text-transform: uppercase;
+    }
+
+    /* ════════════════════════════════════
+       RSVP
+    ════════════════════════════════════ */
+    .rsvp-section { }
+
+    .rsvp-intro {
+      font-size: 13px;
+      color: var(--mid);
+      margin-bottom: 32px;
+      line-height: 1.8;
+    }
+
+    .rsvp-form { width: 100%; }
+
+    .rsvp-field {
+      margin-bottom: 20px;
+    }
+
+    .rsvp-label {
+      display: block;
+      font-size: 9px;
+      font-weight: 500;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: var(--light);
+      margin-bottom: 10px;
+    }
+
+    .rsvp-input {
+      width: 100%;
+      border: none;
+      border-bottom: 1px solid #CCCCCC;
+      background: transparent;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      color: var(--text);
+      padding: 8px 0;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+    .rsvp-input:focus { border-bottom-color: var(--text); }
+    .rsvp-input::placeholder { color: #BBBBBB; }
+
+    .radio-group {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .radio-option {
+      position: relative;
+      flex: 1;
+      min-width: 120px;
+    }
+
+    .radio-option input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .radio-option label {
+      display: block;
+      border: 1px solid #CCCCCC;
+      padding: 12px 16px;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--mid);
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.25s ease;
+      user-select: none;
+    }
+
+    .radio-option input[type="radio"]:checked + label {
+      border-color: var(--text);
+      background-color: var(--text);
+      color: var(--bg);
+    }
+
+    .radio-option label:hover {
+      border-color: var(--mid);
+      color: var(--text);
+    }
+
+    .rsvp-submit {
+      width: 100%;
+      margin-top: 28px;
+      padding: 16px;
+      background-color: var(--text);
+      color: var(--bg);
+      border: none;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background-color 0.25s ease, transform 0.15s ease;
+    }
+
+    .rsvp-submit:hover {
+      background-color: #333333;
+    }
+
+    .rsvp-submit:active {
+      transform: scale(0.985);
+    }
+
+    .rsvp-confirm-msg {
+      display: none;
+      margin-top: 24px;
+      padding: 18px 20px;
+      border: 1px solid var(--gold-line);
+      font-size: 13px;
+      color: var(--gold);
+      text-align: center;
+      letter-spacing: 0.06em;
+    }
+
+    /* ════════════════════════════════════
+       FOOTER
+    ════════════════════════════════════ */
+    footer {
+      padding: 48px 0 64px;
+      text-align: center;
+      border-top: 1px solid #E4E1DC;
+    }
+
+    .footer-names {
+      font-family: 'DM Serif Display', serif;
+      font-size: 22px;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .footer-marathi {
+      font-family: 'Noto Serif Devanagari', serif;
+      font-size: 14px;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+
+    .footer-note {
+      font-size: 11px;
+      color: var(--light);
+      letter-spacing: 0.08em;
+    }
+
+    .footer-year {
+      display: inline-block;
+      margin-top: 28px;
+      font-size: 10px;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+      color: #CCCCCC;
+    }
+
+    /* ════════════════════════════════════
+       MUSIC TOGGLE
+    ════════════════════════════════════ */
+    #music-btn {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      width: 46px;
+      height: 46px;
+      background-color: var(--text);
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 3px;
+      padding: 10px 12px;
+      z-index: 999;
+      transition: background-color 0.25s ease;
+    }
+
+    #music-btn:hover { background-color: #333333; }
+
+    .eq-bar {
+      width: 4px;
+      background-color: var(--bg);
+      border-radius: 1px;
+      transform-origin: bottom;
+    }
+
+    .eq-bar:nth-child(1) { height: 10px; }
+    .eq-bar:nth-child(2) { height: 18px; }
+    .eq-bar:nth-child(3) { height: 14px; }
+
+    /* Playing animation */
+    #music-btn.playing .eq-bar:nth-child(1) {
+      animation: eq1 0.7s ease-in-out infinite alternate;
+    }
+    #music-btn.playing .eq-bar:nth-child(2) {
+      animation: eq2 0.55s ease-in-out infinite alternate;
+    }
+    #music-btn.playing .eq-bar:nth-child(3) {
+      animation: eq3 0.85s ease-in-out infinite alternate;
+    }
+
+    @keyframes eq1 { from { height: 6px; } to { height: 20px; } }
+    @keyframes eq2 { from { height: 18px; } to { height: 6px; } }
+    @keyframes eq3 { from { height: 10px; } to { height: 22px; } }
+
+    /* Paused state */
+    #music-btn:not(.playing) .eq-bar {
+      opacity: 0.45;
+      animation: none;
+    }
+
+    /* ════════════════════════════════════
+       RESPONSIVE
+    ════════════════════════════════════ */
+    @media (max-width: 480px) {
+      .wrapper { padding: 0 20px; }
+      .hero { padding: 52px 0 48px; }
+      .hero-name-first,
+      .hero-name-second { font-size: 56px; }
+      .hero-name-and { font-size: 28px; }
+      .photo-grid { gap: 8px; }
+      .details-table td:first-child { width: 80px; font-size: 8px; }
+      #music-btn { bottom: 20px; right: 20px; }
+      .radio-group { flex-direction: column; }
+      .radio-option { min-width: unset; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Background Audio -->
+<audio id="bg-audio" loop preload="auto">
+  <source src="../audio/saathiya-tune-kya-kiya-video-song-love-salman-khan-revathi-ishtar-music-3_bprPAg98.mp3" type="audio/mpeg" />
+</audio>
+
+<!-- Music Toggle Button -->
+<button id="music-btn" aria-label="Toggle background music">
+  <span class="eq-bar"></span>
+  <span class="eq-bar"></span>
+  <span class="eq-bar"></span>
+</button>
+
+<!-- ──────────────────────────────────────
+     HERO
+────────────────────────────────────── -->
+<div class="wrapper">
+  <section class="hero">
+    <div class="hero-top-rule reveal"></div>
+
+    <p class="hero-years reveal">२५ वर्षे &nbsp;·&nbsp; 25 Years</p>
+
+    <div class="hero-name-block reveal">
+      <span class="hero-name-first">RUTA</span>
+      <span class="hero-name-and">&amp;</span>
+      <span class="hero-name-second">ANANT</span>
+    </div>
+
+    <p class="hero-surname reveal">Todkar</p>
+
+    <div class="hero-mid-rule reveal"></div>
+
+    <p class="hero-occasion reveal">Silver Jubilee Anniversary</p>
+    <p class="hero-marathi reveal">शुभ रौप्य महोत्सव</p>
+    <p class="hero-date reveal">12th April, Saturday &nbsp;·&nbsp; 2025</p>
+  </section>
+</div>
+
+<div class="thin-rule wrapper"></div>
+
+<!-- ──────────────────────────────────────
+     PHOTOS
+────────────────────────────────────── -->
+<div class="wrapper">
+  <section class="photos-section">
+    <p class="section-label reveal">A Journey Together</p>
+
+    <div class="photo-main-wrap reveal">
+      <img class="photo-main" src="../photo/vintage.jpg" alt="Ruta and Anant — early years" />
+    </div>
+    <p class="photo-caption reveal">Est. 2000</p>
+
+    <div class="gold-rule reveal"></div>
+
+    <div class="photo-grid reveal">
+      <div>
+        <img src="../photo/candid.jpg" alt="Candid moment" />
+        <p class="photo-grid-caption">Candid</p>
+      </div>
+      <div>
+        <img src="../photo/casual.jpg" alt="Casual together" />
+        <p class="photo-grid-caption">Together</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="thin-rule wrapper"></div>
+
+<!-- ──────────────────────────────────────
+     MESSAGE
+────────────────────────────────────── -->
+<div class="wrapper">
+  <section class="message-section">
+    <div class="gold-rule reveal"></div>
+    <p class="message-quote reveal">
+      "Twenty-five years of laughter, love,<br />and a lifetime still ahead."
+    </p>
+    <p class="message-attr reveal">Ruta &amp; Anant Todkar</p>
+  </section>
+</div>
+
+<div class="thin-rule wrapper"></div>
+
+<!-- ──────────────────────────────────────
+     EVENT DETAILS
+────────────────────────────────────── -->
+<div class="wrapper">
+  <section class="details-section">
+    <p class="section-label reveal">The Celebration</p>
+
+    <table class="details-table reveal">
+      <tr>
+        <td>Occasion</td>
+        <td>
+          <div class="detail-primary">25th Silver Jubilee</div>
+          <div class="detail-secondary">
+            <span class="detail-accent" style="font-family:'Noto Serif Devanagari',serif;">शुभ रौप्य महोत्सव</span>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td>Date</td>
+        <td>
+          <div class="detail-primary">Saturday, 12 April 2025</div>
+          <div class="detail-secondary">Mark your calendars</div>
+        </td>
+      </tr>
+      <tr>
+        <td>Time</td>
+        <td>
+          <div class="detail-primary">To Be Announced</div>
+          <div class="detail-secondary">Details will follow shortly</div>
+        </td>
+      </tr>
+      <tr>
+        <td>Venue</td>
+        <td>
+          <div class="detail-primary">Midland, Ghansoli</div>
+          <div class="detail-secondary">
+            Manoshi Complex, Plot 5&amp;6<br />
+            Sector 3, Ghansoli<br />
+            Navi Mumbai 400701
+          </div>
+        </td>
+      </tr>
+    </table>
+  </section>
+</div>
+
+<div class="thin-rule wrapper"></div>
+
+<!-- ──────────────────────────────────────
+     RSVP
+────────────────────────────────────── -->
+<div class="wrapper">
+  <section class="rsvp-section">
+    <p class="section-label reveal">Kindly Respond</p>
+    <p class="rsvp-intro reveal">
+      Your presence would mean the world to us. Please let us know if you will be joining the celebration.
+    </p>
+
+    <form class="rsvp-form reveal" id="rsvp-form" onsubmit="handleRSVP(event)">
+
+      <div class="rsvp-field">
+        <label class="rsvp-label" for="rsvp-name">Your Name</label>
+        <input class="rsvp-input" type="text" id="rsvp-name" placeholder="Full name" required />
+      </div>
+
+      <div class="rsvp-field">
+        <label class="rsvp-label" for="rsvp-phone">Phone / WhatsApp</label>
+        <input class="rsvp-input" type="tel" id="rsvp-phone" placeholder="+91 XXXXX XXXXX" />
+      </div>
+
+      <div class="rsvp-field">
+        <span class="rsvp-label">Will you be attending?</span>
+        <div class="radio-group">
+          <div class="radio-option">
+            <input type="radio" name="attendance" id="att-yes" value="yes" required />
+            <label for="att-yes">Joyfully Accept</label>
+          </div>
+          <div class="radio-option">
+            <input type="radio" name="attendance" id="att-no" value="no" />
+            <label for="att-no">Regretfully Decline</label>
+          </div>
+          <div class="radio-option">
+            <input type="radio" name="attendance" id="att-maybe" value="maybe" />
+            <label for="att-maybe">Perhaps</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="rsvp-field">
+        <label class="rsvp-label" for="rsvp-guests">Number of Guests</label>
+        <input class="rsvp-input" type="number" id="rsvp-guests" min="1" max="10" placeholder="1" />
+      </div>
+
+      <button type="submit" class="rsvp-submit">Confirm Attendance</button>
+    </form>
+
+    <div class="rsvp-confirm-msg" id="rsvp-confirm">
+      Thank you — we look forward to celebrating with you.
+    </div>
+  </section>
+</div>
+
+<!-- ──────────────────────────────────────
+     FOOTER
+────────────────────────────────────── -->
+<div class="wrapper">
+  <footer>
+    <p class="footer-names reveal">Ruta &amp; Anant Todkar</p>
+    <p class="footer-marathi reveal">रुता तोडकर &amp; अनंत तोडकर</p>
+    <p class="footer-note reveal">With love and gratitude for 25 beautiful years</p>
+    <span class="footer-year reveal">2000 — 2025</span>
+  </footer>
+</div>
+
+<script>
+  /* ── Scroll Reveal ── */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  /* ── Background Music ── */
+  const audio   = document.getElementById('bg-audio');
+  const musicBtn = document.getElementById('music-btn');
+  let   audioStarted = false;
+
+  audio.volume = 0.32;
+
+  function startAudio() {
+    if (!audioStarted) {
+      audio.play().then(() => {
+        audioStarted = true;
+        musicBtn.classList.add('playing');
+      }).catch(() => {});
+    }
+  }
+
+  /* Autoplay on first user gesture */
+  ['touchstart', 'click', 'keydown', 'scroll'].forEach(evt => {
+    document.addEventListener(evt, startAudio, { once: true });
+  });
+
+  musicBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    if (!audioStarted) {
+      startAudio();
+      return;
+    }
+    if (audio.paused) {
+      audio.play();
+      musicBtn.classList.add('playing');
+    } else {
+      audio.pause();
+      musicBtn.classList.remove('playing');
+    }
+  });
+
+  /* ── RSVP ── */
+  function handleRSVP(e) {
+    e.preventDefault();
+    const form    = document.getElementById('rsvp-form');
+    const confirm = document.getElementById('rsvp-confirm');
+    form.style.display    = 'none';
+    confirm.style.display = 'block';
+  }
+</script>
+</body>
+</html>

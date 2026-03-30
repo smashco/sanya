@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ruta &amp; Anant Todkar — Raupy Mahotsav 2025</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400;1,500;1,600&family=Noto+Serif+Devanagari:wght@400;600&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --parchment:   #F2E8D5;
+      --parchment-dk:#E8D9B8;
+      --text:        #2C1A0A;
+      --ink:         #3D2314;
+      --sepia-mid:   #5A3A20;
+      --sepia-light: #8C6B4A;
+      --gold:        #8B6014;
+      --gold-light:  #B8892A;
+      --red-wax:     #8B1A1A;
+      --max:         600px;
+    }
+
+    /* Aged noise texture via SVG */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background-color: var(--parchment);
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3CfeBlend in='SourceGraphic' mode='multiply'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23noise)' opacity='0.065'/%3E%3C/svg%3E");
+      color: var(--text);
+      font-family: 'Cormorant Garamond', 'Georgia', serif;
+      font-size: 16px;
+      line-height: 1.75;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Wrapper ── */
+    .wrapper {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 32px;
+    }
+
+    /* ── Scroll reveal ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.85s ease, transform 0.85s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ── Slight tilt utility ── */
+    .tilt-left  { transform: rotate(-0.5deg); }
+    .tilt-right { transform: rotate(0.4deg); }
+    .reveal.visible.tilt-left  { transform: rotate(-0.5deg); }
+    .reveal.visible.tilt-right { transform: rotate(0.4deg); }
+
+    /* ════════════════════════════════════
+       ORNAMENTAL BORDER
+    ════════════════════════════════════ */
+    .ornate-border {
+      width: 100%;
+      position: relative;
+      padding: 6px 0;
+      margin-bottom: 6px;
+    }
+
+    .ornate-border .double-line {
+      position: relative;
+      height: 10px;
+    }
+
+    .ornate-border .double-line::before,
+    .ornate-border .double-line::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0;
+      height: 1px;
+      background: var(--gold);
+    }
+    .ornate-border .double-line::before { top: 2px; }
+    .ornate-border .double-line::after  { top: 7px; }
+
+    /* Corner flourish (left) */
+    .ornate-border .double-line span {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 16px;
+      color: var(--gold);
+      background: var(--parchment);
+      padding: 0 6px;
+      line-height: 1;
+    }
+    .ornate-border .double-line span.left  { left: 0; }
+    .ornate-border .double-line span.right { right: 0; }
+    .ornate-border .double-line span.center {
+      left: 50%; transform: translate(-50%, -50%);
+    }
+
+    /* ════════════════════════════════════
+       DIVIDER
+    ════════════════════════════════════ */
+    .flourish-divider {
+      text-align: center;
+      color: var(--gold);
+      font-size: 22px;
+      line-height: 1;
+      margin: 36px 0;
+      letter-spacing: 0.12em;
+      opacity: 0.75;
+    }
+
+    .thin-rule-parchment {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold), transparent);
+      margin: 32px 0;
+      opacity: 0.5;
+    }
+
+    /* ════════════════════════════════════
+       WAX SEAL SVG — inline above hero
+    ════════════════════════════════════ */
+    .seal-wrap {
+      text-align: center;
+      padding-top: 56px;
+      padding-bottom: 32px;
+    }
+
+    .seal-wrap svg {
+      filter: drop-shadow(0 3px 10px rgba(139,26,26,0.4));
+    }
+
+    /* ════════════════════════════════════
+       LETTERHEAD TOP BORDER
+    ════════════════════════════════════ */
+    .letterhead-border {
+      width: 100%;
+      margin-bottom: 40px;
+    }
+
+    /* ════════════════════════════════════
+       HERO
+    ════════════════════════════════════ */
+    .hero {
+      text-align: center;
+      padding-bottom: 48px;
+    }
+
+    .hero-salutation {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 14px;
+      letter-spacing: 0.12em;
+      color: var(--sepia-light);
+      margin-bottom: 22px;
+    }
+
+    .hero-to {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: clamp(13px, 3vw, 15px);
+      color: var(--sepia-mid);
+      margin-bottom: 36px;
+      letter-spacing: 0.04em;
+    }
+
+    .hero-names {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: clamp(36px, 10vw, 58px);
+      color: var(--ink);
+      line-height: 1.1;
+      margin-bottom: 10px;
+    }
+
+    .hero-names-marathi {
+      font-family: 'Noto Serif Devanagari', serif;
+      font-size: clamp(15px, 4vw, 19px);
+      color: var(--gold);
+      margin-bottom: 28px;
+      letter-spacing: 0.04em;
+    }
+
+    .hero-cordially {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(15px, 3.5vw, 18px);
+      color: var(--sepia-mid);
+      line-height: 1.7;
+      max-width: 380px;
+      margin: 0 auto 24px;
+    }
+
+    .hero-occasion {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(16px, 4.5vw, 22px);
+      color: var(--ink);
+      font-style: italic;
+      margin-bottom: 6px;
+    }
+
+    .hero-occasion-marathi {
+      font-family: 'Noto Serif Devanagari', serif;
+      font-size: 17px;
+      color: var(--gold);
+    }
+
+    .hero-date-stamp {
+      display: inline-block;
+      margin-top: 20px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 14px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--sepia-mid);
+      border-top: 1px solid var(--gold);
+      border-bottom: 1px solid var(--gold);
+      padding: 6px 18px;
+    }
+
+    /* ════════════════════════════════════
+       POSTMARK
+    ════════════════════════════════════ */
+    .postmark-wrap {
+      text-align: right;
+      margin-top: -10px;
+      margin-bottom: 8px;
+      padding-right: 8px;
+      opacity: 0.55;
+    }
+
+    /* ════════════════════════════════════
+       PHOTOS — OVAL PORTRAITS
+    ════════════════════════════════════ */
+    .photos-section {
+      text-align: center;
+      padding: 40px 0 48px;
+    }
+
+    .photo-single-wrap {
+      display: inline-block;
+      margin-bottom: 28px;
+    }
+
+    .photo-oval {
+      width: 240px;
+      height: 290px;
+      object-fit: cover;
+      border-radius: 50% 50% 50% 50% / 44% 44% 56% 56%;
+      border: 3px solid var(--sepia-mid);
+      filter: sepia(0.65) contrast(1.08) brightness(0.93);
+      box-shadow:
+        0 0 0 6px var(--parchment),
+        0 0 0 7px var(--gold),
+        4px 6px 18px rgba(44,26,10,0.25);
+      transition: filter 0.4s;
+    }
+    .photo-oval:hover { filter: sepia(0.25) contrast(1.04) brightness(0.98); }
+
+    .photo-then-now {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .portrait-item {
+      text-align: center;
+    }
+
+    .photo-oval-sm {
+      width: 170px;
+      height: 206px;
+      object-fit: cover;
+      border-radius: 50% 50% 50% 50% / 44% 44% 56% 56%;
+      border: 2px solid var(--sepia-mid);
+      filter: sepia(0.55) contrast(1.06) brightness(0.94);
+      box-shadow:
+        0 0 0 5px var(--parchment),
+        0 0 0 6px var(--gold-light),
+        3px 5px 14px rgba(44,26,10,0.22);
+      transition: filter 0.4s;
+    }
+    .photo-oval-sm:hover { filter: sepia(0.2) contrast(1.03) brightness(0.99); }
+
+    .portrait-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 14px;
+      color: var(--sepia-light);
+      margin-top: 10px;
+      letter-spacing: 0.12em;
+    }
+
+    /* ════════════════════════════════════
+       EVENT DETAILS — LETTER FORMAT
+    ════════════════════════════════════ */
+    .details-section {
+      padding: 36px 0 40px;
+    }
+
+    .letter-body {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: clamp(15px, 3.5vw, 17px);
+      color: var(--ink);
+      line-height: 1.9;
+      text-align: center;
+    }
+
+    .letter-body em {
+      font-style: normal;
+      color: var(--gold);
+      font-family: 'Playfair Display', serif;
+    }
+
+    .letter-body strong {
+      font-style: italic;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .detail-card {
+      margin: 28px auto;
+      max-width: 400px;
+      border: 1px solid var(--gold);
+      border-top: 3px double var(--gold);
+      border-bottom: 3px double var(--gold);
+      padding: 22px 28px;
+      background: rgba(255,255,255,0.18);
+      transform: rotate(-0.4deg);
+    }
+
+    .detail-card-row {
+      display: flex;
+      gap: 14px;
+      padding: 10px 0;
+      border-bottom: 1px dashed rgba(139,96,20,0.3);
+      align-items: baseline;
+    }
+    .detail-card-row:last-child { border-bottom: none; }
+
+    .detail-card-label {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--sepia-light);
+      min-width: 60px;
+      flex-shrink: 0;
+    }
+
+    .detail-card-value {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 15px;
+      color: var(--ink);
+      line-height: 1.5;
+    }
+
+    /* ════════════════════════════════════
+       RSVP — REPLY CARD STYLE
+    ════════════════════════════════════ */
+    .rsvp-section {
+      padding: 40px 0 48px;
+    }
+
+    .reply-card {
+      border: 1px solid var(--gold);
+      padding: 32px 28px;
+      background: rgba(255,255,255,0.22);
+      position: relative;
+      transform: rotate(0.35deg);
+    }
+
+    .reply-card::before {
+      content: 'R.S.V.P.';
+      position: absolute;
+      top: -11px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--parchment);
+      padding: 0 14px;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 13px;
+      letter-spacing: 0.22em;
+      color: var(--gold);
+    }
+
+    .rsvp-heading {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 20px;
+      color: var(--ink);
+      text-align: center;
+      margin-bottom: 8px;
+    }
+
+    .rsvp-sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 14px;
+      color: var(--sepia-light);
+      text-align: center;
+      margin-bottom: 24px;
+    }
+
+    .rsvp-field {
+      margin-bottom: 18px;
+    }
+
+    .rsvp-label {
+      display: block;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      color: var(--sepia-light);
+      margin-bottom: 6px;
+    }
+
+    .rsvp-input {
+      width: 100%;
+      border: none;
+      border-bottom: 1px solid rgba(139,96,20,0.45);
+      background: transparent;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 15px;
+      color: var(--ink);
+      padding: 6px 0;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+    .rsvp-input:focus { border-bottom-color: var(--gold); }
+    .rsvp-input::placeholder { color: rgba(139,96,20,0.4); font-style: italic; }
+
+    .radio-group {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .radio-option {
+      position: relative;
+      flex: 1;
+      min-width: 130px;
+    }
+
+    .radio-option input[type="radio"] {
+      position: absolute;
+      opacity: 0;
+      width: 0; height: 0;
+    }
+
+    .radio-option label {
+      display: block;
+      border: 1px solid rgba(139,96,20,0.45);
+      padding: 10px 12px;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 13px;
+      letter-spacing: 0.06em;
+      color: var(--sepia-mid);
+      cursor: pointer;
+      text-align: center;
+      transition: all 0.25s ease;
+      background: rgba(255,255,255,0.2);
+    }
+
+    .radio-option input[type="radio"]:checked + label {
+      border-color: var(--gold);
+      background-color: var(--gold);
+      color: var(--parchment);
+    }
+
+    .radio-option label:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .rsvp-submit {
+      width: 100%;
+      margin-top: 24px;
+      padding: 14px;
+      background: transparent;
+      border: 1px solid var(--gold);
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 15px;
+      color: var(--gold);
+      cursor: pointer;
+      letter-spacing: 0.08em;
+      transition: all 0.28s ease;
+    }
+
+    .rsvp-submit:hover {
+      background-color: var(--gold);
+      color: var(--parchment);
+    }
+
+    .rsvp-confirm-msg {
+      display: none;
+      margin-top: 20px;
+      padding: 16px;
+      text-align: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 16px;
+      color: var(--gold);
+      border-top: 1px solid rgba(139,96,20,0.3);
+    }
+
+    /* ════════════════════════════════════
+       FOOTER
+    ════════════════════════════════════ */
+    footer {
+      padding: 48px 0 64px;
+      text-align: center;
+    }
+
+    .footer-closing {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 15px;
+      color: var(--sepia-mid);
+      margin-bottom: 12px;
+    }
+
+    .footer-sign {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 26px;
+      color: var(--ink);
+      margin-bottom: 8px;
+    }
+
+    .footer-marathi {
+      font-family: 'Noto Serif Devanagari', serif;
+      font-size: 15px;
+      color: var(--gold);
+      margin-bottom: 20px;
+    }
+
+    .footer-years {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+      font-size: 13px;
+      letter-spacing: 0.2em;
+      color: var(--sepia-light);
+      text-transform: uppercase;
+    }
+
+    /* ════════════════════════════════════
+       MUSIC TOGGLE
+    ════════════════════════════════════ */
+    #music-btn {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      width: 48px;
+      height: 48px;
+      background: var(--red-wax);
+      border: 2px solid var(--gold-light);
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 3px;
+      padding: 11px 13px;
+      z-index: 999;
+      box-shadow: 0 3px 12px rgba(139,26,26,0.4);
+      transition: transform 0.2s ease;
+    }
+
+    #music-btn:hover { transform: scale(1.08); }
+
+    .eq-bar {
+      width: 4px;
+      background: #F2D8A0;
+      border-radius: 1px;
+      transform-origin: bottom;
+    }
+
+    .eq-bar:nth-child(1) { height: 9px; }
+    .eq-bar:nth-child(2) { height: 16px; }
+    .eq-bar:nth-child(3) { height: 12px; }
+
+    #music-btn.playing .eq-bar:nth-child(1) {
+      animation: eq1 0.7s ease-in-out infinite alternate;
+    }
+    #music-btn.playing .eq-bar:nth-child(2) {
+      animation: eq2 0.55s ease-in-out infinite alternate;
+    }
+    #music-btn.playing .eq-bar:nth-child(3) {
+      animation: eq3 0.85s ease-in-out infinite alternate;
+    }
+
+    @keyframes eq1 { from { height: 5px; } to { height: 18px; } }
+    @keyframes eq2 { from { height: 16px; } to { height: 5px; } }
+    @keyframes eq3 { from { height: 9px; } to { height: 20px; } }
+
+    #music-btn:not(.playing) .eq-bar { opacity: 0.4; }
+
+    /* ════════════════════════════════════
+       RESPONSIVE
+    ════════════════════════════════════ */
+    @media (max-width: 600px) {
+      .wrapper { padding: 0 22px; }
+      .hero-names { font-size: 36px; }
+
+      /* Simplify ornamental borders */
+      .ornate-border .double-line span.left,
+      .ornate-border .double-line span.right { display: none; }
+
+      .photo-then-now { gap: 16px; }
+      .photo-oval-sm { width: 140px; height: 170px; }
+      .detail-card { transform: none; padding: 18px 18px; }
+      .reply-card  { transform: none; }
+      #music-btn { bottom: 18px; right: 18px; }
+      .radio-group { flex-direction: column; }
+      .radio-option { min-width: unset; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Background Audio -->
+<audio id="bg-audio" loop preload="auto">
+  <source src="../audio/saathiya-tune-kya-kiya-video-song-love-salman-khan-revathi-ishtar-music-3_bprPAg98.mp3" type="audio/mpeg" />
+</audio>
+
+<!-- Music Toggle (wax-seal style circle) -->
+<button id="music-btn" aria-label="Toggle background music">
+  <span class="eq-bar"></span>
+  <span class="eq-bar"></span>
+  <span class="eq-bar"></span>
+</button>
+
+<!-- ──────────────────────────────────────
+     WAX SEAL
+────────────────────────────────────── -->
+<div class="wrapper">
+  <div class="seal-wrap reveal">
+    <svg width="110" height="130" viewBox="0 0 110 130" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Wax seal">
+      <!-- Drip shapes at bottom -->
+      <ellipse cx="40" cy="122" rx="7" ry="5" fill="#6B1212"/>
+      <ellipse cx="55" cy="126" rx="9" ry="6" fill="#721515"/>
+      <ellipse cx="70" cy="122" rx="7" ry="5" fill="#6B1212"/>
+      <ellipse cx="32" cy="118" rx="5" ry="4" fill="#7A1818"/>
+      <ellipse cx="78" cy="118" rx="5" ry="4" fill="#7A1818"/>
+      <!-- Main wax circle -->
+      <circle cx="55" cy="60" r="48" fill="#8B1A1A"/>
+      <!-- Texture highlight -->
+      <circle cx="55" cy="60" r="48" fill="url(#wax-grad)"/>
+      <!-- Gold rim -->
+      <circle cx="55" cy="60" r="48" fill="none" stroke="#B8892A" stroke-width="2.5"/>
+      <circle cx="55" cy="60" r="43" fill="none" stroke="#D4A83A" stroke-width="0.8" stroke-dasharray="4 3"/>
+      <!-- Monogram -->
+      <text x="55" y="52" text-anchor="middle" font-family="Playfair Display, Georgia, serif" font-style="italic" font-size="14" fill="#F2D8A0" letter-spacing="2">R &amp; A</text>
+      <text x="55" y="70" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif" font-style="italic" font-size="9" fill="#D4A83A" letter-spacing="3">TODKAR</text>
+      <!-- Year arc (bottom) -->
+      <path id="arc-bottom" d="M 20 75 A 35 35 0 0 0 90 75" fill="none"/>
+      <text font-family="Cormorant Garamond, serif" font-size="8" fill="#D4A83A" letter-spacing="1">
+        <textPath href="#arc-bottom">· 2000 · 2025 ·</textPath>
+      </text>
+      <!-- Gradient def -->
+      <defs>
+        <radialGradient id="wax-grad" cx="38%" cy="34%" r="65%">
+          <stop offset="0%" stop-color="#B03030" stop-opacity="0.5"/>
+          <stop offset="100%" stop-color="#5A0A0A" stop-opacity="0.35"/>
+        </radialGradient>
+      </defs>
+    </svg>
+  </div>
+</div>
+
+<!-- ──────────────────────────────────────
+     LETTERHEAD BORDER
+────────────────────────────────────── -->
+<div class="wrapper">
+  <div class="ornate-border reveal letterhead-border">
+    <div class="double-line">
+      <span class="left">❧</span>
+      <span class="center">✦</span>
+      <span class="right">❧</span>
+    </div>
+  </div>
+</div>
+
+<!-- ──────────────────────────────────────
+     HERO — LETTER OPENING
+────────────────────────────────────── -->
+<div class="wrapper">
+  <section class="hero">
+    <p class="hero-salutation reveal">~ An Invitation ~</p>
+
+    <p class="hero-to reveal">To our most beloved family &amp; friends,</p>
+
+    <h1 class="hero-names reveal tilt-left">
+      Ruta<br /><em style="font-size:0.55em;color:var(--gold);">&amp;</em><br />Anant
+    </h1>
+
+    <p class="hero-names-marathi reveal">रुता तोडकर &amp; अनंत तोडकर</p>
+
+    <p class="hero-cordially reveal">
+      cordially request the honour of your presence<br />
+      as they joyfully celebrate the completion of
+    </p>
+
+    <p class="hero-occasion reveal">Twenty-Five Years</p>
+    <p class="hero-occasion-marathi reveal">शुभ रौप्य महोत्सव</p>
+    <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;color:var(--sepia-mid);margin-top:6px;" class="reveal">of their blessed union</p>
+
+    <div class="hero-date-stamp reveal">Saturday, 12th April 2025</div>
+  </section>
+</div>
+
+<!-- ──────────────────────────────────────
+     POSTMARK
+────────────────────────────────────── -->
+<div class="wrapper">
+  <div class="postmark-wrap reveal">
+    <svg width="80" height="80" viewBox="0 0 80 80" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="40" cy="40" r="36" fill="none" stroke="var(--sepia-light)" stroke-width="1.5"/>
+      <circle cx="40" cy="40" r="30" fill="none" stroke="var(--sepia-light)" stroke-width="0.8"/>
+      <text x="40" y="35" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="8" fill="var(--sepia-light)" letter-spacing="2" font-style="italic">NAVI MUMBAI</text>
+      <text x="40" y="46" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="11" fill="var(--sepia-mid)" font-style="italic" font-weight="600">2025</text>
+      <text x="40" y="57" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="7" fill="var(--sepia-light)" letter-spacing="2" font-style="italic">INDIA</text>
+    </svg>
+  </div>
+</div>
+
+<!-- ──────────────────────────────────────
+     DIVIDER
+────────────────────────────────────── -->
+<div class="wrapper">
+  <div class="flourish-divider reveal">❧ ✦ ❧</div>
+</div>
+
+<!-- ──────────────────────────────────────
+     PHOTOS
+────────────────────────────────────── -->
+<div class="wrapper">
+  <section class="photos-section">
+    <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:14px;color:var(--sepia-light);letter-spacing:0.14em;margin-bottom:24px;" class="reveal">
+      ~ Through the Years ~
+    </p>
+
+    <!-- Main vintage photo -->
+    <div class="photo-single-wrap reveal">
+      <img class="photo-oval" src="../photo/vintage.jpg" alt="Ruta and Anant — early days" />
+    </div>
+
+    <div class="flourish-divider reveal" style="margin: 20px 0;">— ✦ —</div>
+
+    <!-- Then & Now -->
+    <div class="photo-then-now reveal">
+      <div class="portrait-item">
+        <img class="photo-oval-sm" src="../photo/vintage.jpg" alt="Then — early years" />
+        <p class="portrait-label">Then</p>
+      </div>
+      <div class="portrait-item">
+        <img class="photo-oval-sm" src="../photo/traditional.jpg" alt="Now — celebrating today" />
+        <p class="portrait-label">Now</p>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ──────────────────────────────────────
+     DIVIDER
+────────────────────────────────────── -->
+<div class="wrapper">
+  <div class="thin-rule-parchment reveal"></div>
+</div>
+
+<!-- ──────────────────────────────────────
+     EVENT DETAILS
+────────────────────────────────────── -->
+<div class="wrapper">
+  <section class="details-section">
+
+    <p class="letter-body reveal">
+      On the auspicious occasion of their
+      <em>Silver Jubilee</em>, they invite you<br />
+      to share in the joy of this milestone celebration.
+    </p>
+
+    <div class="detail-card reveal tilt-left">
+      <div class="detail-card-row">
+        <span class="detail-card-label">Occasion</span>
+        <span class="detail-card-value">25th Silver Jubilee Anniversary</span>
+      </div>
+      <div class="detail-card-row">
+        <span class="detail-card-label">Date</span>
+        <span class="detail-card-value">Saturday, 12th April, 2025</span>
+      </div>
+      <div class="detail-card-row">
+        <span class="detail-card-label">Time</span>
+        <span class="detail-card-value">To Be Announced<br /><span style="font-size:12px;color:var(--sepia-light);">Details shall follow shortly</span></span>
+      </div>
+      <div class="detail-card-row">
+        <span class="detail-card-label">Venue</span>
+        <span class="detail-card-value">
+          Midland, Ghansoli<br />
+          <span style="font-size:13px;color:var(--sepia-mid);">
+            Manoshi Complex, Plot 5 &amp; 6<br />
+            Sector 3, Ghansoli<br />
+            Navi Mumbai — 400701
+          </span>
+        </span>
+      </div>
+    </div>
+
+    <p class="letter-body reveal" style="margin-top:24px;">
+      Your blessings and warm presence shall make<br />
+      <strong>this occasion truly complete.</strong>
+    </p>
+
+  </section>
+</div>
+
+<!-- ──────────────────────────────────────
+     DIVIDER
+────────────────────────────────────── -->
+<div class="wrapper">
+  <div class="flourish-divider reveal">❧ ✦ ❧</div>
+</div>
+
+<!-- ──────────────────────────────────────
+     RSVP
+────────────────────────────────────── -->
+<div class="wrapper">
+  <section class="rsvp-section">
+    <div class="reply-card reveal">
+      <h2 class="rsvp-heading">Please Respond</h2>
+      <p class="rsvp-sub">Kindly confirm your attendance at your earliest convenience</p>
+
+      <form id="rsvp-form" onsubmit="handleRSVP(event)">
+        <div class="rsvp-field">
+          <label class="rsvp-label" for="rsvp-name">Your Name</label>
+          <input class="rsvp-input" type="text" id="rsvp-name" placeholder="Your full name…" required />
+        </div>
+
+        <div class="rsvp-field">
+          <label class="rsvp-label" for="rsvp-phone">Phone / WhatsApp</label>
+          <input class="rsvp-input" type="tel" id="rsvp-phone" placeholder="+91 XXXXX XXXXX" />
+        </div>
+
+        <div class="rsvp-field">
+          <span class="rsvp-label">Shall you be attending?</span>
+          <div class="radio-group">
+            <div class="radio-option">
+              <input type="radio" name="attendance" id="att-yes" value="yes" required />
+              <label for="att-yes">Joyfully Accept</label>
+            </div>
+            <div class="radio-option">
+              <input type="radio" name="attendance" id="att-no" value="no" />
+              <label for="att-no">Regretfully Decline</label>
+            </div>
+            <div class="radio-option">
+              <input type="radio" name="attendance" id="att-maybe" value="maybe" />
+              <label for="att-maybe">Perhaps</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="rsvp-field">
+          <label class="rsvp-label" for="rsvp-guests">Number of Guests</label>
+          <input class="rsvp-input" type="number" id="rsvp-guests" min="1" max="10" placeholder="1" />
+        </div>
+
+        <button type="submit" class="rsvp-submit">Seal &amp; Confirm</button>
+      </form>
+
+      <div class="rsvp-confirm-msg" id="rsvp-confirm">
+        With warmest gratitude — we eagerly await your presence.
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- ──────────────────────────────────────
+     FOOTER
+────────────────────────────────────── -->
+<div class="wrapper">
+  <div class="ornate-border reveal">
+    <div class="double-line">
+      <span class="left">❧</span>
+      <span class="center">✦</span>
+      <span class="right">❧</span>
+    </div>
+  </div>
+
+  <footer>
+    <p class="footer-closing reveal">With deepest love and gratitude,</p>
+    <p class="footer-sign reveal">Ruta &amp; Anant Todkar</p>
+    <p class="footer-marathi reveal">रुता तोडकर &amp; अनंत तोडकर</p>
+    <p class="footer-years reveal">Est. 2000 · Silver Jubilee 2025</p>
+  </footer>
+</div>
+
+<script>
+  /* ── Scroll Reveal ── */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  /* ── Background Music ── */
+  const audio    = document.getElementById('bg-audio');
+  const musicBtn = document.getElementById('music-btn');
+  let   audioStarted = false;
+
+  audio.volume = 0.32;
+
+  function startAudio() {
+    if (!audioStarted) {
+      audio.play().then(() => {
+        audioStarted = true;
+        musicBtn.classList.add('playing');
+      }).catch(() => {});
+    }
+  }
+
+  ['touchstart', 'click', 'keydown', 'scroll'].forEach(evt => {
+    document.addEventListener(evt, startAudio, { once: true });
+  });
+
+  musicBtn.addEventListener('click', function(e) {
+    e.stopPropagation();
+    if (!audioStarted) { startAudio(); return; }
+    if (audio.paused) {
+      audio.play();
+      musicBtn.classList.add('playing');
+    } else {
+      audio.pause();
+      musicBtn.classList.remove('playing');
+    }
+  });
+
+  /* ── RSVP ── */
+  function handleRSVP(e) {
+    e.preventDefault();
+    document.getElementById('rsvp-form').style.display    = 'none';
+    document.getElementById('rsvp-confirm').style.display = 'block';
+  }
+</script>
+</body>
+</html>

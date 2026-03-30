@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Silver Jubilee — Ruta & Anant Todkar</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Noto+Serif+Devanagari:wght@400;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --black: #111111;
+      --gold: #C9A96E;
+      --gold-light: #E2C896;
+      --gray: #888888;
+      --gray-light: #CCCCCC;
+      --white: #FFFFFF;
+      --bg: #F8F8F6;
+      --bg-section: #F0F0ED;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--bg);
+      color: var(--black);
+      font-family: 'DM Sans', sans-serif;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* ─── MARBLE SVG TEXTURE OVERLAY ─── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='800' height='800'%3E%3Cfilter id='marble'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.012 0.018' numOctaves='6' seed='42' stitchTiles='stitch' result='noise'/%3E%3CfeColorMatrix type='saturate' values='0' in='noise' result='gray'/%3E%3CfeComponentTransfer in='gray' result='contrast'%3E%3CfeFuncA type='linear' slope='0.09' intercept='0'/%3E%3C/feComponentTransfer%3E%3C/filter%3E%3Crect width='800' height='800' filter='url(%23marble)' fill='%23000000'/%3E%3C/svg%3E");
+      background-size: 800px 800px;
+      opacity: 1;
+    }
+
+    /* ─── MARBLE VEINS SVG ─── */
+    .marble-veins {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .marble-veins svg {
+      width: 100%;
+      height: 100%;
+    }
+
+    /* ─── CONTENT LAYER ─── */
+    .content-layer {
+      position: relative;
+      z-index: 1;
+    }
+
+    /* ─── TYPOGRAPHY ─── */
+    h1, h2, h3, .serif {
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    .devanagari {
+      font-family: 'Noto Serif Devanagari', serif;
+    }
+
+    /* ─── MUSIC TOGGLE ─── */
+    #music-toggle {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 9999;
+      width: 52px;
+      height: 52px;
+      background: var(--black);
+      border: 2px solid var(--gold);
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      transition: transform 0.2s, box-shadow 0.3s;
+      box-shadow: 0 4px 20px rgba(201,169,110,0.3);
+    }
+
+    #music-toggle:hover {
+      transform: scale(1.1);
+      box-shadow: 0 6px 28px rgba(201,169,110,0.5);
+    }
+
+    .eq-bar {
+      width: 4px;
+      background: var(--gold);
+      border-radius: 2px;
+      transform-origin: bottom;
+    }
+
+    .eq-bar:nth-child(1) { height: 12px; }
+    .eq-bar:nth-child(2) { height: 20px; }
+    .eq-bar:nth-child(3) { height: 16px; }
+    .eq-bar:nth-child(4) { height: 24px; }
+    .eq-bar:nth-child(5) { height: 10px; }
+
+    #music-toggle.playing .eq-bar:nth-child(1) { animation: eq1 0.7s ease-in-out infinite alternate; }
+    #music-toggle.playing .eq-bar:nth-child(2) { animation: eq2 0.5s ease-in-out infinite alternate; }
+    #music-toggle.playing .eq-bar:nth-child(3) { animation: eq3 0.9s ease-in-out infinite alternate; }
+    #music-toggle.playing .eq-bar:nth-child(4) { animation: eq4 0.6s ease-in-out infinite alternate; }
+    #music-toggle.playing .eq-bar:nth-child(5) { animation: eq5 0.8s ease-in-out infinite alternate; }
+
+    @keyframes eq1 { from { height: 6px; } to { height: 20px; } }
+    @keyframes eq2 { from { height: 14px; } to { height: 28px; } }
+    @keyframes eq3 { from { height: 8px; } to { height: 22px; } }
+    @keyframes eq4 { from { height: 18px; } to { height: 32px; } }
+    @keyframes eq5 { from { height: 4px; } to { height: 16px; } }
+
+    /* ─── HERO SECTION ─── */
+    #hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 60px 40px 60px 60px;
+      position: relative;
+    }
+
+    .xxv-rotated {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 800;
+      font-size: clamp(120px, 18vw, 220px);
+      color: var(--black);
+      line-height: 0.85;
+      letter-spacing: -4px;
+      transform: rotate(-90deg) translateX(-30%);
+      transform-origin: left center;
+      position: absolute;
+      left: -20px;
+      top: 50%;
+      white-space: nowrap;
+      opacity: 0.08;
+      pointer-events: none;
+    }
+
+    .hero-text-block {
+      position: relative;
+      z-index: 2;
+    }
+
+    .silver-jubilee-tag {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .hero-names {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      font-size: clamp(38px, 5vw, 72px);
+      line-height: 1.05;
+      color: var(--black);
+      margin-bottom: 8px;
+    }
+
+    .hero-names .amp {
+      color: var(--gold);
+      font-style: italic;
+      font-weight: 400;
+    }
+
+    .hero-names-devanagari {
+      font-family: 'Noto Serif Devanagari', serif;
+      font-weight: 600;
+      font-size: clamp(16px, 2.2vw, 26px);
+      color: var(--gray);
+      margin-bottom: 28px;
+      display: block;
+      letter-spacing: 1px;
+    }
+
+    .gold-rule {
+      width: 120px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--gold), transparent);
+      margin-bottom: 24px;
+    }
+
+    .hero-date-text {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gray);
+      margin-bottom: 8px;
+    }
+
+    .hero-event-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      font-style: italic;
+      font-size: clamp(20px, 3vw, 36px);
+      color: var(--black);
+    }
+
+    .hero-right {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 40px;
+      background: rgba(255,255,255,0.4);
+      position: relative;
+    }
+
+    .hero-photo-frame {
+      position: relative;
+      width: clamp(260px, 35vw, 440px);
+      aspect-ratio: 3/4;
+    }
+
+    .hero-photo-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      filter: grayscale(100%) contrast(1.05);
+    }
+
+    .hero-photo-frame::before {
+      content: '';
+      position: absolute;
+      inset: -8px;
+      border: 3px solid var(--black);
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .hero-photo-frame::after {
+      content: '';
+      position: absolute;
+      inset: -18px;
+      border: 1px solid var(--gold);
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .xxv-badge {
+      position: absolute;
+      bottom: -20px;
+      right: -20px;
+      width: 80px;
+      height: 80px;
+      background: var(--black);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      z-index: 5;
+    }
+
+    .xxv-badge span {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 800;
+      font-size: 20px;
+      color: var(--gold);
+      line-height: 1;
+    }
+
+    .xxv-badge small {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 7px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--white);
+      margin-top: 4px;
+    }
+
+    /* ─── SECTION COMMONS ─── */
+    .section {
+      padding: 80px 60px;
+      position: relative;
+    }
+
+    .section-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+      display: block;
+    }
+
+    .section-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      font-size: clamp(28px, 4vw, 52px);
+      color: var(--black);
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+
+    .gold-line {
+      width: 60px;
+      height: 2px;
+      background: var(--gold);
+      margin-bottom: 40px;
+    }
+
+    /* ─── SCROLL REVEAL ─── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal-left.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* ─── PHOTO GRID ─── */
+    #photos {
+      background: var(--white);
+    }
+
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-top: 16px;
+    }
+
+    .photo-item {
+      position: relative;
+    }
+
+    .photo-item img {
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      display: block;
+      filter: grayscale(20%);
+      transition: filter 0.4s;
+    }
+
+    .photo-item:hover img {
+      filter: grayscale(0%);
+    }
+
+    /* thick black frame */
+    .photo-item::before {
+      content: '';
+      position: absolute;
+      inset: -6px;
+      border: 3px solid var(--black);
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    /* gold corner brackets */
+    .photo-item::after {
+      content: '';
+      position: absolute;
+      inset: -14px;
+      background:
+        linear-gradient(var(--gold), var(--gold)) top left / 20px 2px no-repeat,
+        linear-gradient(var(--gold), var(--gold)) top left / 2px 20px no-repeat,
+        linear-gradient(var(--gold), var(--gold)) top right / 20px 2px no-repeat,
+        linear-gradient(var(--gold), var(--gold)) top right / 2px 20px no-repeat,
+        linear-gradient(var(--gold), var(--gold)) bottom left / 20px 2px no-repeat,
+        linear-gradient(var(--gold), var(--gold)) bottom left / 2px 20px no-repeat,
+        linear-gradient(var(--gold), var(--gold)) bottom right / 20px 2px no-repeat,
+        linear-gradient(var(--gold), var(--gold)) bottom right / 2px 20px no-repeat;
+      z-index: 3;
+      pointer-events: none;
+    }
+
+    .photo-caption {
+      margin-top: 16px;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--gray);
+      text-align: center;
+    }
+
+    /* ─── QUOTE BAND ─── */
+    #quote-band {
+      background: var(--black);
+      padding: 60px;
+      text-align: center;
+    }
+
+    .quote-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      font-style: italic;
+      font-size: clamp(22px, 3.5vw, 44px);
+      color: var(--white);
+      line-height: 1.3;
+      max-width: 700px;
+      margin: 0 auto 16px;
+    }
+
+    .quote-devanagari {
+      font-family: 'Noto Serif Devanagari', serif;
+      font-size: clamp(16px, 2.2vw, 24px);
+      color: var(--gold);
+      display: block;
+      margin-top: 8px;
+    }
+
+    .quote-rule {
+      width: 40px;
+      height: 1px;
+      background: var(--gold);
+      display: inline-block;
+      vertical-align: middle;
+      margin: 0 16px;
+    }
+
+    /* ─── EVENT DETAILS ─── */
+    #event {
+      background: var(--bg);
+    }
+
+    .event-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+
+    .event-date-block {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .date-huge {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 800;
+      font-size: clamp(100px, 18vw, 180px);
+      line-height: 0.85;
+      color: var(--black);
+      letter-spacing: -6px;
+    }
+
+    .date-month-year {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-top: 8px;
+    }
+
+    .date-month {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      font-size: clamp(24px, 3.5vw, 48px);
+      color: var(--black);
+      text-transform: uppercase;
+      letter-spacing: 4px;
+    }
+
+    .date-year {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--gray);
+      letter-spacing: 3px;
+    }
+
+    .date-day {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-top: 4px;
+    }
+
+    .event-info-block {
+      padding-top: 20px;
+    }
+
+    .event-info-item {
+      margin-bottom: 36px;
+      padding-left: 20px;
+      border-left: 2px solid var(--gold);
+    }
+
+    .event-info-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+
+    .event-info-value {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      font-size: clamp(18px, 2.2vw, 28px);
+      color: var(--black);
+      line-height: 1.3;
+    }
+
+    .event-info-sub {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      color: var(--gray);
+      margin-top: 4px;
+    }
+
+    /* ─── RSVP SECTION ─── */
+    #rsvp {
+      background: var(--black);
+      padding: 80px 60px;
+    }
+
+    #rsvp .section-label {
+      color: var(--gold);
+    }
+
+    #rsvp .section-heading {
+      color: var(--white);
+    }
+
+    #rsvp .gold-line {
+      background: var(--gold);
+    }
+
+    .rsvp-card {
+      max-width: 680px;
+    }
+
+    .rsvp-intro {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      color: rgba(255,255,255,0.6);
+      margin-bottom: 40px;
+      line-height: 1.7;
+    }
+
+    .rsvp-field {
+      margin-bottom: 28px;
+    }
+
+    .rsvp-field label.field-label {
+      display: block;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 10px;
+    }
+
+    .rsvp-field input[type="text"],
+    .rsvp-field input[type="number"],
+    .rsvp-field textarea {
+      width: 100%;
+      background: transparent;
+      border: 0;
+      border-bottom: 1px solid rgba(255,255,255,0.25);
+      padding: 10px 0;
+      font-family: 'DM Sans', sans-serif;
+      font-size: 15px;
+      color: var(--white);
+      outline: none;
+      transition: border-color 0.3s;
+    }
+
+    .rsvp-field input[type="text"]:focus,
+    .rsvp-field input[type="number"]:focus,
+    .rsvp-field textarea:focus {
+      border-bottom-color: var(--gold);
+    }
+
+    .rsvp-field textarea {
+      resize: vertical;
+      min-height: 80px;
+    }
+
+    .rsvp-radio-group {
+      display: flex;
+      gap: 0;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+
+    .rsvp-radio-label {
+      flex: 1;
+      padding: 14px 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      border-right: 1px solid rgba(255,255,255,0.2);
+      transition: background 0.2s;
+    }
+
+    .rsvp-radio-label:last-child {
+      border-right: 0;
+    }
+
+    .rsvp-radio-label input[type="radio"] {
+      accent-color: var(--gold);
+      width: 16px;
+      height: 16px;
+    }
+
+    .rsvp-radio-label span {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 14px;
+      color: rgba(255,255,255,0.7);
+    }
+
+    .rsvp-radio-label:has(input:checked) {
+      background: rgba(201,169,110,0.15);
+    }
+
+    .rsvp-radio-label:has(input:checked) span {
+      color: var(--gold);
+    }
+
+    .btn-confirm {
+      display: inline-block;
+      margin-top: 32px;
+      padding: 16px 52px;
+      background: transparent;
+      border: 1px solid var(--gold);
+      font-family: 'DM Sans', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--gold);
+      cursor: pointer;
+      transition: background 0.3s, color 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .btn-confirm::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: var(--gold);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.35s ease;
+      z-index: 0;
+    }
+
+    .btn-confirm:hover::before {
+      transform: scaleX(1);
+    }
+
+    .btn-confirm:hover {
+      color: var(--black);
+    }
+
+    .btn-confirm span {
+      position: relative;
+      z-index: 1;
+    }
+
+    .rsvp-success {
+      display: none;
+      text-align: center;
+      padding: 40px;
+      border: 1px solid var(--gold);
+      margin-top: 20px;
+    }
+
+    .rsvp-success p {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      font-size: 28px;
+      color: var(--gold);
+    }
+
+    .rsvp-success small {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 13px;
+      color: rgba(255,255,255,0.5);
+      display: block;
+      margin-top: 8px;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--bg-section);
+      padding: 40px 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid rgba(0,0,0,0.1);
+    }
+
+    .footer-names {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 700;
+      font-size: 22px;
+      color: var(--black);
+    }
+
+    .footer-names .amp { color: var(--gold); }
+
+    .footer-right {
+      text-align: right;
+    }
+
+    .footer-right p {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 12px;
+      color: var(--gray);
+      letter-spacing: 1px;
+    }
+
+    .footer-xxv {
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 800;
+      font-size: 36px;
+      color: rgba(0,0,0,0.07);
+      letter-spacing: -1px;
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      .section { padding: 60px 32px; }
+      #quote-band { padding: 50px 32px; }
+      #rsvp { padding: 60px 32px; }
+      footer { padding: 32px; flex-direction: column; gap: 16px; text-align: center; }
+      .footer-right { text-align: center; }
+    }
+
+    @media (max-width: 600px) {
+      #hero {
+        grid-template-columns: 1fr;
+        min-height: auto;
+      }
+
+      .hero-left {
+        padding: 80px 28px 40px;
+        order: 2;
+      }
+
+      .xxv-rotated { display: none; }
+
+      .hero-right {
+        order: 1;
+        padding: 40px 28px 0;
+      }
+
+      .hero-photo-frame {
+        width: 100%;
+        max-width: 300px;
+      }
+
+      .photo-grid {
+        grid-template-columns: 1fr;
+        gap: 48px;
+        max-width: 360px;
+        margin: 0 auto;
+      }
+
+      .event-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+
+      .date-huge {
+        font-size: 100px;
+      }
+
+      .rsvp-radio-group {
+        flex-direction: column;
+      }
+
+      .rsvp-radio-label {
+        border-right: 0;
+        border-bottom: 1px solid rgba(255,255,255,0.2);
+      }
+
+      .rsvp-radio-label:last-child {
+        border-bottom: 0;
+      }
+
+      footer { padding: 28px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- MARBLE VEINS -->
+  <div class="marble-veins" aria-hidden="true">
+    <svg xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" viewBox="0 0 1440 900">
+      <defs>
+        <filter id="blurF">
+          <feGaussianBlur stdDeviation="2.5"/>
+        </filter>
+      </defs>
+      <!-- Vein 1 -->
+      <path d="M0,180 C120,160 200,220 350,190 C500,160 580,240 720,210 C860,180 950,260 1100,230 C1250,200 1350,260 1440,240"
+        fill="none" stroke="rgba(0,0,0,0.07)" stroke-width="3" filter="url(#blurF)"/>
+      <!-- Vein 2 -->
+      <path d="M0,380 C80,360 180,420 320,395 C460,370 540,440 690,420 C840,400 920,460 1080,435 C1240,410 1360,470 1440,450"
+        fill="none" stroke="rgba(0,0,0,0.05)" stroke-width="2" filter="url(#blurF)"/>
+      <!-- Vein 3 - diagonal -->
+      <path d="M-50,0 C100,80 150,200 200,320 C250,440 200,560 300,680 C400,800 500,860 600,900"
+        fill="none" stroke="rgba(0,0,0,0.06)" stroke-width="1.5" filter="url(#blurF)"/>
+      <!-- Vein 4 -->
+      <path d="M800,0 C840,100 900,180 920,300 C940,420 880,520 940,640 C1000,760 1100,820 1200,900"
+        fill="none" stroke="rgba(0,0,0,0.04)" stroke-width="2" filter="url(#blurF)"/>
+      <!-- Vein 5 - thin hairline -->
+      <path d="M0,580 C200,560 300,600 450,575 C600,550 680,590 820,570 C960,550 1050,590 1200,568 C1350,546 1400,590 1440,575"
+        fill="none" stroke="rgba(0,0,0,0.04)" stroke-width="1" filter="url(#blurF)"/>
+      <!-- Vein 6 -->
+      <path d="M300,0 C320,60 280,140 340,220 C400,300 460,340 420,440 C380,540 300,600 360,700 C420,800 500,860 480,900"
+        fill="none" stroke="rgba(0,0,0,0.05)" stroke-width="1.5" filter="url(#blurF)"/>
+      <!-- Vein 7 - right cluster -->
+      <path d="M1100,0 C1120,80 1080,160 1140,240 C1200,320 1260,360 1240,460 C1220,560 1160,620 1200,720 C1240,820 1320,860 1300,900"
+        fill="none" stroke="rgba(0,0,0,0.05)" stroke-width="1.5" filter="url(#blurF)"/>
+      <!-- Vein 8 - horizontal subtle -->
+      <path d="M0,750 C180,730 280,770 440,748 C600,726 700,768 880,748 C1060,728 1160,768 1350,748 C1380,745 1420,752 1440,750"
+        fill="none" stroke="rgba(0,0,0,0.035)" stroke-width="1" filter="url(#blurF)"/>
+    </svg>
+  </div>
+
+  <!-- MUSIC -->
+  <audio id="bg-audio" loop preload="none">
+    <source src="../audio/saathiya-tune-kya-kiya-video-song-love-salman-khan-revathi-ishtar-music-3_bprPAg98.mp3" type="audio/mpeg" />
+  </audio>
+
+  <button id="music-toggle" aria-label="Toggle music" title="Toggle background music">
+    <span class="eq-bar"></span>
+    <span class="eq-bar"></span>
+    <span class="eq-bar"></span>
+    <span class="eq-bar"></span>
+    <span class="eq-bar"></span>
+  </button>
+
+  <div class="content-layer">
+
+    <!-- ═══════════════════════════════════════
+         HERO
+    ═══════════════════════════════════════ -->
+    <section id="hero">
+      <div class="hero-left">
+        <div class="xxv-rotated" aria-hidden="true">XXV</div>
+
+        <div class="hero-text-block">
+          <span class="silver-jubilee-tag">Silver Jubilee &nbsp;·&nbsp; 25 Years</span>
+
+          <h1 class="hero-names">
+            Ruta<br>
+            <span class="amp">&amp;</span><br>
+            Anant<br>
+            Todkar
+          </h1>
+
+          <span class="hero-names-devanagari">रुता &amp; अनंत तोडकर</span>
+
+          <div class="gold-rule"></div>
+
+          <p class="hero-date-text">12 April &nbsp;&nbsp; Saturday &nbsp;&nbsp; 2025</p>
+          <p class="hero-event-title">शुभ रौप्य महोत्सव</p>
+        </div>
+      </div>
+
+      <div class="hero-right">
+        <div class="hero-photo-frame">
+          <img src="../photo/vintage.jpg" alt="Ruta & Anant Todkar — Vintage" />
+          <div class="xxv-badge">
+            <span>XXV</span>
+            <small>Years</small>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         PHOTOS
+    ═══════════════════════════════════════ -->
+    <section id="photos" class="section">
+      <span class="section-label reveal">A Journey in Frames</span>
+      <h2 class="section-heading reveal">Our Story,<br>Our Moments</h2>
+      <div class="gold-line reveal"></div>
+
+      <div class="photo-grid">
+        <div class="photo-item reveal">
+          <img src="../photo/traditional.jpg" alt="Traditional" />
+          <p class="photo-caption">पारंपरिक</p>
+        </div>
+        <div class="photo-item reveal" style="transition-delay:0.15s">
+          <img src="../photo/candid.jpg" alt="Candid" />
+          <p class="photo-caption">Candid Moments</p>
+        </div>
+        <div class="photo-item reveal" style="transition-delay:0.3s">
+          <img src="../photo/casual.jpg" alt="Casual" />
+          <p class="photo-caption">Together Always</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         QUOTE BAND
+    ═══════════════════════════════════════ -->
+    <section id="quote-band">
+      <div class="reveal">
+        <span class="quote-rule"></span>
+        <span class="quote-text">
+          "Twenty-five years of love, laughter, and life together."
+          <span class="quote-devanagari">पंचवीस वर्षांच्या प्रेमाचा हा उत्सव</span>
+        </span>
+        <span class="quote-rule"></span>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         EVENT DETAILS
+    ═══════════════════════════════════════ -->
+    <section id="event" class="section">
+      <span class="section-label reveal">You Are Invited</span>
+      <h2 class="section-heading reveal">Event<br>Details</h2>
+      <div class="gold-line reveal"></div>
+
+      <div class="event-grid">
+        <div class="event-date-block reveal-left">
+          <div class="date-huge">12</div>
+          <div class="date-month-year">
+            <span class="date-month">April</span>
+            <span class="date-year">2025</span>
+          </div>
+          <span class="date-day">Saturday</span>
+        </div>
+
+        <div class="event-info-block reveal">
+          <div class="event-info-item">
+            <p class="event-info-label">Event</p>
+            <p class="event-info-value">25th Silver Jubilee Anniversary</p>
+            <p class="event-info-sub" style="font-family:'Noto Serif Devanagari',serif;">शुभ रौप्य महोत्सव</p>
+          </div>
+
+          <div class="event-info-item" style="transition-delay:0.1s">
+            <p class="event-info-label">Time</p>
+            <p class="event-info-value">To Be Announced</p>
+            <p class="event-info-sub">Details will follow soon</p>
+          </div>
+
+          <div class="event-info-item" style="transition-delay:0.2s">
+            <p class="event-info-label">Venue</p>
+            <p class="event-info-value">Midland, Ghansoli</p>
+            <p class="event-info-sub">Manoshi Complex, Plot 5&amp;6<br>Sector 3, Ghansoli<br>Navi Mumbai — 400701</p>
+          </div>
+
+          <div class="event-info-item" style="transition-delay:0.3s">
+            <p class="event-info-label">Dress Code</p>
+            <p class="event-info-value">Formal / Ethnic</p>
+            <p class="event-info-sub">Silver &amp; Gold tones welcome</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         RSVP
+    ═══════════════════════════════════════ -->
+    <section id="rsvp">
+      <div class="rsvp-card reveal">
+        <span class="section-label">Kindly Confirm</span>
+        <h2 class="section-heading">RSVP</h2>
+        <div class="gold-line"></div>
+
+        <p class="rsvp-intro">
+          We would be honoured by your presence to celebrate this milestone of love and togetherness.
+          Please let us know if you can join us.
+        </p>
+
+        <form id="rsvp-form" onsubmit="submitRSVP(event)">
+          <div class="rsvp-field">
+            <label class="field-label" for="rsvp-name">Your Name</label>
+            <input type="text" id="rsvp-name" placeholder="Full Name" required />
+          </div>
+
+          <div class="rsvp-field">
+            <label class="field-label">Will You Attend?</label>
+            <div class="rsvp-radio-group">
+              <label class="rsvp-radio-label">
+                <input type="radio" name="attendance" value="yes" required />
+                <span>Joyfully Attending</span>
+              </label>
+              <label class="rsvp-radio-label">
+                <input type="radio" name="attendance" value="maybe" />
+                <span>Maybe</span>
+              </label>
+              <label class="rsvp-radio-label">
+                <input type="radio" name="attendance" value="no" />
+                <span>Unable to Attend</span>
+              </label>
+            </div>
+          </div>
+
+          <div class="rsvp-field">
+            <label class="field-label" for="rsvp-guests">Number of Guests</label>
+            <input type="number" id="rsvp-guests" placeholder="Including yourself" min="1" max="10" />
+          </div>
+
+          <div class="rsvp-field">
+            <label class="field-label" for="rsvp-message">A Message for the Couple</label>
+            <textarea id="rsvp-message" placeholder="Share your warm wishes…"></textarea>
+          </div>
+
+          <button type="submit" class="btn-confirm">
+            <span>Confirm Attendance</span>
+          </button>
+        </form>
+
+        <div class="rsvp-success" id="rsvp-success">
+          <p>We await you with joy!</p>
+          <small>आपल्या उपस्थितीची आम्ही आतुरतेने वाट पाहत आहोत।</small>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════
+         FOOTER
+    ═══════════════════════════════════════ -->
+    <footer>
+      <div>
+        <p class="footer-names">Ruta <span class="amp">&amp;</span> Anant Todkar</p>
+        <p style="font-family:'DM Sans',sans-serif; font-size:12px; color:var(--gray); margin-top:4px; font-family:'Noto Serif Devanagari',serif;">
+          रुता &amp; अनंत तोडकर
+        </p>
+      </div>
+      <div class="footer-right">
+        <p class="footer-xxv">XXV</p>
+        <p style="margin-top:-8px; letter-spacing:2px; font-size:11px;">12 · APRIL · 2025</p>
+        <p style="margin-top:4px;">Midland, Ghansoli · Navi Mumbai</p>
+      </div>
+    </footer>
+
+  </div><!-- /.content-layer -->
+
+  <script>
+    // ─── MUSIC ───
+    const audio = document.getElementById('bg-audio');
+    const btn   = document.getElementById('music-toggle');
+    let started = false;
+
+    audio.volume = 0.32;
+
+    function startMusic() {
+      if (!started) {
+        audio.play().then(() => {
+          btn.classList.add('playing');
+          started = true;
+        }).catch(() => {});
+      }
+    }
+
+    btn.addEventListener('click', () => {
+      if (!started) {
+        startMusic();
+        return;
+      }
+      if (audio.paused) {
+        audio.play();
+        btn.classList.add('playing');
+      } else {
+        audio.pause();
+        btn.classList.remove('playing');
+      }
+    });
+
+    ['click', 'touchstart', 'keydown'].forEach(ev => {
+      document.addEventListener(ev, startMusic, { once: true });
+    });
+
+    // ─── SCROLL REVEAL ───
+    const revealEls = document.querySelectorAll('.reveal, .reveal-left');
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.12 });
+
+    revealEls.forEach(el => observer.observe(el));
+
+    // ─── RSVP ───
+    function submitRSVP(e) {
+      e.preventDefault();
+      const form    = document.getElementById('rsvp-form');
+      const success = document.getElementById('rsvp-success');
+      form.style.display    = 'none';
+      success.style.display = 'block';
+    }
+  </script>
+</body>
+</html>

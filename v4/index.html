@@ -1,0 +1,1124 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>शुभ रौप्य महोत्सव — रुता तोडकर &amp; अनंत तोडकर</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Devanagari:wght@300;400;600;700&family=Cinzel:wght@400;600&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:       #120508;
+      --maroon:   #8B0000;
+      --maroon2:  #6B0000;
+      --gold:     #C9A96E;
+      --gold-deep:#8B6914;
+      --cream:    #F5E6B8;
+      --saffron:  #C85A10;
+      --saffron2: #E8834A;
+      --white:    #FFF8F0;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background-color: var(--bg);
+      color: var(--cream);
+      font-family: 'Cormorant Garamond', serif;
+      font-weight: 300;
+      overflow-x: hidden;
+    }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--gold); }
+
+    /* ─── AUDIO BUTTON ──────────────────────────────── */
+    #music-btn {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 9999;
+      width: 54px;
+      height: 54px;
+      background: var(--bg);
+      border: 2px solid var(--gold);
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 3px;
+      transition: border-color 0.3s, box-shadow 0.3s;
+      box-shadow: 0 0 12px rgba(201,169,110,0.3);
+    }
+    #music-btn:hover { border-color: var(--cream); box-shadow: 0 0 20px rgba(201,169,110,0.5); }
+    .eq-bar {
+      width: 4px;
+      background: var(--gold);
+      border-radius: 2px;
+      height: 8px;
+      transform-origin: bottom center;
+    }
+    #music-btn.playing .eq-bar:nth-child(1) { animation: eq1 0.6s ease-in-out infinite alternate; }
+    #music-btn.playing .eq-bar:nth-child(2) { animation: eq2 0.5s ease-in-out infinite alternate; }
+    #music-btn.playing .eq-bar:nth-child(3) { animation: eq3 0.7s ease-in-out infinite alternate; }
+    #music-btn.playing .eq-bar:nth-child(4) { animation: eq4 0.45s ease-in-out infinite alternate; }
+    @keyframes eq1 { from { height: 6px; } to { height: 22px; } }
+    @keyframes eq2 { from { height: 14px; } to { height: 28px; } }
+    @keyframes eq3 { from { height: 8px; } to { height: 20px; } }
+    @keyframes eq4 { from { height: 16px; } to { height: 10px; } }
+
+    /* ─── JALI BORDER BAND ───────────────────────────── */
+    .jali-band {
+      width: 100%;
+      overflow: hidden;
+      background: var(--maroon2);
+      position: relative;
+      height: 40px;
+    }
+    .jali-band svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    /* ─── MANDALA WATERMARK ───────────────────────────── */
+    .mandala-bg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: min(700px, 95vw);
+      height: min(700px, 95vw);
+      opacity: 0.04;
+      pointer-events: none;
+      z-index: 0;
+      animation: mandalaRotate 60s linear infinite;
+    }
+    @keyframes mandalaRotate {
+      from { transform: translate(-50%, -50%) rotate(0deg); }
+      to   { transform: translate(-50%, -50%) rotate(360deg); }
+    }
+
+    /* ─── HERO ──────────────────────────────────────── */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      background: radial-gradient(ellipse at center top, #3d0a12 0%, #1a0408 45%, #120508 100%);
+      padding-bottom: 60px;
+    }
+
+    /* Corner lotus buds */
+    .lotus-corner {
+      position: absolute;
+      width: 70px;
+      height: 70px;
+      pointer-events: none;
+      opacity: 0.7;
+    }
+    .lotus-corner.tl { top: 0; left: 0; }
+    .lotus-corner.tr { top: 0; right: 0; transform: scaleX(-1); }
+    .lotus-corner.bl { bottom: 0; left: 0; transform: scaleY(-1); }
+    .lotus-corner.br { bottom: 0; right: 0; transform: scale(-1,-1); }
+
+    /* Mughal arch wrapper */
+    .arch-wrap {
+      position: relative;
+      z-index: 2;
+      width: clamp(260px, 60vw, 400px);
+      margin: 0 auto;
+      margin-top: 40px;
+    }
+    .arch-photo-container {
+      position: relative;
+    }
+    .arch-photo-container img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+      clip-path: url(#mughalClip);
+    }
+    .arch-svg-overlay {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    /* Hero text */
+    .hero-text {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding: 24px 24px 0;
+      max-width: 680px;
+    }
+    .hindi-names {
+      font-family: 'Noto Serif Devanagari', serif;
+      font-size: clamp(28px, 8vw, 54px);
+      font-weight: 700;
+      line-height: 1.25;
+      background: linear-gradient(135deg, var(--gold-deep) 0%, var(--gold) 35%, var(--cream) 55%, var(--gold) 75%, var(--gold-deep) 100%);
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: goldShimmer 5s ease-in-out infinite;
+      margin-bottom: 6px;
+    }
+    @keyframes goldShimmer {
+      0%   { background-position: 0% 50%; }
+      50%  { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+    .hindi-ampersand {
+      font-family: 'Noto Serif Devanagari', serif;
+      font-size: 0.85em;
+      color: var(--saffron2);
+      display: block;
+      line-height: 1;
+      margin: 4px 0;
+    }
+    .english-names {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(14px, 3.5vw, 22px);
+      font-weight: 400;
+      color: var(--gold);
+      letter-spacing: 0.12em;
+      margin-bottom: 4px;
+    }
+    .event-title-hindi {
+      font-family: 'Noto Serif Devanagari', serif;
+      font-size: clamp(20px, 5vw, 34px);
+      font-weight: 600;
+      color: var(--saffron2);
+      margin-top: 18px;
+      text-shadow: 0 0 30px rgba(200, 90, 16, 0.5);
+    }
+    .event-title-english {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(10px, 2.5vw, 14px);
+      letter-spacing: 0.45em;
+      color: var(--gold);
+      text-transform: uppercase;
+      margin-top: 6px;
+    }
+
+    /* ─── FLORAL MEDALLION DIVIDER ────────────────────── */
+    .medallion-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin: 32px auto;
+    }
+    .medallion-line {
+      flex: 1;
+      max-width: 200px;
+      height: 1px;
+      background: linear-gradient(to right, transparent, var(--gold));
+    }
+    .medallion-line.right {
+      background: linear-gradient(to left, transparent, var(--gold));
+    }
+
+    /* ─── SECTION COMMON ─────────────────────────────── */
+    section {
+      padding: 70px 24px;
+      max-width: 960px;
+      margin: 0 auto;
+    }
+    .section-title-hindi {
+      font-family: 'Noto Serif Devanagari', serif;
+      font-size: clamp(22px, 5vw, 36px);
+      font-weight: 600;
+      color: var(--saffron2);
+      text-align: center;
+      margin-bottom: 4px;
+    }
+    .section-title-english {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(10px, 2.5vw, 13px);
+      letter-spacing: 0.45em;
+      color: var(--gold);
+      text-align: center;
+      text-transform: uppercase;
+      margin-bottom: 40px;
+    }
+
+    /* ─── THEN & NOW PHOTOS ───────────────────────────── */
+    .then-now-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+      margin-top: 16px;
+      align-items: start;
+    }
+    .arch-photo-block {
+      position: relative;
+      text-align: center;
+    }
+    .arch-photo-block img {
+      display: block;
+      width: 100%;
+      aspect-ratio: 3/4;
+      object-fit: cover;
+    }
+    .arch-photo-block .arch-overlay-svg {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+    .arch-caption {
+      font-family: 'Noto Serif Devanagari', serif;
+      font-size: clamp(14px, 3.5vw, 18px);
+      color: var(--gold);
+      margin-top: 14px;
+    }
+    .arch-caption-sub {
+      font-family: 'Cinzel', serif;
+      font-size: 10px;
+      letter-spacing: 0.35em;
+      color: var(--saffron);
+      margin-top: 4px;
+      text-transform: uppercase;
+    }
+
+    /* ─── EVENT DETAILS ──────────────────────────────── */
+    #details {
+      text-align: center;
+    }
+    .kalash-wrap {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 32px;
+    }
+
+    .details-cards {
+      display: flex;
+      justify-content: center;
+      gap: 0;
+      flex-wrap: wrap;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+    .detail-card {
+      flex: 1;
+      min-width: 240px;
+      padding: 28px 20px;
+      position: relative;
+    }
+    .detail-card + .detail-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 20%; bottom: 20%;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+    }
+    .detail-label-hindi {
+      font-family: 'Noto Serif Devanagari', serif;
+      font-size: 13px;
+      color: var(--saffron);
+      margin-bottom: 8px;
+      letter-spacing: 0.05em;
+    }
+    .detail-label-eng {
+      font-family: 'Cinzel', serif;
+      font-size: 9px;
+      letter-spacing: 0.4em;
+      color: var(--gold-deep);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .detail-value-hindi {
+      font-family: 'Noto Serif Devanagari', serif;
+      font-size: clamp(18px, 4.5vw, 26px);
+      font-weight: 600;
+      color: var(--cream);
+      line-height: 1.4;
+    }
+    .detail-value-sub {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(13px, 3vw, 16px);
+      color: var(--gold);
+      margin-top: 6px;
+      font-style: italic;
+    }
+
+    /* ─── RSVP ───────────────────────────────────────── */
+    #rsvp {
+      max-width: 580px;
+    }
+    .rsvp-card {
+      background: rgba(139, 0, 0, 0.12);
+      border: 1.5px solid var(--gold-deep);
+      position: relative;
+      padding: 56px 40px;
+      text-align: center;
+      border-radius: 2px;
+    }
+    .rsvp-jali-border {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      border-radius: 2px;
+    }
+    .rsvp-question {
+      font-family: 'Noto Serif Devanagari', serif;
+      font-size: clamp(18px, 4.5vw, 26px);
+      font-weight: 600;
+      color: var(--cream);
+      margin-bottom: 8px;
+    }
+    .rsvp-question-eng {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(14px, 3vw, 18px);
+      font-style: italic;
+      color: var(--gold);
+      margin-bottom: 28px;
+    }
+    .rsvp-options {
+      display: flex;
+      justify-content: center;
+      gap: 32px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
+    .rsvp-option {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+    }
+    .rsvp-option input[type="radio"] { display: none; }
+    .radio-petal {
+      width: 22px;
+      height: 22px;
+      border: 1.5px solid var(--gold);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+      flex-shrink: 0;
+      position: relative;
+    }
+    .radio-petal::after {
+      content: '';
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--gold);
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .rsvp-option input:checked ~ .radio-petal {
+      border-color: var(--saffron2);
+      box-shadow: 0 0 10px rgba(200, 90, 16, 0.4);
+    }
+    .rsvp-option input:checked ~ .radio-petal::after { opacity: 1; }
+    .rsvp-option-label-hindi {
+      font-family: 'Noto Serif Devanagari', serif;
+      font-size: clamp(14px, 3.5vw, 18px);
+      color: var(--cream);
+    }
+    .rsvp-name-input {
+      width: 100%;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid var(--gold-deep);
+      color: var(--cream);
+      font-family: 'Noto Serif Devanagari', serif;
+      font-size: 16px;
+      padding: 10px 0;
+      text-align: center;
+      outline: none;
+      margin-bottom: 28px;
+      transition: border-color 0.3s;
+    }
+    .rsvp-name-input::placeholder {
+      color: var(--gold-deep);
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic;
+    }
+    .rsvp-name-input:focus { border-bottom-color: var(--gold); }
+    .rsvp-btn {
+      font-family: 'Noto Serif Devanagari', serif;
+      font-size: clamp(14px, 3.5vw, 18px);
+      color: var(--bg);
+      background: linear-gradient(135deg, var(--saffron) 0%, var(--gold) 100%);
+      border: none;
+      padding: 16px 48px;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: opacity 0.3s, transform 0.2s;
+      box-shadow: 0 4px 20px rgba(201, 169, 110, 0.3);
+    }
+    .rsvp-btn:hover { opacity: 0.88; transform: scale(1.03); }
+    .rsvp-message {
+      font-family: 'Noto Serif Devanagari', serif;
+      font-size: 15px;
+      color: var(--gold);
+      margin-top: 18px;
+      min-height: 22px;
+    }
+
+    /* ─── FOOTER ─────────────────────────────────────── */
+    footer {
+      text-align: center;
+      padding: 60px 24px 80px;
+      border-top: 1px solid var(--maroon);
+      background: linear-gradient(to bottom, #120508, #0a0204);
+    }
+    .footer-blessing {
+      font-family: 'Noto Serif Devanagari', serif;
+      font-size: clamp(26px, 6vw, 42px);
+      font-weight: 700;
+      color: var(--gold);
+      letter-spacing: 0.08em;
+      margin-bottom: 16px;
+      text-shadow: 0 0 30px rgba(201, 169, 110, 0.4);
+    }
+    .footer-names-hindi {
+      font-family: 'Noto Serif Devanagari', serif;
+      font-size: clamp(18px, 4.5vw, 28px);
+      color: var(--cream);
+      margin-bottom: 6px;
+    }
+    .footer-names-eng {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(11px, 2.5vw, 14px);
+      letter-spacing: 0.4em;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+    .footer-date {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 14px;
+      color: var(--gold-deep);
+      letter-spacing: 0.2em;
+      font-style: italic;
+    }
+    .footer-xxv {
+      font-family: 'Cinzel', serif;
+      font-size: 32px;
+      color: transparent;
+      -webkit-text-stroke: 1px var(--gold-deep);
+      letter-spacing: 0.3em;
+      margin-top: 20px;
+    }
+
+    /* ─── SCROLL REVEAL ──────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94), transform 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ─── RESPONSIVE ─────────────────────────────────── */
+    @media (max-width: 600px) {
+      .lotus-corner { width: 44px; height: 44px; }
+      .then-now-grid { grid-template-columns: 1fr; max-width: 300px; margin: 0 auto; }
+      .details-cards { flex-direction: column; }
+      .detail-card + .detail-card::before { display: none; }
+      .rsvp-card { padding: 36px 20px; }
+      .rsvp-options { gap: 16px; }
+      .jali-band { height: 28px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- BACKGROUND AUDIO -->
+<audio id="bg-audio" loop preload="none">
+  <source src="../audio/saathiya-tune-kya-kiya-video-song-love-salman-khan-revathi-ishtar-music-3_bprPAg98.mp3" type="audio/mpeg" />
+</audio>
+
+<!-- MUSIC TOGGLE -->
+<button id="music-btn" title="Toggle Music" aria-label="Toggle background music">
+  <div class="eq-bar"></div>
+  <div class="eq-bar"></div>
+  <div class="eq-bar"></div>
+  <div class="eq-bar"></div>
+</button>
+
+<!-- SVG Clip path for Mughal arch -->
+<svg width="0" height="0" style="position:absolute;" aria-hidden="true">
+  <defs>
+    <clipPath id="mughalClip" clipPathUnits="objectBoundingBox">
+      <!-- Horseshoe / Mughal pointed arch clip: rectangular bottom, pointed arch top -->
+      <path d="
+        M 0.08, 1
+        L 0.08, 0.42
+        Q 0.08, 0.05  0.5, 0.02
+        Q 0.92, 0.05  0.92, 0.42
+        L 0.92, 1
+        Z
+      "/>
+    </clipPath>
+    <clipPath id="archClip2" clipPathUnits="objectBoundingBox">
+      <path d="M 0.08,1 L 0.08,0.45 Q 0.08,0.05 0.5,0.02 Q 0.92,0.05 0.92,0.45 L 0.92,1 Z"/>
+    </clipPath>
+  </defs>
+</svg>
+
+<!-- ═══════════════════════════════════════════════════ JALI TOP -->
+<div class="jali-band" aria-hidden="true">
+  <svg viewBox="0 0 800 40" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <pattern id="jaliPat" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+        <!-- Jali geometric unit: 8-pointed star lattice -->
+        <rect width="40" height="40" fill="#6B0000"/>
+        <g fill="none" stroke="#C9A96E" stroke-width="0.8" opacity="0.7">
+          <!-- Outer square -->
+          <rect x="1" y="1" width="38" height="38"/>
+          <!-- Inner rotated square -->
+          <polygon points="20,2 38,20 20,38 2,20"/>
+          <!-- Cross -->
+          <line x1="20" y1="1" x2="20" y2="39"/>
+          <line x1="1" y1="20" x2="39" y2="20"/>
+          <!-- Small center diamond -->
+          <polygon points="20,14 26,20 20,26 14,20"/>
+          <!-- Corner small squares -->
+          <rect x="2" y="2" width="7" height="7"/>
+          <rect x="31" y="2" width="7" height="7"/>
+          <rect x="2" y="31" width="7" height="7"/>
+          <rect x="31" y="31" width="7" height="7"/>
+        </g>
+      </pattern>
+    </defs>
+    <rect width="800" height="40" fill="url(#jaliPat)"/>
+    <!-- Gradient masks for fade edges -->
+    <rect width="800" height="40" fill="url(#fadeGradH)" opacity="0.5"/>
+    <defs>
+      <linearGradient id="fadeGradH" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0%" stop-color="#120508" stop-opacity="0.8"/>
+        <stop offset="15%" stop-color="#120508" stop-opacity="0"/>
+        <stop offset="85%" stop-color="#120508" stop-opacity="0"/>
+        <stop offset="100%" stop-color="#120508" stop-opacity="0.8"/>
+      </linearGradient>
+    </defs>
+  </svg>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ HERO -->
+<section id="hero">
+
+  <!-- Mandala watermark -->
+  <svg class="mandala-bg" viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <g stroke="#C9A96E" stroke-width="0.8">
+      <!-- Concentric circles -->
+      <circle cx="200" cy="200" r="195"/>
+      <circle cx="200" cy="200" r="180"/>
+      <circle cx="200" cy="200" r="155"/>
+      <circle cx="200" cy="200" r="130"/>
+      <circle cx="200" cy="200" r="105"/>
+      <circle cx="200" cy="200" r="80"/>
+      <circle cx="200" cy="200" r="55"/>
+      <circle cx="200" cy="200" r="30"/>
+      <!-- 16 radial lines -->
+      <line x1="200" y1="5"   x2="200" y2="395"/>
+      <line x1="5"   y1="200" x2="395" y2="200"/>
+      <line x1="42"  y1="42"  x2="358" y2="358"/>
+      <line x1="358" y1="42"  x2="42"  y2="358"/>
+      <line x1="122" y1="5"   x2="278" y2="395"/>
+      <line x1="278" y1="5"   x2="122" y2="395"/>
+      <line x1="5"   y1="122" x2="395" y2="278"/>
+      <line x1="5"   y1="278" x2="395" y2="122"/>
+      <!-- Petal shapes -->
+      <ellipse cx="200" cy="112" rx="16" ry="30" transform="rotate(0 200 200)"/>
+      <ellipse cx="200" cy="112" rx="16" ry="30" transform="rotate(22.5 200 200)"/>
+      <ellipse cx="200" cy="112" rx="16" ry="30" transform="rotate(45 200 200)"/>
+      <ellipse cx="200" cy="112" rx="16" ry="30" transform="rotate(67.5 200 200)"/>
+      <ellipse cx="200" cy="112" rx="16" ry="30" transform="rotate(90 200 200)"/>
+      <ellipse cx="200" cy="112" rx="16" ry="30" transform="rotate(112.5 200 200)"/>
+      <ellipse cx="200" cy="112" rx="16" ry="30" transform="rotate(135 200 200)"/>
+      <ellipse cx="200" cy="112" rx="16" ry="30" transform="rotate(157.5 200 200)"/>
+      <ellipse cx="200" cy="112" rx="16" ry="30" transform="rotate(180 200 200)"/>
+      <ellipse cx="200" cy="112" rx="16" ry="30" transform="rotate(202.5 200 200)"/>
+      <ellipse cx="200" cy="112" rx="16" ry="30" transform="rotate(225 200 200)"/>
+      <ellipse cx="200" cy="112" rx="16" ry="30" transform="rotate(247.5 200 200)"/>
+      <ellipse cx="200" cy="112" rx="16" ry="30" transform="rotate(270 200 200)"/>
+      <ellipse cx="200" cy="112" rx="16" ry="30" transform="rotate(292.5 200 200)"/>
+      <ellipse cx="200" cy="112" rx="16" ry="30" transform="rotate(315 200 200)"/>
+      <ellipse cx="200" cy="112" rx="16" ry="30" transform="rotate(337.5 200 200)"/>
+    </g>
+  </svg>
+
+  <!-- Corner lotus ornaments -->
+  <svg class="lotus-corner tl" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <line x1="0" y1="0" x2="70" y2="0" stroke="#C9A96E" stroke-width="1.5"/>
+    <line x1="0" y1="0" x2="0" y2="70" stroke="#C9A96E" stroke-width="1.5"/>
+    <line x1="5" y1="5" x2="55" y2="5" stroke="#8B6914" stroke-width="0.6"/>
+    <line x1="5" y1="5" x2="5" y2="55" stroke="#8B6914" stroke-width="0.6"/>
+    <!-- Lotus bud -->
+    <ellipse cx="22" cy="22" rx="6" ry="10" fill="none" stroke="#C9A96E" stroke-width="1" transform="rotate(-20 22 22)"/>
+    <ellipse cx="22" cy="22" rx="4" ry="8"  fill="none" stroke="#8B6914" stroke-width="0.8" transform="rotate(10 22 22)"/>
+    <ellipse cx="22" cy="22" rx="6" ry="10" fill="none" stroke="#C9A96E" stroke-width="1" transform="rotate(40 22 22)"/>
+    <circle cx="22" cy="22" r="3" fill="none" stroke="#C9A96E" stroke-width="1"/>
+    <!-- Stem -->
+    <line x1="22" y1="25" x2="18" y2="38" stroke="#C9A96E" stroke-width="0.8"/>
+    <!-- Leaf -->
+    <ellipse cx="14" cy="36" rx="5" ry="3" fill="none" stroke="#8B6914" stroke-width="0.7" transform="rotate(-30 14 36)"/>
+  </svg>
+  <svg class="lotus-corner tr" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <line x1="0" y1="0" x2="70" y2="0" stroke="#C9A96E" stroke-width="1.5"/>
+    <line x1="0" y1="0" x2="0" y2="70" stroke="#C9A96E" stroke-width="1.5"/>
+    <line x1="5" y1="5" x2="55" y2="5" stroke="#8B6914" stroke-width="0.6"/>
+    <line x1="5" y1="5" x2="5" y2="55" stroke="#8B6914" stroke-width="0.6"/>
+    <ellipse cx="22" cy="22" rx="6" ry="10" fill="none" stroke="#C9A96E" stroke-width="1" transform="rotate(-20 22 22)"/>
+    <ellipse cx="22" cy="22" rx="4" ry="8"  fill="none" stroke="#8B6914" stroke-width="0.8" transform="rotate(10 22 22)"/>
+    <ellipse cx="22" cy="22" rx="6" ry="10" fill="none" stroke="#C9A96E" stroke-width="1" transform="rotate(40 22 22)"/>
+    <circle cx="22" cy="22" r="3" fill="none" stroke="#C9A96E" stroke-width="1"/>
+    <line x1="22" y1="25" x2="18" y2="38" stroke="#C9A96E" stroke-width="0.8"/>
+    <ellipse cx="14" cy="36" rx="5" ry="3" fill="none" stroke="#8B6914" stroke-width="0.7" transform="rotate(-30 14 36)"/>
+  </svg>
+  <svg class="lotus-corner bl" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <line x1="0" y1="0" x2="70" y2="0" stroke="#C9A96E" stroke-width="1.5"/>
+    <line x1="0" y1="0" x2="0" y2="70" stroke="#C9A96E" stroke-width="1.5"/>
+    <line x1="5" y1="5" x2="55" y2="5" stroke="#8B6914" stroke-width="0.6"/>
+    <line x1="5" y1="5" x2="5" y2="55" stroke="#8B6914" stroke-width="0.6"/>
+    <ellipse cx="22" cy="22" rx="6" ry="10" fill="none" stroke="#C9A96E" stroke-width="1" transform="rotate(-20 22 22)"/>
+    <ellipse cx="22" cy="22" rx="4" ry="8"  fill="none" stroke="#8B6914" stroke-width="0.8" transform="rotate(10 22 22)"/>
+    <ellipse cx="22" cy="22" rx="6" ry="10" fill="none" stroke="#C9A96E" stroke-width="1" transform="rotate(40 22 22)"/>
+    <circle cx="22" cy="22" r="3" fill="none" stroke="#C9A96E" stroke-width="1"/>
+    <line x1="22" y1="25" x2="18" y2="38" stroke="#C9A96E" stroke-width="0.8"/>
+    <ellipse cx="14" cy="36" rx="5" ry="3" fill="none" stroke="#8B6914" stroke-width="0.7" transform="rotate(-30 14 36)"/>
+  </svg>
+  <svg class="lotus-corner br" viewBox="0 0 70 70" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <line x1="0" y1="0" x2="70" y2="0" stroke="#C9A96E" stroke-width="1.5"/>
+    <line x1="0" y1="0" x2="0" y2="70" stroke="#C9A96E" stroke-width="1.5"/>
+    <line x1="5" y1="5" x2="55" y2="5" stroke="#8B6914" stroke-width="0.6"/>
+    <line x1="5" y1="5" x2="5" y2="55" stroke="#8B6914" stroke-width="0.6"/>
+    <ellipse cx="22" cy="22" rx="6" ry="10" fill="none" stroke="#C9A96E" stroke-width="1" transform="rotate(-20 22 22)"/>
+    <ellipse cx="22" cy="22" rx="4" ry="8"  fill="none" stroke="#8B6914" stroke-width="0.8" transform="rotate(10 22 22)"/>
+    <ellipse cx="22" cy="22" rx="6" ry="10" fill="none" stroke="#C9A96E" stroke-width="1" transform="rotate(40 22 22)"/>
+    <circle cx="22" cy="22" r="3" fill="none" stroke="#C9A96E" stroke-width="1"/>
+    <line x1="22" y1="25" x2="18" y2="38" stroke="#C9A96E" stroke-width="0.8"/>
+    <ellipse cx="14" cy="36" rx="5" ry="3" fill="none" stroke="#8B6914" stroke-width="0.7" transform="rotate(-30 14 36)"/>
+  </svg>
+
+  <!-- Mughal arch photo -->
+  <div class="arch-wrap" aria-label="Photo of the couple">
+    <div class="arch-photo-container">
+      <img src="../photo/vintage.jpg" alt="Ruta and Anant — 2000" />
+      <!-- Arch overlay SVG: ornamental border around the arch shape -->
+      <svg class="arch-svg-overlay" viewBox="0 0 400 533" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+        <!-- Outer arch border -->
+        <path d="M 28,533 L 28,220 Q 28,0 200,10 Q 372,0 372,220 L 372,533"
+              stroke="#C9A96E" stroke-width="3" fill="none"/>
+        <!-- Inner arch border -->
+        <path d="M 42,533 L 42,224 Q 42,30 200,38 Q 358,30 358,224 L 358,533"
+              stroke="#8B6914" stroke-width="1.2" fill="none" opacity="0.7"/>
+        <!-- Spandrel decoration left -->
+        <g stroke="#C9A96E" stroke-width="1" opacity="0.6" fill="none">
+          <path d="M 28,220 Q 60,100 120,60"/>
+          <circle cx="60" cy="150" r="12"/>
+          <polygon points="50,100 70,100 80,115 70,130 50,130 40,115" />
+          <circle cx="68" cy="115" r="4"/>
+        </g>
+        <!-- Spandrel decoration right -->
+        <g stroke="#C9A96E" stroke-width="1" opacity="0.6" fill="none">
+          <path d="M 372,220 Q 340,100 280,60"/>
+          <circle cx="340" cy="150" r="12"/>
+          <polygon points="330,100 350,100 360,115 350,130 330,130 320,115"/>
+          <circle cx="332" cy="115" r="4"/>
+        </g>
+        <!-- Keystone at apex -->
+        <polygon points="200,10 218,22 210,40 190,40 182,22" fill="none" stroke="#C9A96E" stroke-width="1.5"/>
+        <circle cx="200" cy="30" r="4" fill="#C9A96E" opacity="0.8"/>
+        <!-- Base decorative band -->
+        <line x1="28" y1="440" x2="372" y2="440" stroke="#C9A96E" stroke-width="0.8" opacity="0.5"/>
+        <line x1="28" y1="448" x2="372" y2="448" stroke="#8B6914" stroke-width="0.5" opacity="0.4"/>
+        <!-- Small inlay diamonds along arch -->
+        <polygon points="200,14 204,20 200,26 196,20" fill="#C9A96E" opacity="0.6"/>
+        <polygon points="100,85 104,91 100,97 96,91"  fill="#C9A96E" opacity="0.5"/>
+        <polygon points="300,85 304,91 300,97 296,91" fill="#C9A96E" opacity="0.5"/>
+      </svg>
+    </div>
+  </div>
+
+  <!-- Names & title -->
+  <div class="hero-text">
+    <div class="hindi-names">
+      रुता तोडकर
+      <span class="hindi-ampersand">&amp;</span>
+      अनंत तोडकर
+    </div>
+    <p class="english-names">Ruta Todkar &amp; Anant Todkar</p>
+
+    <!-- Medallion divider -->
+    <div class="medallion-divider" aria-hidden="true">
+      <div class="medallion-line"></div>
+      <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="20" cy="20" r="18" stroke="#C9A96E" stroke-width="1"/>
+        <circle cx="20" cy="20" r="13" stroke="#8B6914" stroke-width="0.7"/>
+        <polygon points="20,2 22,14 20,12 18,14" fill="#C9A96E"/>
+        <polygon points="20,38 22,26 20,28 18,26" fill="#C9A96E"/>
+        <polygon points="2,20 14,18 12,20 14,22" fill="#C9A96E"/>
+        <polygon points="38,20 26,18 28,20 26,22" fill="#C9A96E"/>
+        <polygon points="20,2 38,20 20,38 2,20" fill="none" stroke="#C9A96E" stroke-width="0.6" opacity="0.5"/>
+        <circle cx="20" cy="20" r="4" fill="none" stroke="#C9A96E" stroke-width="1"/>
+        <circle cx="20" cy="20" r="2" fill="#C9A96E"/>
+      </svg>
+      <div class="medallion-line right"></div>
+    </div>
+
+    <p class="event-title-hindi">शुभ रौप्य महोत्सव</p>
+    <p class="event-title-english">Silver Jubilee Anniversary &nbsp;·&nbsp; XXV</p>
+  </div>
+
+</section>
+
+<!-- ═══════════════════════════════════════════════════ JALI BAND -->
+<div class="jali-band" aria-hidden="true">
+  <svg viewBox="0 0 800 40" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <rect width="800" height="40" fill="url(#jaliPat)"/>
+    <rect width="800" height="40" fill="url(#fadeGradH)" opacity="0.5"/>
+  </svg>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ THEN & NOW -->
+<section id="then-now">
+  <p class="section-title-hindi reveal">तब और अब</p>
+  <p class="section-title-english reveal reveal-delay-1">Then &amp; Now — A Journey of Love</p>
+
+  <div class="then-now-grid">
+
+    <div class="arch-photo-block reveal reveal-delay-1">
+      <img src="../photo/vintage.jpg" alt="Then — 2000" style="clip-path: url(#archClip2);" />
+      <svg class="arch-overlay-svg" viewBox="0 0 100 133" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+        <path d="M 7,133 L 7,55 Q 7,0 50,2.5 Q 93,0 93,55 L 93,133" stroke="#C9A96E" stroke-width="1.5" fill="none"/>
+        <path d="M 11,133 L 11,57 Q 11,7 50,9 Q 89,7 89,57 L 89,133" stroke="#8B6914" stroke-width="0.7" fill="none" opacity="0.6"/>
+        <polygon points="50,3 54,8 50,12 46,8" fill="#C9A96E" opacity="0.8"/>
+        <!-- Spandrel dots -->
+        <circle cx="18" cy="38" r="2.5" stroke="#C9A96E" stroke-width="0.8" fill="none"/>
+        <circle cx="82" cy="38" r="2.5" stroke="#C9A96E" stroke-width="0.8" fill="none"/>
+        <line x1="7" y1="110" x2="93" y2="110" stroke="#C9A96E" stroke-width="0.5" opacity="0.4"/>
+      </svg>
+      <p class="arch-caption">रुता &amp; अनंत</p>
+      <p class="arch-caption-sub">Then — 2000</p>
+    </div>
+
+    <div class="arch-photo-block reveal reveal-delay-2">
+      <img src="../photo/traditional.jpg" alt="Now — 2025" style="clip-path: url(#archClip2);" />
+      <svg class="arch-overlay-svg" viewBox="0 0 100 133" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none">
+        <path d="M 7,133 L 7,55 Q 7,0 50,2.5 Q 93,0 93,55 L 93,133" stroke="#C85A10" stroke-width="1.5" fill="none"/>
+        <path d="M 11,133 L 11,57 Q 11,7 50,9 Q 89,7 89,57 L 89,133" stroke="#8B6914" stroke-width="0.7" fill="none" opacity="0.6"/>
+        <polygon points="50,3 54,8 50,12 46,8" fill="#C85A10" opacity="0.8"/>
+        <circle cx="18" cy="38" r="2.5" stroke="#C85A10" stroke-width="0.8" fill="none"/>
+        <circle cx="82" cy="38" r="2.5" stroke="#C85A10" stroke-width="0.8" fill="none"/>
+        <line x1="7" y1="110" x2="93" y2="110" stroke="#C85A10" stroke-width="0.5" opacity="0.4"/>
+      </svg>
+      <p class="arch-caption">रुता &amp; अनंत</p>
+      <p class="arch-caption-sub">Now — 2025</p>
+    </div>
+
+  </div>
+
+  <!-- Floral medallion divider -->
+  <div class="medallion-divider reveal" style="margin-top:48px;" aria-hidden="true">
+    <div class="medallion-line" style="max-width:100%;"></div>
+    <svg width="52" height="52" viewBox="0 0 52 52" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Floral medallion -->
+      <circle cx="26" cy="26" r="24" stroke="#C9A96E" stroke-width="1"/>
+      <circle cx="26" cy="26" r="18" stroke="#8B6914" stroke-width="0.7"/>
+      <!-- 8 petals -->
+      <g fill="none" stroke="#C9A96E" stroke-width="0.9">
+        <ellipse cx="26" cy="10" rx="3.5" ry="7" />
+        <ellipse cx="26" cy="10" rx="3.5" ry="7" transform="rotate(45 26 26)"/>
+        <ellipse cx="26" cy="10" rx="3.5" ry="7" transform="rotate(90 26 26)"/>
+        <ellipse cx="26" cy="10" rx="3.5" ry="7" transform="rotate(135 26 26)"/>
+        <ellipse cx="26" cy="10" rx="3.5" ry="7" transform="rotate(180 26 26)"/>
+        <ellipse cx="26" cy="10" rx="3.5" ry="7" transform="rotate(225 26 26)"/>
+        <ellipse cx="26" cy="10" rx="3.5" ry="7" transform="rotate(270 26 26)"/>
+        <ellipse cx="26" cy="10" rx="3.5" ry="7" transform="rotate(315 26 26)"/>
+      </g>
+      <circle cx="26" cy="26" r="5" fill="none" stroke="#C9A96E" stroke-width="1"/>
+      <circle cx="26" cy="26" r="2" fill="#C9A96E"/>
+    </svg>
+    <div class="medallion-line right" style="max-width:100%;"></div>
+  </div>
+
+</section>
+
+<!-- ═══════════════════════════════════════════════════ JALI BAND -->
+<div class="jali-band" aria-hidden="true">
+  <svg viewBox="0 0 800 40" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <rect width="800" height="40" fill="url(#jaliPat)"/>
+    <rect width="800" height="40" fill="url(#fadeGradH)" opacity="0.5"/>
+  </svg>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ EVENT DETAILS -->
+<section id="details">
+  <p class="section-title-hindi reveal">समारोह विवरण</p>
+  <p class="section-title-english reveal reveal-delay-1">Celebration Details</p>
+
+  <!-- Kalash SVG -->
+  <div class="kalash-wrap reveal reveal-delay-1" aria-hidden="true">
+    <svg width="80" height="100" viewBox="0 0 80 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <!-- Base plate -->
+      <ellipse cx="40" cy="90" rx="30" ry="6" fill="none" stroke="#C9A96E" stroke-width="1.5"/>
+      <line x1="10" y1="90" x2="70" y2="90" stroke="#C9A96E" stroke-width="1.5"/>
+      <!-- Stem -->
+      <rect x="34" y="76" width="12" height="16" fill="none" stroke="#C9A96E" stroke-width="1.2"/>
+      <!-- Body -->
+      <path d="M 22,76 Q 14,55 18,36 Q 22,20 40,18 Q 58,20 62,36 Q 66,55 58,76 Z"
+            fill="none" stroke="#C9A96E" stroke-width="2"/>
+      <!-- Neck -->
+      <path d="M 32,18 Q 30,10 34,6 L 46,6 Q 50,10 48,18" fill="none" stroke="#C9A96E" stroke-width="1.5"/>
+      <!-- Coconut leaves top -->
+      <path d="M 40,6 Q 28,2 22,8" stroke="#C9A96E" stroke-width="1.2" fill="none"/>
+      <path d="M 40,6 Q 52,2 58,8" stroke="#C9A96E" stroke-width="1.2" fill="none"/>
+      <path d="M 40,6 Q 36,0 40,0 Q 44,0 40,6" fill="none" stroke="#C9A96E" stroke-width="1"/>
+      <!-- Coconut -->
+      <circle cx="40" cy="6" r="5" fill="none" stroke="#8B6914" stroke-width="1" opacity="0.7"/>
+      <!-- Body decorations -->
+      <path d="M 22,50 Q 40,44 58,50" stroke="#8B6914" stroke-width="0.7" fill="none" opacity="0.6"/>
+      <path d="M 24,60 Q 40,54 56,60" stroke="#8B6914" stroke-width="0.7" fill="none" opacity="0.6"/>
+      <!-- Mango / dots on body -->
+      <circle cx="32" cy="45" r="3" fill="none" stroke="#C9A96E" stroke-width="0.8" opacity="0.7"/>
+      <circle cx="48" cy="45" r="3" fill="none" stroke="#C9A96E" stroke-width="0.8" opacity="0.7"/>
+      <circle cx="40" cy="38" r="3" fill="none" stroke="#C85A10" stroke-width="0.8" opacity="0.7"/>
+    </svg>
+  </div>
+
+  <div class="details-cards">
+
+    <div class="detail-card reveal reveal-delay-2">
+      <p class="detail-label-hindi">तारीख</p>
+      <p class="detail-label-eng">Date</p>
+      <p class="detail-value-hindi">१२ एप्रिल २०२५</p>
+      <p class="detail-value-sub">12th April, Saturday 2025</p>
+      <p class="detail-value-sub" style="margin-top:8px; color:var(--saffron);">वेळ: लवकरच जाहीर होईल</p>
+      <p class="detail-value-sub" style="color:var(--gold-deep); font-size:13px;">Time: To Be Announced</p>
+    </div>
+
+    <div class="detail-card reveal reveal-delay-3">
+      <p class="detail-label-hindi">स्थळ</p>
+      <p class="detail-label-eng">Venue</p>
+      <p class="detail-value-hindi">मिडलँड, घणसोली</p>
+      <p class="detail-value-sub">Midland, Ghansoli</p>
+      <p class="detail-value-sub" style="margin-top:6px;">Manoshi Complex, Plot 5&amp;6</p>
+      <p class="detail-value-sub">Sector 3, Ghansoli</p>
+      <p class="detail-value-sub">Navi Mumbai 400701</p>
+    </div>
+
+  </div>
+
+  <!-- Ornate separator -->
+  <div class="medallion-divider reveal" style="margin-top:52px;" aria-hidden="true">
+    <div class="medallion-line" style="max-width:100%;"></div>
+    <svg width="44" height="44" viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="22,2 42,22 22,42 2,22" stroke="#C9A96E" stroke-width="1.5" fill="none"/>
+      <polygon points="22,8 36,22 22,36 8,22" stroke="#8B6914" stroke-width="0.8" fill="none"/>
+      <circle cx="22" cy="22" r="5" stroke="#C9A96E" stroke-width="1" fill="none"/>
+      <circle cx="22" cy="22" r="2" fill="#C9A96E"/>
+    </svg>
+    <div class="medallion-line right" style="max-width:100%;"></div>
+  </div>
+
+</section>
+
+<!-- ═══════════════════════════════════════════════════ JALI BAND -->
+<div class="jali-band" aria-hidden="true">
+  <svg viewBox="0 0 800 40" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <rect width="800" height="40" fill="url(#jaliPat)"/>
+    <rect width="800" height="40" fill="url(#fadeGradH)" opacity="0.5"/>
+  </svg>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ RSVP -->
+<section id="rsvp" style="margin:0 auto; max-width:580px; width:100%; padding:80px 24px;">
+  <p class="section-title-hindi reveal">आपली उपस्थिती</p>
+  <p class="section-title-english reveal reveal-delay-1">Kindly Confirm Your Presence</p>
+
+  <div class="rsvp-card reveal reveal-delay-2">
+
+    <!-- Jali-inspired border pattern overlay -->
+    <svg class="rsvp-jali-border" viewBox="0 0 580 380" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <pattern id="jaliSmall" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+          <rect width="20" height="20" fill="none"/>
+          <g fill="none" stroke="#8B6914" stroke-width="0.5" opacity="0.5">
+            <polygon points="10,1 19,10 10,19 1,10"/>
+            <line x1="10" y1="1" x2="10" y2="19"/>
+            <line x1="1" y1="10" x2="19" y2="10"/>
+          </g>
+        </pattern>
+      </defs>
+      <!-- Outer border -->
+      <rect x="1" y="1" width="578" height="378" stroke="#C9A96E" stroke-width="2" fill="none"/>
+      <!-- Jali corner patches -->
+      <rect x="1" y="1" width="60" height="60" fill="url(#jaliSmall)" opacity="0.5"/>
+      <rect x="519" y="1" width="60" height="60" fill="url(#jaliSmall)" opacity="0.5"/>
+      <rect x="1" y="319" width="60" height="60" fill="url(#jaliSmall)" opacity="0.5"/>
+      <rect x="519" y="319" width="60" height="60" fill="url(#jaliSmall)" opacity="0.5"/>
+      <!-- Corner accent diamonds -->
+      <polygon points="1,1 20,1 1,20" fill="none" stroke="#C9A96E" stroke-width="1.2"/>
+      <polygon points="579,1 560,1 579,20" fill="none" stroke="#C9A96E" stroke-width="1.2"/>
+      <polygon points="1,379 20,379 1,360" fill="none" stroke="#C9A96E" stroke-width="1.2"/>
+      <polygon points="579,379 560,379 579,360" fill="none" stroke="#C9A96E" stroke-width="1.2"/>
+      <!-- Top mid diamond -->
+      <polygon points="290,1 298,9 290,17 282,9" fill="none" stroke="#C85A10" stroke-width="1.2"/>
+      <!-- Inner border -->
+      <rect x="8" y="8" width="564" height="364" stroke="#6B0000" stroke-width="1" fill="none" opacity="0.6"/>
+    </svg>
+
+    <p class="rsvp-question">आपली उपस्थिती आमचे भाग्य</p>
+    <p class="rsvp-question-eng">Will you grace us with your presence?</p>
+
+    <div class="rsvp-options">
+      <label class="rsvp-option">
+        <input type="radio" name="rsvp" value="yes" />
+        <span class="radio-petal"></span>
+        <span class="rsvp-option-label-hindi">आनंदाने येणार</span>
+      </label>
+      <label class="rsvp-option">
+        <input type="radio" name="rsvp" value="no" />
+        <span class="radio-petal"></span>
+        <span class="rsvp-option-label-hindi">येण्यास असमर्थ</span>
+      </label>
+    </div>
+
+    <input class="rsvp-name-input" type="text" placeholder="Your Name / आपले नाव" id="rsvp-name" />
+
+    <button class="rsvp-btn" onclick="submitRSVP()">उत्तर पाठवा — Confirm</button>
+    <p class="rsvp-message" id="rsvp-msg"></p>
+
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════ JALI BOTTOM -->
+<div class="jali-band" aria-hidden="true">
+  <svg viewBox="0 0 800 40" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+    <rect width="800" height="40" fill="url(#jaliPat)"/>
+    <rect width="800" height="40" fill="url(#fadeGradH)" opacity="0.5"/>
+  </svg>
+</div>
+
+<!-- ═══════════════════════════════════════════════════ FOOTER -->
+<footer>
+  <!-- Medallion divider -->
+  <div class="medallion-divider" style="margin-bottom:28px;" aria-hidden="true">
+    <div class="medallion-line" style="max-width:100%;"></div>
+    <svg width="36" height="36" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="18" cy="18" r="16" stroke="#C9A96E" stroke-width="1"/>
+      <polygon points="18,2 34,18 18,34 2,18" fill="none" stroke="#8B6914" stroke-width="0.7"/>
+      <circle cx="18" cy="18" r="4" fill="#C9A96E" opacity="0.5"/>
+    </svg>
+    <div class="medallion-line right" style="max-width:100%;"></div>
+  </div>
+
+  <p class="footer-blessing">॥ शुभं भवतु ॥</p>
+
+  <p class="footer-names-hindi">रुता तोडकर &amp; अनंत तोडकर</p>
+  <p class="footer-names-eng">RUTA TODKAR &amp; ANANT TODKAR</p>
+
+  <div class="medallion-divider" style="margin:16px auto;" aria-hidden="true">
+    <div class="medallion-line" style="max-width:80px;"></div>
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <polygon points="10,1 19,10 10,19 1,10" stroke="#C9A96E" stroke-width="1" fill="none"/>
+      <circle cx="10" cy="10" r="3" fill="#C9A96E" opacity="0.6"/>
+    </svg>
+    <div class="medallion-line right" style="max-width:80px;"></div>
+  </div>
+
+  <p class="footer-date">१२ एप्रिल, शनिवार २०२५ &nbsp;|&nbsp; मिडलँड, घणसोली, नवी मुंबई</p>
+  <p class="footer-date" style="margin-top:4px;">12th April, Saturday 2025 &nbsp;|&nbsp; Ghansoli, Navi Mumbai 400701</p>
+  <p class="footer-xxv">XXV</p>
+  <p style="font-family:'Noto Serif Devanagari',serif; font-size:13px; color:var(--gold-deep); margin-top:8px; letter-spacing:0.1em;">पंचवीस वर्षांच्या प्रेमाचा सोहळा</p>
+</footer>
+
+<script>
+  /* ─── AUDIO ─────────────────────────────────────────── */
+  const audio    = document.getElementById('bg-audio');
+  const musicBtn = document.getElementById('music-btn');
+  let audioStarted = false;
+
+  audio.volume = 0.32;
+
+  function startAudio() {
+    if (!audioStarted) {
+      audio.play().then(() => {
+        audioStarted = true;
+        musicBtn.classList.add('playing');
+      }).catch(() => {});
+    }
+  }
+
+  document.addEventListener('click', startAudio, { once: true });
+  document.addEventListener('touchstart', startAudio, { once: true });
+
+  musicBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    if (audio.paused) {
+      audio.play().then(() => {
+        audioStarted = true;
+        musicBtn.classList.add('playing');
+      }).catch(() => {});
+    } else {
+      audio.pause();
+      musicBtn.classList.remove('playing');
+    }
+  });
+
+  /* ─── SCROLL REVEAL ──────────────────────────────────── */
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  reveals.forEach(el => observer.observe(el));
+
+  /* ─── RSVP ───────────────────────────────────────────── */
+  function submitRSVP() {
+    const name   = document.getElementById('rsvp-name').value.trim();
+    const choice = document.querySelector('input[name="rsvp"]:checked');
+    const msg    = document.getElementById('rsvp-msg');
+
+    if (!name) {
+      msg.textContent = 'कृपया आपले नाव लिहा। / Please enter your name.';
+      msg.style.color = '#C9A96E';
+      return;
+    }
+    if (!choice) {
+      msg.textContent = 'कृपया एक पर्याय निवडा। / Please select a response.';
+      msg.style.color = '#C9A96E';
+      return;
+    }
+
+    if (choice.value === 'yes') {
+      msg.textContent = `${name}, आपले आगमन आमच्यासाठी आनंदाचे ठरेल। We look forward to seeing you on the 12th!`;
+    } else {
+      msg.textContent = `${name}, आपली उपस्थिती मिस होईल। Thank you for responding.`;
+    }
+    msg.style.color = '#F5E6B8';
+  }
+</script>
+</body>
+</html>
