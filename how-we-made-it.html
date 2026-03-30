@@ -1,908 +1,645 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>How We Built It — Ruta & Anant Silver Jubilee Invitation</title>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lato:wght@300;400;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet" />
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>Technical Deep-Dive — Ruta & Anant Invitation</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Lato:wght@300;400;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet"/>
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --iv:#F8F3E8;--cr:#FAF7F0;--br:#2C1A10;--b2:#5A3A25;
+  --gn:#5C7A3E;--g2:#7A9E55;--gd:#C9A96E;--g3:#E8D4A8;
+  --ink:#1A1A2E;--red:#C53030;--pu:#7C3AED;--bl:#1D4ED8;
+}
+body{background:#D8D2C8;font-family:'Lato',sans-serif;color:var(--br);font-size:10.5pt;line-height:1.7}
 
-:root {
-  --ivory:  #F8F3E8;
-  --cream:  #FAF7F0;
-  --brown:  #2C1A10;
-  --brown2: #5A3A25;
-  --green:  #5C7A3E;
-  --green2: #7A9E55;
-  --gold:   #C9A96E;
-  --gold2:  #E8D4A8;
-  --ink:    #1A1A2E;
-}
+/* PAGE */
+.page{width:210mm;min-height:297mm;background:white;margin:16px auto;position:relative;overflow:hidden;page-break-after:always}
+.pi{padding:46px 50px 44px;min-height:297mm;position:relative}
 
-body {
-  background: #DDD8CE;
-  font-family: 'Lato', sans-serif;
-  color: var(--brown);
-  font-size: 11pt;
-  line-height: 1.65;
-}
+/* PAGE HEADER */
+.ph{display:flex;justify-content:space-between;align-items:center;margin-bottom:32px;padding-bottom:10px;border-bottom:1px solid rgba(92,122,62,.18)}
+.ph-t{font-size:.56rem;letter-spacing:.35em;text-transform:uppercase;color:var(--gn)}
+.ph-n{font-family:'Playfair Display',serif;font-size:.95rem;color:var(--gd)}
 
-.page {
-  width: 210mm;
-  min-height: 297mm;
-  background: white;
-  margin: 20px auto;
-  position: relative;
-  overflow: hidden;
-  page-break-after: always;
-}
+/* COVER */
+.cover{background:var(--br);min-height:297mm;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;position:relative}
+.cv-bg{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.cv-c{position:relative;z-index:2;padding:60px 50px}
+.cv-ey{font-size:.6rem;letter-spacing:.4em;text-transform:uppercase;color:var(--gd);margin-bottom:20px}
+.cv-t{font-family:'Playfair Display',serif;font-size:2.8rem;line-height:1.15;color:white;margin-bottom:8px}
+.cv-t em{color:var(--gd);font-style:italic}
+.cv-s{font-family:'Playfair Display',serif;font-size:.95rem;font-style:italic;color:rgba(255,255,255,.5);margin-bottom:40px}
+.cv-r{width:70px;height:1px;background:linear-gradient(90deg,transparent,var(--gd),transparent);margin:0 auto 40px}
+.cv-ps{display:flex;gap:36px;justify-content:center;flex-wrap:wrap}
+.cv-p{text-align:center}.cv-pn{font-family:'Playfair Display',serif;font-size:2rem;color:var(--gd);line-height:1}
+.cv-pl{font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:rgba(255,255,255,.35);margin-top:4px}
+.cv-ft{position:absolute;bottom:28px;left:0;right:0;text-align:center;font-size:.58rem;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.22)}
 
-/* ── COVER ── */
-.cover {
-  background: var(--brown);
-  min-height: 297mm;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  position: relative;
-}
-.cover-bg { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
-.cover-content { position: relative; z-index: 2; padding: 60px 50px; }
+/* HEADINGS */
+h2.h2{font-family:'Playfair Display',serif;font-size:1.7rem;color:var(--br);margin-bottom:4px;line-height:1.2}
+h2.h2 span{color:var(--gn)}
+.intro{font-size:.85rem;color:var(--b2);margin-bottom:24px;max-width:490px;line-height:1.7}
 
-.cover-eyebrow {
-  font-size: 0.6rem;
-  letter-spacing: 0.4em;
-  text-transform: uppercase;
-  color: var(--gold);
-  margin-bottom: 24px;
-}
-.cover-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 3rem;
-  line-height: 1.15;
-  color: white;
-  margin-bottom: 10px;
-}
-.cover-title em { color: var(--gold); font-style: italic; }
-.cover-sub {
-  font-family: 'Playfair Display', serif;
-  font-size: 1rem;
-  font-style: italic;
-  color: rgba(255,255,255,0.55);
-  margin-bottom: 44px;
-}
-.cover-rule {
-  width: 80px; height: 1px;
-  background: linear-gradient(90deg, transparent, var(--gold), transparent);
-  margin: 0 auto 44px;
-}
-.cover-pills {
-  display: flex;
-  gap: 32px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
-.cover-pill {
-  text-align: center;
-}
-.cover-pill-num {
-  font-family: 'Playfair Display', serif;
-  font-size: 2rem;
-  color: var(--gold);
-  line-height: 1;
-}
-.cover-pill-label {
-  font-size: 0.6rem;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.4);
-  margin-top: 4px;
-}
-.cover-footer {
-  position: absolute;
-  bottom: 32px; left: 0; right: 0;
-  text-align: center;
-  font-size: 0.62rem;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.25);
-}
+h3.h3{font-family:'Playfair Display',serif;font-size:1.05rem;color:var(--br);margin:22px 0 10px;display:flex;align-items:center;gap:8px}
+h3.h3::before{content:'';display:inline-block;width:16px;height:2px;background:var(--gd);flex-shrink:0}
 
-/* ── INNER PAGE ── */
-.page-inner {
-  padding: 50px 52px 48px;
-  min-height: 297mm;
-  position: relative;
-}
-.page-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 36px;
-  padding-bottom: 12px;
-  border-bottom: 1px solid rgba(92,122,62,0.18);
-}
-.page-header-title {
-  font-size: 0.58rem;
-  letter-spacing: 0.35em;
-  text-transform: uppercase;
-  color: var(--green);
-}
-.page-header-num {
-  font-family: 'Playfair Display', serif;
-  font-size: 1rem;
-  color: var(--gold);
-}
+/* CODE BLOCK */
+.cb{background:var(--ink);border-radius:8px;margin:10px 0 14px;overflow:hidden}
+.cb-head{background:rgba(255,255,255,.06);padding:6px 14px;font-family:'Fira Code',monospace;font-size:.6rem;color:rgba(255,255,255,.4);letter-spacing:.15em;border-bottom:1px solid rgba(255,255,255,.05)}
+.cb pre{padding:12px 14px;font-family:'Fira Code',monospace;font-size:.68rem;line-height:1.65;color:#A8D8A8;white-space:pre-wrap}
+.kw{color:#C792EA}.fn{color:#82AAFF}.str{color:#C3E88D}.cm{color:#546E7A}.nm{color:#F78C6C}.tg{color:#FF8B94}.at{color:#FFCB6B}
+/* inline code */
+code{font-family:'Fira Code',monospace;font-size:.72rem;background:rgba(92,122,62,.12);color:var(--gn);padding:1px 5px;border-radius:3px}
 
-h2.sh {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.85rem;
-  color: var(--brown);
-  margin-bottom: 6px;
-  line-height: 1.2;
-}
-h2.sh span { color: var(--green); }
-.si {
-  font-size: 0.88rem;
-  color: var(--brown2);
-  margin-bottom: 28px;
-  max-width: 500px;
-  line-height: 1.7;
-}
+/* EXPLAIN CARD */
+.ec{display:flex;gap:14px;margin-bottom:12px;background:var(--cr);border-radius:8px;padding:13px 15px;border-left:3px solid var(--gd)}
+.ec-icon{font-size:1.3rem;flex-shrink:0;line-height:1.2;width:28px;text-align:center}
+.ec-body{}
+.ec-title{font-weight:700;font-size:.82rem;margin-bottom:2px}
+.ec-desc{font-size:.76rem;color:var(--b2);line-height:1.5}
 
-/* ── ANALOGY CARDS ── */
-.analogy-card {
-  display: flex;
-  gap: 18px;
-  align-items: flex-start;
-  background: var(--cream);
-  border-radius: 12px;
-  padding: 18px 20px;
-  margin-bottom: 14px;
-  border-left: 4px solid var(--gold);
-}
-.analogy-emoji {
-  font-size: 2rem;
-  line-height: 1;
-  flex-shrink: 0;
-  width: 44px;
-  text-align: center;
-}
-.analogy-title {
-  font-family: 'Playfair Display', serif;
-  font-size: 1rem;
-  color: var(--brown);
-  margin-bottom: 3px;
-}
-.analogy-tech {
-  font-family: 'Fira Code', monospace;
-  font-size: 0.65rem;
-  background: var(--brown);
-  color: var(--gold);
-  padding: 1px 7px;
-  border-radius: 4px;
-  display: inline-block;
-  margin-bottom: 5px;
-}
-.analogy-simple {
-  font-size: 0.8rem;
-  color: var(--brown2);
-  line-height: 1.5;
-}
+/* FLOW */
+.flow{background:var(--cr);border-radius:10px;padding:18px 20px;margin:14px 0;border:1px solid rgba(92,122,62,.12)}
+.flow-lbl{font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gn);font-weight:700;margin-bottom:12px}
+.frow{display:flex;align-items:center;gap:7px;margin-bottom:8px;flex-wrap:wrap}
+.fb{background:var(--br);color:white;border-radius:5px;padding:5px 10px;font-size:.7rem;white-space:nowrap}
+.fb.gn{background:var(--gn)}.fb.gd{background:var(--gd);color:var(--br);font-weight:700}.fb.rd{background:var(--red)}
+.fa{color:var(--gd);font-size:.9rem;flex-shrink:0}
+.fn2{font-size:.68rem;color:var(--b2);font-style:italic;margin-top:6px}
 
-/* ── STEP BLOCKS ── */
-.step-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
-  margin: 22px 0;
-}
-.step-block {
-  border-radius: 10px;
-  overflow: hidden;
-  border: 1px solid rgba(92,122,62,0.12);
-}
-.step-block-header {
-  background: var(--green);
-  color: white;
-  padding: 9px 14px;
-  font-size: 0.68rem;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.step-num {
-  background: rgba(255,255,255,0.2);
-  width: 20px; height: 20px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.7rem;
-  font-weight: 700;
-  font-family: 'Playfair Display', serif;
-  flex-shrink: 0;
-}
-.step-block-body {
-  padding: 12px 14px;
-  font-size: 0.78rem;
-  color: var(--brown2);
-  line-height: 1.5;
-}
+/* LINE-BY-LINE TABLE */
+.lbl{width:100%;border-collapse:collapse;margin:12px 0 18px;font-size:.74rem}
+.lbl thead tr{background:var(--gn);color:white}
+.lbl thead th{padding:7px 10px;text-align:left;font-size:.6rem;letter-spacing:.18em;text-transform:uppercase}
+.lbl tbody tr{border-bottom:1px solid rgba(92,122,62,.1)}
+.lbl tbody tr:hover{background:rgba(92,122,62,.04)}
+.lbl td{padding:7px 10px;vertical-align:top}
+.lbl td:first-child{font-family:'Fira Code',monospace;font-size:.65rem;color:var(--gn);white-space:nowrap;width:38%}
+.lbl td:last-child{color:var(--b2);line-height:1.45}
 
-/* ── CODE BLOCK ── */
-.code-block {
-  background: var(--ink);
-  border-radius: 10px;
-  padding: 16px 18px;
-  margin: 16px 0;
-}
-.code-label {
-  font-size: 0.58rem;
-  letter-spacing: 0.3em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.3);
-  margin-bottom: 8px;
-}
-.code-block pre {
-  font-family: 'Fira Code', monospace;
-  font-size: 0.68rem;
-  line-height: 1.65;
-  color: #A8D8A8;
-  white-space: pre-wrap;
-}
-.kw  { color: #C792EA; }
-.fn  { color: #82AAFF; }
-.str { color: #C3E88D; }
-.cm  { color: #546E7A; }
-.num { color: #F78C6C; }
+/* HIGHLIGHT BOX */
+.hb{border-radius:9px;padding:14px 16px;margin:14px 0}
+.hb.green{background:rgba(92,122,62,.08);border-left:3px solid var(--gn)}
+.hb.gold{background:rgba(201,169,110,.1);border-left:3px solid var(--gd)}
+.hb.blue{background:rgba(29,78,216,.06);border-left:3px solid var(--bl)}
+.hb.red{background:rgba(197,48,48,.06);border-left:3px solid var(--red)}
+.hb-t{font-weight:700;font-size:.8rem;margin-bottom:3px}
+.hb-d{font-size:.76rem;color:var(--b2);line-height:1.5}
 
-/* ── FLOW DIAGRAM ── */
-.flow {
-  background: var(--cream);
-  border-radius: 12px;
-  padding: 22px 24px;
-  margin: 18px 0;
-  border: 1px solid rgba(92,122,62,0.12);
-}
-.flow-label {
-  font-size: 0.6rem;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
-  color: var(--green);
-  font-weight: 700;
-  margin-bottom: 14px;
-}
-.flow-row {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin-bottom: 8px;
-  flex-wrap: wrap;
-}
-.flow-box {
-  background: var(--brown);
-  color: white;
-  border-radius: 6px;
-  padding: 6px 12px;
-  font-size: 0.72rem;
-  white-space: nowrap;
-}
-.flow-box.green { background: var(--green); }
-.flow-box.gold  { background: var(--gold); color: var(--brown); font-weight: 700; }
-.flow-arrow {
-  color: var(--gold);
-  font-size: 1rem;
-  flex-shrink: 0;
-}
-.flow-note {
-  font-size: 0.68rem;
-  color: var(--brown2);
-  font-style: italic;
-  margin-top: 4px;
-}
+/* STATS */
+.sr{display:flex;gap:10px;margin:18px 0}
+.sp{flex:1;background:var(--cr);border-radius:9px;padding:14px 10px;text-align:center;border-top:3px solid var(--gd)}
+.sp-n{font-family:'Playfair Display',serif;font-size:1.7rem;color:var(--gn);line-height:1}
+.sp-l{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--b2);margin-top:3px}
 
-/* ── STATS ROW ── */
-.stats-row {
-  display: flex;
-  gap: 12px;
-  margin: 24px 0;
-}
-.stat-pill {
-  flex: 1;
-  background: var(--cream);
-  border-radius: 10px;
-  padding: 16px 12px;
-  text-align: center;
-  border-top: 3px solid var(--gold);
-}
-.stat-num {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.8rem;
-  color: var(--green);
-  line-height: 1;
-}
-.stat-label {
-  font-size: 0.6rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--brown2);
-  margin-top: 4px;
-}
+/* CLOSING */
+.cl{background:var(--br);border-radius:11px;padding:28px 32px;text-align:center;margin-top:20px;color:white}
+.cl blockquote{font-family:'Playfair Display',serif;font-size:1.05rem;font-style:italic;color:var(--g3);line-height:1.65;margin-bottom:12px}
+.cl cite{font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.3);font-style:normal}
 
-/* ── CLOSING ── */
-.closing {
-  background: var(--brown);
-  border-radius: 12px;
-  padding: 30px 34px;
-  text-align: center;
-  margin-top: 24px;
-  color: white;
-}
-.closing blockquote {
-  font-family: 'Playfair Display', serif;
-  font-size: 1.15rem;
-  font-style: italic;
-  color: var(--gold2);
-  line-height: 1.65;
-  margin-bottom: 14px;
-}
-.closing cite {
-  font-size: 0.65rem;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.35);
-  font-style: normal;
-}
+.leaf-d{position:absolute;opacity:.05;pointer-events:none}
 
-/* ── LEAF DECO ── */
-.leaf-deco { position: absolute; opacity: 0.05; pointer-events: none; }
-
-@media print {
-  body { background: white; }
-  .page { margin: 0; box-shadow: none; }
-}
+@media print{body{background:white}.page{margin:0;box-shadow:none}}
 </style>
 </head>
 <body>
 
 
-<!-- ════════════════════ COVER ════════════════════ -->
+<!-- ═══════ COVER ═══════ -->
 <div class="page cover">
-  <div class="cover-bg">
-    <svg width="100%" height="100%" viewBox="0 0 595 842" xmlns="http://www.w3.org/2000/svg" opacity="0.08">
-      <g fill="#C9A96E">
-        <path d="M0 0 Q50 70 25 140 Q-15 70 0 0Z"/>
-        <path d="M25 0 Q80 45 60 115 Q15 65 25 0Z"/>
-        <path d="M60 0 Q105 35 90 90 Q45 52 60 0Z"/>
-        <path d="M0 25 Q70 60 48 130 Q-8 78 0 25Z"/>
-      </g>
-      <g fill="#C9A96E" transform="translate(595,0) scale(-1,1)">
-        <path d="M0 0 Q50 70 25 140 Q-15 70 0 0Z"/>
-        <path d="M25 0 Q80 45 60 115 Q15 65 25 0Z"/>
-        <path d="M60 0 Q105 35 90 90 Q45 52 60 0Z"/>
-      </g>
-      <g fill="#C9A96E" transform="translate(0,842) scale(1,-1)">
-        <path d="M0 0 Q50 70 25 140 Q-15 70 0 0Z"/>
-        <path d="M25 0 Q80 45 60 115 Q15 65 25 0Z"/>
-        <path d="M60 0 Q105 35 90 90 Q45 52 60 0Z"/>
-      </g>
-      <g fill="#C9A96E" transform="translate(595,842) scale(-1,-1)">
-        <path d="M0 0 Q50 70 25 140 Q-15 70 0 0Z"/>
-        <path d="M25 0 Q80 45 60 115 Q15 65 25 0Z"/>
-        <path d="M60 0 Q105 35 90 90 Q45 52 60 0Z"/>
-      </g>
-      <circle cx="297" cy="421" r="155" stroke="#C9A96E" stroke-width="1" fill="none" stroke-dasharray="5 9"/>
-      <circle cx="297" cy="421" r="175" stroke="#C9A96E" stroke-width="0.4" fill="none" stroke-dasharray="2 14"/>
-      <path d="M210 310 Q192 282 206 262 Q222 285 210 310Z" fill="#7A9E55"/>
-      <path d="M385 265 Q407 240 421 255 Q404 278 385 265Z" fill="#5C7A3E"/>
-      <path d="M165 540 Q145 515 158 494 Q175 518 165 540Z" fill="#7A9E55"/>
-      <path d="M430 565 Q452 540 465 555 Q447 578 430 565Z" fill="#5C7A3E"/>
+  <div class="cv-bg">
+    <svg width="100%" height="100%" viewBox="0 0 595 842" xmlns="http://www.w3.org/2000/svg" opacity=".09">
+      <g fill="#C9A96E"><path d="M0 0 Q55 75 28 148 Q-18 74 0 0Z"/><path d="M28 0 Q85 48 64 120 Q18 68 28 0Z"/><path d="M64 0 Q108 38 94 94 Q50 56 64 0Z"/></g>
+      <g fill="#C9A96E" transform="translate(595,0) scale(-1,1)"><path d="M0 0 Q55 75 28 148 Q-18 74 0 0Z"/><path d="M28 0 Q85 48 64 120 Q18 68 28 0Z"/></g>
+      <g fill="#C9A96E" transform="translate(0,842) scale(1,-1)"><path d="M0 0 Q55 75 28 148 Q-18 74 0 0Z"/><path d="M28 0 Q85 48 64 120 Q18 68 28 0Z"/></g>
+      <g fill="#C9A96E" transform="translate(595,842) scale(-1,-1)"><path d="M0 0 Q55 75 28 148 Q-18 74 0 0Z"/><path d="M28 0 Q85 48 64 120 Q18 68 28 0Z"/></g>
+      <circle cx="297" cy="421" r="150" stroke="#C9A96E" stroke-width="1" fill="none" stroke-dasharray="5 9"/>
     </svg>
     <svg width="100%" height="100%" viewBox="0 0 595 842" xmlns="http://www.w3.org/2000/svg" style="position:absolute;top:0;left:0">
-      <line x1="44" y1="145" x2="551" y2="145" stroke="#C9A96E" stroke-width="0.5" opacity="0.3"/>
-      <line x1="44" y1="697" x2="551" y2="697" stroke="#C9A96E" stroke-width="0.5" opacity="0.3"/>
+      <line x1="44" y1="148" x2="551" y2="148" stroke="#C9A96E" stroke-width=".5" opacity=".3"/>
+      <line x1="44" y1="694" x2="551" y2="694" stroke="#C9A96E" stroke-width=".5" opacity=".3"/>
     </svg>
   </div>
-
-  <div class="cover-content">
-    <div class="cover-eyebrow">Technical Documentation</div>
-    <div class="cover-title">How We <em>Built</em><br>the Invitation</div>
-    <div class="cover-sub">Ruta &amp; Anant Todkar — Silver Jubilee Anniversary</div>
-    <div class="cover-rule"></div>
-    <div class="cover-pills">
-      <div class="cover-pill"><div class="cover-pill-num">10</div><div class="cover-pill-label">Designs</div></div>
-      <div class="cover-pill"><div class="cover-pill-num">1</div><div class="cover-pill-label">Final Site</div></div>
-      <div class="cover-pill"><div class="cover-pill-num">0</div><div class="cover-pill-label">Cost</div></div>
-      <div class="cover-pill"><div class="cover-pill-num">∞</div><div class="cover-pill-label">Live Forever</div></div>
+  <div class="cv-c">
+    <div class="cv-ey">Technical Deep-Dive Documentation</div>
+    <div class="cv-t">How Every Line<br><em>Was Written</em></div>
+    <div class="cv-s">Ruta &amp; Anant Todkar — Silver Jubilee Anniversary Website</div>
+    <div class="cv-r"></div>
+    <div class="cv-ps">
+      <div class="cv-p"><div class="cv-pn">7</div><div class="cv-pl">Sections</div></div>
+      <div class="cv-p"><div class="cv-pn">3</div><div class="cv-pl">JS Systems</div></div>
+      <div class="cv-p"><div class="cv-pn">1</div><div class="cv-pl">Google API</div></div>
+      <div class="cv-p"><div class="cv-pn">∞</div><div class="cv-pl">RSVP Data</div></div>
     </div>
   </div>
-  <div class="cover-footer">smashco.github.io/sanya &nbsp;·&nbsp; April 12, 2025 &nbsp;·&nbsp; Midland, Ghansoli</div>
+  <div class="cv-ft">smashco.github.io/sanya · HTML · CSS · JavaScript · Google Apps Script</div>
 </div>
 
 
-<!-- ════════════════════ PAGE 1 — WHAT IS IT? ════════════════════ -->
-<div class="page">
-<div class="page-inner">
+<!-- ═══════ PAGE 1 — FILE STRUCTURE & HEAD ═══════ -->
+<div class="page"><div class="pi">
+  <svg class="leaf-d" style="top:-10px;right:-10px;width:130px" viewBox="0 0 160 160" fill="none"><path d="M80 0 Q140 20 160 80 Q100 120 40 100 Q0 40 80 0Z" fill="#5C7A3E"/></svg>
+  <div class="ph"><span class="ph-t">Technical Deep-Dive — Ruta &amp; Anant Invitation</span><span class="ph-n">01</span></div>
 
-  <svg class="leaf-deco" style="top:-20px;right:-20px;width:150px" viewBox="0 0 160 160" fill="none">
-    <path d="M80 0 Q140 20 160 80 Q100 120 40 100 Q0 40 80 0Z" fill="#5C7A3E"/>
-    <path d="M80 0 Q120 40 110 100 Q60 80 80 0Z" fill="#7A9E55"/>
-  </svg>
+  <h2 class="h2">Project <span>Structure</span></h2>
+  <p class="intro">Every file in the repository and what it does. The whole website is static — no server, no database on our side, just files served directly to the browser.</p>
 
-  <div class="page-header">
-    <span class="page-header-title">Technical Documentation — Silver Jubilee Invitation</span>
-    <span class="page-header-num">01</span>
+  <div class="cb">
+    <div class="cb-head">Repository file tree — smashco/sanya on GitHub</div>
+    <pre><span class="str">sanya/</span>
+├── <span class="fn">index.html</span>          <span class="cm">← The main invitation page (1,382 lines)</span>
+├── <span class="tg">.nojekyll</span>           <span class="cm">← Empty file, tells GitHub: skip Jekyll processing</span>
+├── <span class="str">photo/</span>
+│   ├── <span class="fn">vintage.jpg</span>     <span class="cm">← Hero circle photo (couple, older)</span>
+│   ├── <span class="fn">traditional.jpg</span> <span class="cm">← Then & Now "Now" photo</span>
+│   ├── <span class="fn">candid.jpg</span>      <span class="cm">← Moments grid photo 1</span>
+│   └── <span class="fn">casual.jpg</span>      <span class="cm">← Moments grid photo 2</span>
+├── <span class="str">audio/</span>
+│   └── <span class="fn">saathiya.mp3</span>    <span class="cm">← Background music file</span>
+├── <span class="str">v1/</span> … <span class="str">v10/</span>
+│   └── <span class="fn">index.html</span>      <span class="cm">← 10 alternate design versions</span>
+├── <span class="str">dataofsanya/</span>
+│   └── <span class="fn">index.html</span>      <span class="cm">← Admin page: shows all RSVP responses</span>
+└── <span class="fn">how-we-made-it.html</span> <span class="cm">← This document</span></pre>
   </div>
 
-  <h2 class="sh">What <span>Is It?</span></h2>
-  <p class="si">A digital wedding anniversary invitation — opened on any phone or computer, no app needed, works forever. Let's break down every piece like you're five.</p>
+  <h3 class="h3">The HTML &lt;head&gt; — Setup Before Anything Renders</h3>
+  <table class="lbl">
+    <thead><tr><th>Line of Code</th><th>What it does (plain English)</th></tr></thead>
+    <tbody>
+      <tr><td>&lt;!DOCTYPE html&gt;</td><td>Tells the browser: "this file uses modern HTML5 rules, not old 1999 HTML". Without this, browsers go into quirks mode and things look broken.</td></tr>
+      <tr><td>&lt;html lang="en"&gt;</td><td>Wraps the entire page. <code>lang="en"</code> tells screen readers and search engines the page is in English.</td></tr>
+      <tr><td>&lt;meta charset="UTF-8"&gt;</td><td>Allows any character to display — English, Devanagari (मराठी), emojis. Without this, special characters show as garbled text like "â€™".</td></tr>
+      <tr><td>&lt;meta name="viewport" …&gt;</td><td>Critical for mobile. Tells the phone: "don't zoom out to fit the whole desktop layout on your screen — use my actual screen width." Makes the site mobile-friendly.</td></tr>
+      <tr><td>&lt;link rel="preconnect" …&gt;</td><td>Starts a connection to Google's font servers before actually loading fonts. Saves ~200ms because the DNS lookup happens in advance.</td></tr>
+      <tr><td>&lt;link href="fonts.googleapis…"&gt;</td><td>Loads 4 typefaces from Google Fonts: <strong>Playfair Display</strong> (headings), <strong>Lato</strong> (body text), <strong>Cormorant Garamond</strong> (quotes), <strong>Noto Serif Devanagari</strong> (मराठी text). All free, streamed from Google's CDN.</td></tr>
+    </tbody>
+  </table>
 
-  <div class="analogy-card">
-    <div class="analogy-emoji">🏠</div>
-    <div>
-      <div class="analogy-title">The Website Itself</div>
-      <div class="analogy-tech">HTML / CSS / JavaScript</div>
-      <div class="analogy-simple"><strong>HTML</strong> is like the bricks of a house — it puts text, photos, and buttons on screen. <strong>CSS</strong> is the paint and furniture — it makes everything look beautiful with colors, fonts, and animations. <strong>JavaScript</strong> is the electricity — it makes things move, play music, and respond when you tap.</div>
-    </div>
+  <h3 class="h3">CSS Variables — The Colour System</h3>
+  <p style="font-size:.8rem;color:var(--b2);margin-bottom:10px;line-height:1.55">Think of CSS variables like named paint pots. Instead of typing <code>#5C7A3E</code> a hundred times, we name it once and use the name everywhere. If we want to change the green, we change one line and the whole site updates.</p>
+
+  <div class="cb">
+    <div class="cb-head">CSS — :root variables (lines 14–26 of index.html)</div>
+    <pre><span class="at">:root</span> {
+  <span class="cm">/* Backgrounds */</span>
+  --ivory:      <span class="str">#F8F3E8</span>;  <span class="cm">/* warm off-white — main background */</span>
+  --ivory-dk:   <span class="str">#EDE6D4</span>;  <span class="cm">/* slightly darker ivory */</span>
+  --cream:      <span class="str">#FAF7F0</span>;  <span class="cm">/* near-white — cards &amp; RSVP section */</span>
+
+  <span class="cm">/* Text */</span>
+  --brown:      <span class="str">#2C1A10</span>;  <span class="cm">/* dark brown — main text colour */</span>
+  --brown-lt:   <span class="str">#5A3A25</span>;  <span class="cm">/* lighter brown — secondary text */</span>
+
+  <span class="cm">/* Accent: Green */</span>
+  --green:      <span class="str">#5C7A3E</span>;  <span class="cm">/* forest green — labels, borders */</span>
+  --green-lt:   <span class="str">#7A9E55</span>;  <span class="cm">/* lighter green */</span>
+  --green-pale: <span class="str">#C8D9B4</span>;  <span class="cm">/* very pale green — divider lines */</span>
+
+  <span class="cm">/* Accent: Gold */</span>
+  --gold:       <span class="str">#C9A96E</span>;  <span class="cm">/* warm gold — rules, badges, accents */</span>
+  --gold-lt:    <span class="str">#E8D4A8</span>;  <span class="cm">/* pale gold */</span>
+  --gold-dk:    <span class="str">#A07840</span>;  <span class="cm">/* dark gold — date badge text */</span>
+}</pre>
   </div>
 
-  <div class="analogy-card">
-    <div class="analogy-emoji">📦</div>
-    <div>
-      <div class="analogy-title">Where It Lives</div>
-      <div class="analogy-tech">GitHub Pages</div>
-      <div class="analogy-simple">Imagine a free locker on the internet that holds your files and shows them to the whole world. GitHub Pages is exactly that — free forever, no monthly fee, no server to manage. Every time we saved a change it went live in under 2 minutes.</div>
-    </div>
+  <div class="hb green"><div class="hb-t">Why CSS variables matter</div><div class="hb-d">The entire site's colour identity lives in 11 lines. Changing <code>--green</code> from forest green to any other colour instantly repaints every button, label, border, and divider on the page — no hunting through thousands of lines.</div></div>
+
+</div></div>
+
+
+<!-- ═══════ PAGE 2 — HERO SECTION ═══════ -->
+<div class="page"><div class="pi">
+  <div class="ph"><span class="ph-t">Technical Deep-Dive — Ruta &amp; Anant Invitation</span><span class="ph-n">02</span></div>
+
+  <h2 class="h2">The Hero <span>Section</span></h2>
+  <p class="intro">The first thing you see — full screen, couple photo in a circle with a leaf wreath, names, date badge. Every detail explained.</p>
+
+  <h3 class="h3">Full-Screen Layout</h3>
+  <table class="lbl">
+    <thead><tr><th>CSS Property</th><th>What it does</th></tr></thead>
+    <tbody>
+      <tr><td>min-height: 100vh</td><td><code>vh</code> = "viewport height". <code>100vh</code> = 100% of whatever screen you're on. On a phone it's the phone height, on a monitor it's the monitor height. The hero always fills the whole screen.</td></tr>
+      <tr><td>display: flex; align-items: center; justify-content: center</td><td>Flexbox centres everything perfectly — both horizontally (justify) and vertically (align). Without this, the content would stick to the top-left corner.</td></tr>
+      <tr><td>background: linear-gradient(160deg, …)</td><td>A diagonal gradient from near-white (#FAF7F0) through warm ivory to a slightly darker ivory. Gives depth without a flat background.</td></tr>
+      <tr><td>#hero::before { … radial-gradient … }</td><td>A pseudo-element (a ghost layer on top) adds two very subtle radial glows — a faint green tint top-left, a faint gold tint bottom-right. Creates a "lit from within" paper effect. <code>pointer-events: none</code> means it can't be clicked.</td></tr>
+    </tbody>
+  </table>
+
+  <h3 class="h3">The Circular Photo — Three-Layer System</h3>
+  <div class="hb gold"><div class="hb-t">The Problem</div><div class="hb-d">Photos are rectangular. A circle crop creates white empty gaps on the sides when the photo is taller than wide. <code>object-fit: cover</code> zooms in and crops the subject. <code>object-fit: contain</code> shows the full subject but leaves gaps.</div></div>
+
+  <div class="hb green"><div class="hb-t">The Solution — Blur Background Trick</div><div class="hb-d">Stack three layers inside a circle that clips everything: (1) a blurred+scaled copy of the same photo fills the gaps with matching colour tones, (2) the sharp photo sits on top at full size. The overflow:hidden circle clips both. The leaf wreath SVG floats outside on a separate layer so it doesn't get clipped.</div></div>
+
+  <table class="lbl">
+    <thead><tr><th>Layer / CSS</th><th>What it does</th></tr></thead>
+    <tbody>
+      <tr><td>.hero-photo-outer { width: 260px }</td><td>The outermost container. 260px square. The leaf wreath is positioned inside this — not clipped, can extend beyond it.</td></tr>
+      <tr><td>.hero-photo-wrap { inset: 33px; border-radius: 50%; overflow: hidden }</td><td><code>inset: 33px</code> means it sits 33px inside the outer on all sides, making the circle 194px (260−33−33). <code>border-radius: 50%</code> makes it a perfect circle. <code>overflow: hidden</code> clips everything inside to the circle shape.</td></tr>
+      <tr><td>.hero-blur-bg { width: 260px; filter: blur(40px); transform: scale(1.3) }</td><td>Same photo, but 260px wide (larger than the 194px circle), centred with <code>translate(-50%,-50%)</code>, then blurred 40px and scaled 1.3× so blurred edges never show. Fills circle gaps with matching tones.</td></tr>
+      <tr><td>.hero-photo { width: 260px; object-fit: contain }</td><td>The actual sharp photo, also 260px, centred. <code>contain</code> means the whole subject is visible without cropping. Sits above the blur layer via <code>z-index: 2</code>.</td></tr>
+      <tr><td>.leaf-wreath { top: 19px; left: 19px; width: 222px }</td><td>The SVG wreath. Positioned inside the outer container (not the clip), 222px wide, offset 19px from the outer edge. This mathematically centres the wreath over the 194px circle. Outside the <code>overflow:hidden</code> so it's not clipped.</td></tr>
+    </tbody>
+  </table>
+
+  <h3 class="h3">Wreath Animation</h3>
+  <div class="cb">
+    <div class="cb-head">CSS — wreathSway keyframe animation</div>
+    <pre><span class="at">@keyframes</span> <span class="fn">wreathSway</span> {
+  <span class="nm">0%</span>   { <span class="at">transform</span>: <span class="fn">rotate</span>(<span class="nm">-1deg</span>); }
+  <span class="nm">100%</span> { <span class="at">transform</span>: <span class="fn">rotate</span>(<span class="nm">1deg</span>);  }
+}
+
+<span class="cm">/* Applied to .leaf-wreath: */</span>
+<span class="at">animation</span>: wreathSway <span class="nm">6s</span> ease-in-out infinite alternate;</pre>
+  </div>
+  <p style="font-size:.78rem;color:var(--b2);line-height:1.5"><code>alternate</code> means it plays forward then backward, forward then backward — so the wreath sways left, then right, endlessly. <code>ease-in-out</code> means it starts slowly, speeds up in the middle, slows again — like a real leaf in a gentle breeze. <code>6s</code> is the speed: one full sway takes 6 seconds.</p>
+
+  <h3 class="h3">Responsive Font Sizes with clamp()</h3>
+  <div class="cb">
+    <div class="cb-head">CSS — clamp() for fluid typography</div>
+    <pre><span class="cm">/* Couple names heading */</span>
+<span class="at">font-size</span>: <span class="fn">clamp</span>(<span class="nm">2rem</span>, <span class="nm">6vw</span>, <span class="nm">3.6rem</span>);
+<span class="cm">/*         ↑ min   ↑ fluid  ↑ max  */</span>
+
+<span class="cm">/* On a 320px phone:  6vw = 19.2px → uses min 2rem (≈32px)  */</span>
+<span class="cm">/* On a 768px tablet: 6vw = 46px   → uses fluid value       */</span>
+<span class="cm">/* On a 1440px screen:6vw = 86px   → capped at max 3.6rem   */</span></pre>
+  </div>
+  <p style="font-size:.78rem;color:var(--b2);line-height:1.5">This replaces needing 3 different <code>@media</code> breakpoints just for font sizes. One line scales the heading perfectly across every screen width automatically.</p>
+
+</div></div>
+
+
+<!-- ═══════ PAGE 3 — ANIMATIONS & SECTIONS ═══════ -->
+<div class="page"><div class="pi">
+  <svg class="leaf-d" style="bottom:30px;left:-20px;width:140px;transform:rotate(30deg)" viewBox="0 0 160 160" fill="none"><path d="M80 0 Q140 20 160 80 Q100 120 40 100 Q0 40 80 0Z" fill="#5C7A3E"/></svg>
+  <div class="ph"><span class="ph-t">Technical Deep-Dive — Ruta &amp; Anant Invitation</span><span class="ph-n">03</span></div>
+
+  <h2 class="h2">Scroll <span>Animations</span> &amp; Sections</h2>
+  <p class="intro">How elements fade in as you scroll down, how the Then &amp; Now grid works, and how the Event Details three-column layout collapses on mobile.</p>
+
+  <h3 class="h3">IntersectionObserver — Scroll Reveal System</h3>
+  <p style="font-size:.78rem;color:var(--b2);margin-bottom:10px;line-height:1.5">Instead of animating everything on page load (which looks bad), we want each section to animate only when it scrolls into view. The browser has a built-in tool for this called <strong>IntersectionObserver</strong>. It watches elements and fires a callback when they enter or leave the viewport.</p>
+
+  <div class="cb">
+    <div class="cb-head">JavaScript — Scroll reveal (lines 1332–1343)</div>
+    <pre><span class="cm">// Step 1: Find all elements that should animate</span>
+<span class="kw">const</span> revealEls = document.<span class="fn">querySelectorAll</span>(
+  <span class="str">'.reveal, .reveal-left, .reveal-right'</span>
+);
+
+<span class="cm">// Step 2: Create an observer with a callback function</span>
+<span class="kw">const</span> observer = <span class="kw">new</span> <span class="fn">IntersectionObserver</span>((entries) => {
+  entries.<span class="fn">forEach</span>(entry => {
+    <span class="kw">if</span> (entry.isIntersecting) {          <span class="cm">// element is on screen?</span>
+      entry.target.classList.<span class="fn">add</span>(<span class="str">'visible'</span>);  <span class="cm">// add .visible class</span>
+      observer.<span class="fn">unobserve</span>(entry.target);   <span class="cm">// stop watching it</span>
+    }
+  });
+}, { threshold: <span class="nm">0.1</span> });   <span class="cm">// fire when 10% of element is visible</span>
+
+<span class="cm">// Step 3: Start watching every reveal element</span>
+revealEls.<span class="fn">forEach</span>(el => observer.<span class="fn">observe</span>(el));</pre>
   </div>
 
-  <div class="analogy-card">
-    <div class="analogy-emoji">🎵</div>
-    <div>
-      <div class="analogy-title">Background Music (Saathiya)</div>
-      <div class="analogy-tech">Web Audio API</div>
-      <div class="analogy-simple">Phones are sneaky — they block music from auto-playing so ads can't annoy you. We worked around this: the song waits silently, then the moment you tap or scroll anywhere on the page, it starts. An animated equalizer (4 bouncing bars) shows it's playing.</div>
-    </div>
+  <table class="lbl">
+    <thead><tr><th>CSS class</th><th>Starting position → Animates to</th></tr></thead>
+    <tbody>
+      <tr><td>.reveal</td><td>Invisible, 28px below its final position → fades in, slides up to normal position</td></tr>
+      <tr><td>.reveal-left</td><td>Invisible, 28px to the left → fades in, slides right to normal position</td></tr>
+      <tr><td>.reveal-right</td><td>Invisible, 28px to the right → fades in, slides left to normal position</td></tr>
+      <tr><td>.reveal.visible</td><td>opacity: 1, transform: none — the end state added by JavaScript</td></tr>
+    </tbody>
+  </table>
+
+  <div class="hb blue"><div class="hb-t">Why unobserve() after first trigger?</div><div class="hb-d">Once an element has animated in, we never need to watch it again. Calling <code>observer.unobserve()</code> removes it from the watch list — less work for the browser, better performance on pages with many animated elements.</div></div>
+
+  <h3 class="h3">Then &amp; Now — Two Column Grid</h3>
+  <div class="cb">
+    <div class="cb-head">CSS — Then &amp; Now responsive grid</div>
+    <pre><span class="cm">/* Desktop: two equal columns side by side */</span>
+<span class="at">.then-now-grid</span> {
+  <span class="at">display</span>: grid;
+  <span class="at">grid-template-columns</span>: <span class="nm">1fr 1fr</span>;  <span class="cm">/* two equal columns */</span>
+  <span class="at">gap</span>: <span class="nm">36px</span>;
+}
+
+<span class="cm">/* Mobile: stack vertically */</span>
+<span class="at">@media</span> (max-width: <span class="nm">600px</span>) {
+  <span class="at">.then-now-grid</span> { <span class="at">grid-template-columns</span>: <span class="nm">1fr</span>; }
+  <span class="cm">/* 1fr = one column that takes 100% width */</span>
+}</pre>
   </div>
 
-  <div class="analogy-card">
-    <div class="analogy-emoji">📷</div>
-    <div>
-      <div class="analogy-title">The Couple Photos</div>
-      <div class="analogy-tech">CSS object-fit + blur layers</div>
-      <div class="analogy-simple">Photos come in all shapes. To make any photo fit a perfect circle without ugly white gaps, we stack two copies — the back copy is the same photo, heavily blurred and zoomed in to fill the gaps. The front copy is sharp and shows the actual subject. Like frosted glass behind a picture frame.</div>
-    </div>
+  <h3 class="h3">Event Details — Three-Column with Leaf Separators</h3>
+  <div class="cb">
+    <div class="cb-head">CSS — Event details 5-column track layout</div>
+    <pre><span class="at">.details-grid</span> {
+  <span class="at">grid-template-columns</span>: <span class="nm">1fr</span> auto <span class="nm">1fr</span> auto <span class="nm">1fr</span>;
+  <span class="cm">/*                      ↑card  ↑leaf  ↑card  ↑leaf  ↑card */</span>
+}
+<span class="cm">/* The "auto" columns hold decorative SVG leaf separators.   */</span>
+<span class="cm">/* The "1fr" columns hold the Date, Venue, Time cards.       */</span>
+
+<span class="at">@media</span> (max-width: <span class="nm">900px</span>) {
+  <span class="at">.details-grid</span> { <span class="at">grid-template-columns</span>: <span class="nm">1fr</span>; }
+  <span class="at">.detail-separator</span> { <span class="at">display</span>: none; } <span class="cm">/* hide leaf SVGs */</span>
+}</pre>
   </div>
 
-  <div class="analogy-card">
-    <div class="analogy-emoji">📋</div>
-    <div>
-      <div class="analogy-title">RSVP Form</div>
-      <div class="analogy-tech">Google Apps Script + Google Sheets</div>
-      <div class="analogy-simple">When a guest fills the form and clicks Confirm, their name, attendance, and guest count is sent to a tiny program running in the cloud (Google Apps Script). That program writes a new row into a Google Spreadsheet — permanently, with a timestamp. The host can view all responses at <em>/dataofsanya</em>.</div>
-    </div>
+  <h3 class="h3">Music Toggle Button — Animated Equalizer Bars</h3>
+  <div class="cb">
+    <div class="cb-head">CSS — barDance animation (4 independent bars)</div>
+    <pre><span class="at">@keyframes</span> <span class="fn">barDance</span> {
+  <span class="nm">0%</span>   { <span class="at">transform</span>: <span class="fn">scaleY</span>(<span class="nm">0.4</span>); <span class="at">background</span>: var(--green); }
+  <span class="nm">100%</span> { <span class="at">transform</span>: <span class="fn">scaleY</span>(<span class="nm">1.5</span>); <span class="at">background</span>: var(--gold-dk); }
+}
+
+<span class="cm">/* Each bar gets a different animation-delay so they're out of sync */</span>
+<span class="at">.bar</span>:nth-child(1) { animation-delay: <span class="nm">0s</span>; }
+<span class="at">.bar</span>:nth-child(2) { animation-delay: <span class="nm">0.2s</span>; }
+<span class="at">.bar</span>:nth-child(3) { animation-delay: <span class="nm">0.4s</span>; }
+<span class="at">.bar</span>:nth-child(4) { animation-delay: <span class="nm">0.15s</span>; }</pre>
   </div>
+  <p style="font-size:.78rem;color:var(--b2);line-height:1.5"><code>transform-origin: bottom</code> makes each bar grow from its bottom edge (like a real equalizer bar). The bars also change colour from green to dark gold at their peaks. The <code>.playing</code> class is added/removed by JavaScript when music plays/pauses, which toggles the animation on or off.</p>
 
-</div>
-</div>
-
-
-<!-- ════════════════════ PAGE 2 — HOW IT WAS BUILT ════════════════════ -->
-<div class="page">
-<div class="page-inner">
-
-  <div class="page-header">
-    <span class="page-header-title">Technical Documentation — Silver Jubilee Invitation</span>
-    <span class="page-header-num">02</span>
-  </div>
-
-  <h2 class="sh">How It Was <span>Built</span></h2>
-  <p class="si">Step by step — from blank page to 10 live designs. No design software, no templates. Every pixel hand-coded.</p>
-
-  <div class="step-grid">
-    <div class="step-block">
-      <div class="step-block-header"><div class="step-num">1</div>Structure the page (HTML)</div>
-      <div class="step-block-body">Wrote all the sections: hero, Then &amp; Now, Event Details, Moments, Quote, RSVP, Footer. Each section is a &lt;section&gt; tag — like chapters in a book.</div>
-    </div>
-    <div class="step-block">
-      <div class="step-block-header"><div class="step-num">2</div>Style everything (CSS)</div>
-      <div class="step-block-body">Applied fonts from Google Fonts (Playfair Display, Lato, Noto Devanagari), colors, spacing, animations. CSS variables let us change the whole color scheme by editing 9 lines.</div>
-    </div>
-    <div class="step-block">
-      <div class="step-block-header"><div class="step-num">3</div>Draw the decorations (SVG)</div>
-      <div class="step-block-body">Every botanical border, leaf wreath, and corner accent is a hand-drawn SVG shape in code — not an image file. SVGs scale perfectly to any screen size.</div>
-    </div>
-    <div class="step-block">
-      <div class="step-block-header"><div class="step-num">4</div>Add motion (JavaScript)</div>
-      <div class="step-block-body">IntersectionObserver watches when each section enters the screen and adds a "visible" class — triggering CSS slide-up animations as you scroll.</div>
-    </div>
-    <div class="step-block">
-      <div class="step-block-header"><div class="step-num">5</div>Add music</div>
-      <div class="step-block-body">Linked the MP3 file stored in /audio/. JavaScript tries to play immediately (works on desktop), and also listens for any touch/click/scroll to start on mobile.</div>
-    </div>
-    <div class="step-block">
-      <div class="step-block-header"><div class="step-num">6</div>Deploy to the internet</div>
-      <div class="step-block-body">Used Git to push all files to GitHub. GitHub Pages automatically published the site. A .nojekyll file tells GitHub not to process the files — just serve them as-is.</div>
-    </div>
-  </div>
-
-  <!-- How scroll animations work -->
-  <div class="flow" style="margin-top:6px">
-    <div class="flow-label">How scroll reveal animations work</div>
-    <div class="flow-row">
-      <div class="flow-box">Page loads</div>
-      <div class="flow-arrow">→</div>
-      <div class="flow-box">All sections start invisible (opacity: 0)</div>
-      <div class="flow-arrow">→</div>
-      <div class="flow-box green">Viewport watches each section</div>
-    </div>
-    <div class="flow-row">
-      <div class="flow-box green">Section enters screen</div>
-      <div class="flow-arrow">→</div>
-      <div class="flow-box">.visible class added</div>
-      <div class="flow-arrow">→</div>
-      <div class="flow-box gold">Fades in + slides up ✦</div>
-    </div>
-    <div class="flow-note">This uses a built-in browser tool called IntersectionObserver — no extra code library needed.</div>
-  </div>
-
-  <!-- Mobile note -->
-  <div style="background:var(--cream);border-radius:10px;padding:16px 18px;margin-top:14px;border-left:4px solid var(--green)">
-    <div style="font-weight:700;font-size:0.82rem;margin-bottom:4px">📱 Mobile-First Design</div>
-    <div style="font-size:0.78rem;color:var(--brown2);line-height:1.55">
-      The invitation works on any screen size. We used <strong>CSS clamp()</strong> for font sizes — instead of a fixed size like 32px, we wrote <code style="background:var(--brown);color:var(--gold);padding:1px 5px;border-radius:3px;font-family:'Fira Code',monospace;font-size:0.72rem">clamp(1.6rem, 5vw, 2.4rem)</code> which means "between 1.6 and 2.4, scale based on screen width." Two-column layouts collapse to single column on phones using <strong>CSS Grid</strong> with a breakpoint at 600px.
-    </div>
-  </div>
-
-</div>
-</div>
+</div></div>
 
 
-<!-- ════════════════════ PAGE 3 — THE 10 DESIGNS ════════════════════ -->
-<div class="page">
-<div class="page-inner">
+<!-- ═══════ PAGE 4 — MUSIC SYSTEM ═══════ -->
+<div class="page"><div class="pi">
+  <div class="ph"><span class="ph-t">Technical Deep-Dive — Ruta &amp; Anant Invitation</span><span class="ph-n">04</span></div>
 
-  <svg class="leaf-deco" style="bottom:30px;right:-20px;width:160px;transform:rotate(180deg)" viewBox="0 0 160 160" fill="none">
-    <path d="M80 0 Q140 20 160 80 Q100 120 40 100 Q0 40 80 0Z" fill="#5C7A3E"/>
-  </svg>
+  <h2 class="h2">Music <span>System</span></h2>
+  <p class="intro">The complete music implementation — why mobile browsers block autoplay, how we worked around it, and how the toggle button works. Every line explained.</p>
 
-  <div class="page-header">
-    <span class="page-header-title">Technical Documentation — Silver Jubilee Invitation</span>
-    <span class="page-header-num">03</span>
-  </div>
-
-  <h2 class="sh">The <span>10 Designs</span></h2>
-  <p class="si">Ten completely different invitation styles, each hosted at its own URL (/v1 through /v10). All built in a single session. Client chose v2.</p>
-
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:13px">
-
-    <div style="border-radius:10px;overflow:hidden;border:1px solid rgba(0,0,0,0.07)">
-      <div style="height:48px;background:linear-gradient(135deg,#030614,#0E1A3D);display:flex;align-items:center;padding:0 14px;gap:7px">
-        <span style="width:9px;height:9px;border-radius:50%;background:#C9A96E;border:1px solid rgba(255,255,255,0.3)"></span>
-        <span style="width:9px;height:9px;border-radius:50%;background:#A0B0D0;border:1px solid rgba(255,255,255,0.3)"></span>
-        <span style="width:9px;height:9px;border-radius:50%;background:#E8E0C8;border:1px solid rgba(255,255,255,0.3)"></span>
-        <span style="margin-left:auto;font-size:0.58rem;letter-spacing:0.2em;color:rgba(255,255,255,0.6);text-transform:uppercase">V1</span>
-      </div>
-      <div style="padding:10px 13px;background:white">
-        <div style="font-family:'Playfair Display',serif;font-size:0.9rem;margin-bottom:2px">Celestial Night</div>
-        <div style="font-size:0.7rem;color:var(--brown2)">140 JS-generated twinkling stars, deep navy, rotating constellation ring</div>
-      </div>
-    </div>
-
-    <div style="border-radius:10px;overflow:hidden;border:2px solid var(--gold)">
-      <div style="height:48px;background:linear-gradient(135deg,#5C7A3E,#2C1A10);display:flex;align-items:center;padding:0 14px;gap:7px">
-        <span style="width:9px;height:9px;border-radius:50%;background:#F8F3E8;border:1px solid rgba(255,255,255,0.3)"></span>
-        <span style="width:9px;height:9px;border-radius:50%;background:#C9A96E;border:1px solid rgba(255,255,255,0.3)"></span>
-        <span style="width:9px;height:9px;border-radius:50%;background:#7A9E55;border:1px solid rgba(255,255,255,0.3)"></span>
-        <span style="margin-left:auto;font-size:0.58rem;letter-spacing:0.2em;color:var(--gold);text-transform:uppercase;font-weight:700">V2 ✦ CHOSEN</span>
-      </div>
-      <div style="padding:10px 13px;background:white">
-        <div style="font-family:'Playfair Display',serif;font-size:0.9rem;margin-bottom:2px">Botanical Garden</div>
-        <div style="font-size:0.7rem;color:var(--brown2)">Warm ivory, SVG leaf wreath, botanical borders, green &amp; gold palette</div>
-      </div>
-    </div>
-
-    <div style="border-radius:10px;overflow:hidden;border:1px solid rgba(0,0,0,0.07)">
-      <div style="height:48px;background:linear-gradient(135deg,#0D0D0D,#1A1400);display:flex;align-items:center;padding:0 14px;gap:7px">
-        <span style="width:9px;height:9px;border-radius:50%;background:#D4AF37;border:1px solid rgba(255,255,255,0.3)"></span>
-        <span style="width:9px;height:9px;border-radius:50%;background:#8B7536;border:1px solid rgba(255,255,255,0.3)"></span>
-        <span style="width:9px;height:9px;border-radius:50%;background:#F0E6C8;border:1px solid rgba(255,255,255,0.3)"></span>
-        <span style="margin-left:auto;font-size:0.58rem;letter-spacing:0.2em;color:rgba(255,255,255,0.6);text-transform:uppercase">V3</span>
-      </div>
-      <div style="padding:10px 13px;background:white">
-        <div style="font-family:'Playfair Display',serif;font-size:0.9rem;margin-bottom:2px">Art Deco Gatsby</div>
-        <div style="font-size:0.7rem;color:var(--brown2)">Rotating 30s sunburst SVG, geometric gold frames, near-black background</div>
-      </div>
-    </div>
-
-    <div style="border-radius:10px;overflow:hidden;border:1px solid rgba(0,0,0,0.07)">
-      <div style="height:48px;background:linear-gradient(135deg,#4A0E1A,#1A0A2E);display:flex;align-items:center;padding:0 14px;gap:7px">
-        <span style="width:9px;height:9px;border-radius:50%;background:#C9A96E;border:1px solid rgba(255,255,255,0.3)"></span>
-        <span style="width:9px;height:9px;border-radius:50%;background:#D4186C;border:1px solid rgba(255,255,255,0.3)"></span>
-        <span style="width:9px;height:9px;border-radius:50%;background:#F0E0B0;border:1px solid rgba(255,255,255,0.3)"></span>
-        <span style="margin-left:auto;font-size:0.58rem;letter-spacing:0.2em;color:rgba(255,255,255,0.6);text-transform:uppercase">V4</span>
-      </div>
-      <div style="padding:10px 13px;background:white">
-        <div style="font-family:'Playfair Display',serif;font-size:0.9rem;margin-bottom:2px">Royal Mughal</div>
-        <div style="font-size:0.7rem;color:var(--brown2)">Horseshoe arch clip-path, jali lattice SVG, kalash motif, Devanagari script</div>
-      </div>
-    </div>
-
-    <div style="border-radius:10px;overflow:hidden;border:1px solid rgba(0,0,0,0.07)">
-      <div style="height:48px;background:linear-gradient(135deg,#FAFAF8,#EEEEE8);display:flex;align-items:center;padding:0 14px;gap:7px">
-        <span style="width:9px;height:9px;border-radius:50%;background:#1A1A1A;border:1px solid rgba(0,0,0,0.2)"></span>
-        <span style="width:9px;height:9px;border-radius:50%;background:#888;border:1px solid rgba(0,0,0,0.2)"></span>
-        <span style="width:9px;height:9px;border-radius:50%;background:#C9A96E;border:1px solid rgba(0,0,0,0.2)"></span>
-        <span style="margin-left:auto;font-size:0.58rem;letter-spacing:0.2em;color:rgba(0,0,0,0.4);text-transform:uppercase">V5</span>
-      </div>
-      <div style="padding:10px 13px;background:white">
-        <div style="font-family:'Playfair Display',serif;font-size:0.9rem;margin-bottom:2px">Pure Minimalist</div>
-        <div style="font-size:0.7rem;color:var(--brown2)">Near-white, giant stacked names, table-style details, monochrome palette</div>
-      </div>
-    </div>
-
-    <div style="border-radius:10px;overflow:hidden;border:1px solid rgba(0,0,0,0.07)">
-      <div style="height:48px;background:linear-gradient(135deg,#F2E8D5,#D8C8A8);display:flex;align-items:center;padding:0 14px;gap:7px">
-        <span style="width:9px;height:9px;border-radius:50%;background:#8B1A1A;border:1px solid rgba(0,0,0,0.2)"></span>
-        <span style="width:9px;height:9px;border-radius:50%;background:#C9A96E;border:1px solid rgba(0,0,0,0.2)"></span>
-        <span style="width:9px;height:9px;border-radius:50%;background:#4A3020;border:1px solid rgba(0,0,0,0.2)"></span>
-        <span style="margin-left:auto;font-size:0.58rem;letter-spacing:0.2em;color:rgba(0,0,0,0.4);text-transform:uppercase">V6</span>
-      </div>
-      <div style="padding:10px 13px;background:white">
-        <div style="font-family:'Playfair Display',serif;font-size:0.9rem;margin-bottom:2px">Vintage Parchment</div>
-        <div style="font-size:0.7rem;color:var(--brown2)">SVG wax seal with drip shapes, aged paper texture, oval portrait frames</div>
-      </div>
-    </div>
-
-    <div style="border-radius:10px;overflow:hidden;border:1px solid rgba(0,0,0,0.07)">
-      <div style="height:48px;background:linear-gradient(135deg,#021E22,#0A3A40);display:flex;align-items:center;padding:0 14px;gap:7px">
-        <span style="width:9px;height:9px;border-radius:50%;background:#00B4D8;border:1px solid rgba(255,255,255,0.3)"></span>
-        <span style="width:9px;height:9px;border-radius:50%;background:#48CAE4;border:1px solid rgba(255,255,255,0.3)"></span>
-        <span style="width:9px;height:9px;border-radius:50%;background:#C9A96E;border:1px solid rgba(255,255,255,0.3)"></span>
-        <span style="margin-left:auto;font-size:0.58rem;letter-spacing:0.2em;color:rgba(255,255,255,0.6);text-transform:uppercase">V7</span>
-      </div>
-      <div style="padding:10px 13px;background:white">
-        <div style="font-family:'Playfair Display',serif;font-size:0.9rem;margin-bottom:2px">Peacock Teal</div>
-        <div style="font-size:0.7rem;color:var(--brown2)">Large animated peacock feather SVGs, concentric ellipse eyes, iridescent shimmer</div>
-      </div>
-    </div>
-
-    <div style="border-radius:10px;overflow:hidden;border:1px solid rgba(0,0,0,0.07)">
-      <div style="height:48px;background:linear-gradient(135deg,#FFF5F8,#FFE0EC);display:flex;align-items:center;padding:0 14px;gap:7px">
-        <span style="width:9px;height:9px;border-radius:50%;background:#E8A0B0;border:1px solid rgba(0,0,0,0.1)"></span>
-        <span style="width:9px;height:9px;border-radius:50%;background:#C06080;border:1px solid rgba(0,0,0,0.1)"></span>
-        <span style="width:9px;height:9px;border-radius:50%;background:#3A1A28;border:1px solid rgba(0,0,0,0.1)"></span>
-        <span style="margin-left:auto;font-size:0.58rem;letter-spacing:0.2em;color:rgba(0,0,0,0.35);text-transform:uppercase">V8</span>
-      </div>
-      <div style="padding:10px 13px;background:white">
-        <div style="font-family:'Playfair Display',serif;font-size:0.9rem;margin-bottom:2px">Cherry Blossom</div>
-        <div style="font-size:0.7rem;color:var(--brown2)">35 JS-generated falling SVG petals, blossom branch hero, rotating wreath</div>
-      </div>
-    </div>
-
-    <div style="border-radius:10px;overflow:hidden;border:1px solid rgba(0,0,0,0.07)">
-      <div style="height:48px;background:linear-gradient(135deg,#F5F0E8,#E8E0D0);display:flex;align-items:center;padding:0 14px;gap:7px">
-        <span style="width:9px;height:9px;border-radius:50%;background:#1A1A1A;border:1px solid rgba(0,0,0,0.2)"></span>
-        <span style="width:9px;height:9px;border-radius:50%;background:#888880;border:1px solid rgba(0,0,0,0.2)"></span>
-        <span style="width:9px;height:9px;border-radius:50%;background:#C9A96E;border:1px solid rgba(0,0,0,0.2)"></span>
-        <span style="margin-left:auto;font-size:0.58rem;letter-spacing:0.2em;color:rgba(0,0,0,0.35);text-transform:uppercase">V9</span>
-      </div>
-      <div style="padding:10px 13px;background:white">
-        <div style="font-family:'Playfair Display',serif;font-size:0.9rem;margin-bottom:2px">Marble Luxe</div>
-        <div style="font-size:0.7rem;color:var(--brown2)">SVG feTurbulence marble texture, 8 hand-drawn vein paths, ghost "XXV"</div>
-      </div>
-    </div>
-
-    <div style="border-radius:10px;overflow:hidden;border:1px solid rgba(0,0,0,0.07)">
-      <div style="height:48px;background:linear-gradient(135deg,#040F08,#0A2010);display:flex;align-items:center;padding:0 14px;gap:7px">
-        <span style="width:9px;height:9px;border-radius:50%;background:#C9A96E;border:1px solid rgba(255,255,255,0.3)"></span>
-        <span style="width:9px;height:9px;border-radius:50%;background:#5C7A3E;border:1px solid rgba(255,255,255,0.3)"></span>
-        <span style="width:9px;height:9px;border-radius:50%;background:#A0D090;border:1px solid rgba(255,255,255,0.3)"></span>
-        <span style="margin-left:auto;font-size:0.58rem;letter-spacing:0.2em;color:rgba(255,255,255,0.6);text-transform:uppercase">V10</span>
-      </div>
-      <div style="padding:10px 13px;background:white">
-        <div style="font-family:'Playfair Display',serif;font-size:0.9rem;margin-bottom:2px">Emerald Forest</div>
-        <div style="font-size:0.7rem;color:var(--brown2)">Canvas-based firefly particles, botanical corners, Devanagari Saathiya verse</div>
-      </div>
-    </div>
-
-  </div>
-
-</div>
-</div>
-
-
-<!-- ════════════════════ PAGE 4 — DATA & CODE ════════════════════ -->
-<div class="page">
-<div class="page-inner">
-
-  <div class="page-header">
-    <span class="page-header-title">Technical Documentation — Silver Jubilee Invitation</span>
-    <span class="page-header-num">04</span>
-  </div>
-
-  <h2 class="sh">Data & <span>Code</span></h2>
-  <p class="si">The two trickiest parts: making music work on mobile, and saving RSVP data forever. Here's exactly how both work.</p>
-
-  <!-- Music -->
-  <div style="margin-bottom:8px;font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--brown)">🎵 Mobile-Safe Music Autoplay</div>
-  <div style="font-size:0.8rem;color:var(--brown2);margin-bottom:10px;line-height:1.55">
-    Browsers block music from auto-playing. Our solution: <strong>try to play immediately</strong> (works on desktop), and <strong>also attach listeners</strong> for the first tap, scroll, or keypress on mobile. Once triggered, all listeners remove themselves so it only fires once.
-  </div>
-
-  <div class="code-block">
-    <div class="code-label">JavaScript — audio/index.html</div>
-    <pre><span class="kw">const</span> audio = document.<span class="fn">getElementById</span>(<span class="str">'bgAudio'</span>);
-audio.volume = <span class="num">0.32</span>;
-
-<span class="cm">// Try immediately (works on desktop)</span>
-audio.<span class="fn">play</span>().<span class="fn">catch</span>(() => {});
-
-<span class="cm">// Fallback: wait for first user gesture on mobile</span>
-<span class="kw">const</span> <span class="fn">start</span> = () => {
-  audio.<span class="fn">play</span>().<span class="fn">catch</span>(() => {});
-  [<span class="str">'click'</span>, <span class="str">'touchstart'</span>, <span class="str">'scroll'</span>].<span class="fn">forEach</span>(e =>
-    document.<span class="fn">removeEventListener</span>(e, start));
-};
-[<span class="str">'click'</span>, <span class="str">'touchstart'</span>, <span class="str">'scroll'</span>].<span class="fn">forEach</span>(e =>
-  document.<span class="fn">addEventListener</span>(e, start, { once: <span class="kw">true</span> }));</pre>
-  </div>
-
-  <!-- RSVP Flow -->
-  <div style="margin:20px 0 8px;font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--brown)">📋 RSVP → Google Sheets Flow</div>
+  <h3 class="h3">Why Autoplay is Blocked (and How We Fix It)</h3>
+  <div class="hb red"><div class="hb-t">The Browser Rule</div><div class="hb-d">Since 2018, all major browsers (Chrome, Safari, Firefox) block audio/video from auto-playing with sound. This was added to stop annoying ads from blasting audio. The browser requires a "user gesture" — a tap, click, or key press — before any audio can play.</div></div>
 
   <div class="flow">
-    <div class="flow-label">What happens when a guest clicks "Confirm Attendance"</div>
-    <div class="flow-row">
-      <div class="flow-box">Guest fills form</div>
-      <div class="flow-arrow">→</div>
-      <div class="flow-box">JS collects name + attendance + guests</div>
-    </div>
-    <div class="flow-row">
-      <div class="flow-box green">fetch() sends POST request</div>
-      <div class="flow-arrow">→</div>
-      <div class="flow-box">Google Apps Script receives it</div>
-    </div>
-    <div class="flow-row">
-      <div class="flow-box">Apps Script adds timestamp</div>
-      <div class="flow-arrow">→</div>
-      <div class="flow-box gold">New row saved in Google Sheet ✦</div>
-    </div>
-    <div class="flow-row">
-      <div class="flow-box green">Form fades out</div>
-      <div class="flow-arrow">→</div>
-      <div class="flow-box">Personalised confirmation shown to guest</div>
-    </div>
-    <div class="flow-note">The host visits /dataofsanya — the page fetches all rows via GET and renders a live table with stats.</div>
+    <div class="flow-lbl">Music autoplay strategy — two-path approach</div>
+    <div class="frow"><div class="fb">Page loads</div><div class="fa">→</div><div class="fb">Try audio.play() immediately</div><div class="fa">→</div><div class="fb gn">Desktop: works ✓</div></div>
+    <div class="frow"><div class="fb">Same play() call</div><div class="fa">→</div><div class="fb rd">Mobile: blocked, promise rejects</div><div class="fa">→</div><div class="fb">.catch() silently swallows the error</div></div>
+    <div class="frow"><div class="fb gn">Mobile fallback</div><div class="fa">→</div><div class="fb">Listeners on click/touchstart/scroll</div><div class="fa">→</div><div class="fb gd">First gesture → music starts ✦</div></div>
+    <div class="fn2">The { once: true } option means each listener removes itself after firing — it only triggers once.</div>
   </div>
 
-  <!-- Blur trick -->
-  <div style="margin:18px 0 8px;font-family:'Playfair Display',serif;font-size:1.1rem;color:var(--brown)">🔵 The Circular Photo Blur Trick</div>
+  <div class="cb">
+    <div class="cb-head">JavaScript — Full music system (lines 1300–1330)</div>
+    <pre><span class="cm">/* ── Setup ── */</span>
+<span class="kw">const</span> audio = document.<span class="fn">getElementById</span>(<span class="str">'bgAudio'</span>); <span class="cm">// find the &lt;audio&gt; tag</span>
+<span class="kw">const</span> btn   = document.<span class="fn">getElementById</span>(<span class="str">'music-btn'</span>); <span class="cm">// find the toggle button</span>
+audio.volume = <span class="nm">0.32</span>;   <span class="cm">// set to 32% volume — not too loud</span>
+<span class="kw">let</span> musicStarted = <span class="kw">false</span>; <span class="cm">// flag: has music started yet?</span>
 
-  <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px">
-    <div style="background:var(--cream);border-radius:10px;padding:14px 16px">
-      <div style="font-weight:700;font-size:0.8rem;margin-bottom:6px">The Problem</div>
-      <div style="font-size:0.75rem;color:var(--brown2);line-height:1.5">
-        Photos are rectangular. A circle crop creates white/empty gaps on the sides if the photo is portrait-shaped. <code style="background:var(--brown);color:var(--gold);padding:1px 4px;border-radius:3px;font-size:0.68rem;font-family:'Fira Code',monospace">object-fit:contain</code> shows the full photo but leaves gaps.
-      </div>
-    </div>
-    <div style="background:var(--cream);border-radius:10px;padding:14px 16px">
-      <div style="font-weight:700;font-size:0.8rem;margin-bottom:6px">The Solution</div>
-      <div style="font-size:0.75rem;color:var(--brown2);line-height:1.5">
-        Stack two layers inside <code style="background:var(--brown);color:var(--gold);padding:1px 4px;border-radius:3px;font-size:0.68rem;font-family:'Fira Code',monospace">overflow:hidden</code> circle. Bottom layer: same image, <code style="background:var(--brown);color:var(--gold);padding:1px 4px;border-radius:3px;font-size:0.68rem;font-family:'Fira Code',monospace">blur(40px) scale(1.3)</code>. Top layer: sharp photo. The blurred layer fills all gaps with matching tones.
-      </div>
-    </div>
+<span class="cm">/* ── Start function (called once on first gesture) ── */</span>
+<span class="kw">function</span> <span class="fn">startMusic</span>() {
+  <span class="kw">if</span> (!musicStarted) {             <span class="cm">// only run if not already started</span>
+    audio.<span class="fn">play</span>().<span class="fn">then</span>(() => {       <span class="cm">// try to play</span>
+      musicStarted = <span class="kw">true</span>;          <span class="cm">// mark as started</span>
+      btn.classList.<span class="fn">add</span>(<span class="str">'playing'</span>); <span class="cm">// activate equalizer animation</span>
+    }).<span class="fn">catch</span>(() => {});             <span class="cm">// silently ignore any error</span>
+  }
+}
+
+<span class="cm">/* ── Attach to first user gesture (any of these 4 events) ── */</span>
+[<span class="str">'click'</span>, <span class="str">'touchstart'</span>, <span class="str">'keydown'</span>, <span class="str">'scroll'</span>].<span class="fn">forEach</span>(ev => {
+  document.<span class="fn">addEventListener</span>(ev, startMusic, {
+    once: <span class="kw">true</span>,    <span class="cm">// auto-removes after firing once</span>
+    passive: <span class="kw">true</span>  <span class="cm">// scroll performance optimisation</span>
+  });
+});
+
+<span class="cm">/* ── Toggle button: pause/resume ── */</span>
+btn.<span class="fn">addEventListener</span>(<span class="str">'click'</span>, (e) => {
+  e.<span class="fn">stopPropagation</span>();  <span class="cm">// don't let click bubble up &amp; trigger startMusic again</span>
+  <span class="kw">if</span> (audio.paused) {
+    audio.<span class="fn">play</span>().<span class="fn">then</span>(() => {
+      btn.classList.<span class="fn">add</span>(<span class="str">'playing'</span>);
+      musicStarted = <span class="kw">true</span>;
+    });
+  } <span class="kw">else</span> {
+    audio.<span class="fn">pause</span>();
+    btn.classList.<span class="fn">remove</span>(<span class="str">'playing'</span>); <span class="cm">// stops equalizer animation</span>
+  }
+});</pre>
   </div>
 
-</div>
-</div>
+  <div class="hb green"><div class="hb-t">Why stopPropagation() on the button?</div><div class="hb-d">When you click the music toggle button, the click event travels up the DOM (this is called "event bubbling") — it would also trigger the <code>startMusic</code> listener on <code>document</code>. <code>stopPropagation()</code> stops the event from bubbling, preventing a double-trigger.</div></div>
+
+  <h3 class="h3">The &lt;audio&gt; HTML Tag</h3>
+  <div class="cb">
+    <div class="cb-head">HTML — audio element</div>
+    <pre><span class="tg">&lt;audio</span> <span class="at">id</span>=<span class="str">"bgAudio"</span> <span class="at">loop</span> <span class="at">preload</span>=<span class="str">"none"</span><span class="tg">&gt;</span>
+  <span class="tg">&lt;source</span> <span class="at">src</span>=<span class="str">"audio/saathiya.mp3"</span> <span class="at">type</span>=<span class="str">"audio/mpeg"</span><span class="tg">&gt;</span>
+<span class="tg">&lt;/audio&gt;</span></pre>
+  </div>
+  <table class="lbl">
+    <thead><tr><th>Attribute</th><th>What it does</th></tr></thead>
+    <tbody>
+      <tr><td>loop</td><td>When the song ends, it automatically starts again from the beginning. The music plays continuously without any JavaScript needed to restart it.</td></tr>
+      <tr><td>preload="none"</td><td>By default browsers pre-download audio files. We set "none" so the 3MB MP3 doesn't download unless the user actually interacts with the page — saves mobile data.</td></tr>
+      <tr><td>&lt;source&gt; tag</td><td>Specifies the actual file. Using a nested &lt;source&gt; instead of a <code>src</code> attribute on &lt;audio&gt; allows multiple format fallbacks (MP3, OGG etc.) for cross-browser support.</td></tr>
+    </tbody>
+  </table>
+
+</div></div>
 
 
-<!-- ════════════════════ PAGE 5 — FINAL SUMMARY ════════════════════ -->
-<div class="page">
-<div class="page-inner" style="display:flex;flex-direction:column;min-height:297mm">
+<!-- ═══════ PAGE 5 — RSVP SYSTEM ═══════ -->
+<div class="page"><div class="pi">
+  <div class="ph"><span class="ph-t">Technical Deep-Dive — Ruta &amp; Anant Invitation</span><span class="ph-n">05</span></div>
 
-  <div class="page-header">
-    <span class="page-header-title">Technical Documentation — Silver Jubilee Invitation</span>
-    <span class="page-header-num">05</span>
+  <h2 class="h2">RSVP <span>System</span> — Complete Flow</h2>
+  <p class="intro">How data travels from the guest's phone to a permanent row in Google Sheets. Every step, every line of code, every API call explained.</p>
+
+  <div class="flow">
+    <div class="flow-lbl">Complete RSVP data journey — guest to spreadsheet</div>
+    <div class="frow"><div class="fb">Guest types name</div><div class="fa">→</div><div class="fb">Selects Yes/No/Maybe</div><div class="fa">→</div><div class="fb">Enters guest count</div><div class="fa">→</div><div class="fb">Taps Confirm</div></div>
+    <div class="frow"><div class="fb gn">JavaScript collects form values</div><div class="fa">→</div><div class="fb">fetch() POST to Apps Script URL</div></div>
+    <div class="frow"><div class="fb">Google Apps Script receives request</div><div class="fa">→</div><div class="fb">Adds timestamp</div><div class="fa">→</div><div class="fb gd">Writes row to Google Sheet ✦</div></div>
+    <div class="frow"><div class="fb gn">Form fades out (CSS transition)</div><div class="fa">→</div><div class="fb">Personalised message shown to guest</div></div>
+    <div class="fn2">The UI update happens immediately — it doesn't wait for Google's response. This is called "fire-and-forget".</div>
   </div>
 
-  <h2 class="sh">What's <span>Inside</span></h2>
-  <p class="si">A complete summary of every technology used, and where each one lives.</p>
+  <h3 class="h3">JavaScript — submitRSVP() Line by Line</h3>
+  <div class="cb">
+    <div class="cb-head">JavaScript — submitRSVP function (lines 1348–1377)</div>
+    <pre><span class="kw">function</span> <span class="fn">submitRSVP</span>(e) {
+  e.<span class="fn">preventDefault</span>();  <span class="cm">// stop form from reloading the page (default HTML behaviour)</span>
 
-  <div class="stats-row">
-    <div class="stat-pill"><div class="stat-num">1</div><div class="stat-label">HTML File<br>per design</div></div>
-    <div class="stat-pill"><div class="stat-num">10</div><div class="stat-label">Design<br>Versions</div></div>
-    <div class="stat-pill"><div class="stat-num">4</div><div class="stat-label">Real<br>Photos</div></div>
-    <div class="stat-pill"><div class="stat-num">1</div><div class="stat-label">MP3<br>Music File</div></div>
+  <span class="cm">// Collect values from the 3 form fields</span>
+  <span class="kw">const</span> name       = document.<span class="fn">getElementById</span>(<span class="str">'rsvp-name'</span>).value.<span class="fn">trim</span>();
+  <span class="cm">//                 ↑ gets the text input    ↑ removes leading/trailing spaces</span>
+
+  <span class="kw">const</span> attendance = document.<span class="fn">querySelector</span>(<span class="str">'input[name="attendance"]:checked'</span>);
+  <span class="cm">//   Finds whichever radio button (Yes/No/Maybe) is currently selected</span>
+
+  <span class="kw">const</span> guests = document.<span class="fn">getElementById</span>(<span class="str">'rsvp-guests'</span>).value || <span class="nm">1</span>;
+  <span class="cm">//  Number input value, defaults to 1 if left empty (|| 1)</span>
+
+  <span class="kw">if</span> (!name || !attendance) <span class="kw">return</span>; <span class="cm">// stop if required fields are empty</span>
+
+  <span class="cm">// Disable button to prevent double-submit</span>
+  <span class="kw">const</span> btn = document.<span class="fn">querySelector</span>(<span class="str">'.rsvp-btn'</span>);
+  btn.textContent = <span class="str">'Sending…'</span>;
+  btn.disabled = <span class="kw">true</span>;
+
+  <span class="cm">// Send data to Google Apps Script — FIRE AND FORGET</span>
+  <span class="fn">fetch</span>(APPS_SCRIPT_URL, {
+    method: <span class="str">'POST'</span>,
+    body: <span class="fn">JSON.stringify</span>({ name, attendance: attendance.value, guests })
+    <span class="cm">// JSON.stringify converts JS object → string: '{"name":"Raj","attendance":"yes","guests":"3"}'</span>
+  }).<span class="fn">catch</span>(() => {}); <span class="cm">// if network fails, ignore — don't crash the UI</span>
+
+  <span class="cm">// Start fade-out animation on the form</span>
+  <span class="kw">const</span> form = document.<span class="fn">getElementById</span>(<span class="str">'rsvp-form'</span>);
+  <span class="kw">const</span> msg  = document.<span class="fn">getElementById</span>(<span class="str">'rsvp-confirm-msg'</span>);
+  form.style.opacity = <span class="str">'0'</span>;            <span class="cm">// make form transparent</span>
+  form.style.transition = <span class="str">'opacity 0.4s'</span>; <span class="cm">// over 0.4 seconds</span>
+
+  <span class="cm">// After 400ms (when fade is done), hide form and show message</span>
+  <span class="fn">setTimeout</span>(() => {
+    form.style.display = <span class="str">'none'</span>;
+    msg.style.display  = <span class="str">'block'</span>;
+    <span class="kw">if</span> (attendance.value === <span class="str">'yes'</span>) {
+      msg.textContent = <span class="str">`Dear ${name}, we are so delighted!…`</span>;
+      <span class="cm">// Template literal: ${name} inserts the guest's actual name</span>
+    } <span class="kw">else</span> {
+      msg.textContent = <span class="str">`Dear ${name}, we shall miss your presence…`</span>;
+    }
+  }, <span class="nm">400</span>);  <span class="cm">// 400ms delay matches the CSS transition duration</span>
+}</pre>
   </div>
 
-  <!-- Tech stack table -->
-  <div style="background:var(--cream);border-radius:12px;overflow:hidden;margin-bottom:20px">
-    <div style="background:var(--green);color:white;padding:10px 18px;font-size:0.65rem;letter-spacing:0.25em;text-transform:uppercase;font-weight:700">Technology Stack</div>
-    <div style="padding:4px 0">
-      <div style="display:flex;padding:9px 18px;border-bottom:1px solid rgba(92,122,62,0.1);gap:12px">
-        <div style="width:140px;font-weight:700;font-size:0.8rem;flex-shrink:0">HTML5</div>
-        <div style="font-size:0.78rem;color:var(--brown2)">Page structure — sections, forms, images, audio element</div>
-      </div>
-      <div style="display:flex;padding:9px 18px;border-bottom:1px solid rgba(92,122,62,0.1);gap:12px">
-        <div style="width:140px;font-weight:700;font-size:0.8rem;flex-shrink:0">CSS3</div>
-        <div style="font-size:0.78rem;color:var(--brown2)">Variables, Grid, Flexbox, clamp(), keyframe animations, filters, clip-path</div>
-      </div>
-      <div style="display:flex;padding:9px 18px;border-bottom:1px solid rgba(92,122,62,0.1);gap:12px">
-        <div style="width:140px;font-weight:700;font-size:0.8rem;flex-shrink:0">JavaScript (ES6)</div>
-        <div style="font-size:0.78rem;color:var(--brown2)">IntersectionObserver, Web Audio API, fetch(), DOM manipulation</div>
-      </div>
-      <div style="display:flex;padding:9px 18px;border-bottom:1px solid rgba(92,122,62,0.1);gap:12px">
-        <div style="width:140px;font-weight:700;font-size:0.8rem;flex-shrink:0">SVG</div>
-        <div style="font-size:0.78rem;color:var(--brown2)">Botanical borders, leaf wreaths, corner accents, wax seal, all inline — scales perfectly</div>
-      </div>
-      <div style="display:flex;padding:9px 18px;border-bottom:1px solid rgba(92,122,62,0.1);gap:12px">
-        <div style="width:140px;font-weight:700;font-size:0.8rem;flex-shrink:0">Google Fonts</div>
-        <div style="font-size:0.78rem;color:var(--brown2)">Playfair Display · Lato · Cormorant Garamond · Noto Serif Devanagari</div>
-      </div>
-      <div style="display:flex;padding:9px 18px;border-bottom:1px solid rgba(92,122,62,0.1);gap:12px">
-        <div style="width:140px;font-weight:700;font-size:0.8rem;flex-shrink:0">GitHub Pages</div>
-        <div style="font-size:0.78rem;color:var(--brown2)">Free static hosting — files pushed via Git, site auto-publishes in &lt;2 min</div>
-      </div>
-      <div style="display:flex;padding:9px 18px;border-bottom:1px solid rgba(92,122,62,0.1);gap:12px">
-        <div style="width:140px;font-weight:700;font-size:0.8rem;flex-shrink:0">Google Apps Script</div>
-        <div style="font-size:0.78rem;color:var(--brown2)">Serverless function — receives RSVP POST, writes row to Google Sheet</div>
-      </div>
-      <div style="display:flex;padding:9px 18px;gap:12px">
-        <div style="width:140px;font-weight:700;font-size:0.8rem;flex-shrink:0">Google Sheets</div>
-        <div style="font-size:0.78rem;color:var(--brown2)">Permanent RSVP database — every response stored with timestamp forever</div>
-      </div>
-    </div>
+  <h3 class="h3">Google Apps Script — The Server-Side (Cloud Function)</h3>
+  <div class="hb gold"><div class="hb-t">What is Google Apps Script?</div><div class="hb-d">It's a free JavaScript runtime hosted by Google. You write code in their editor, deploy it as a "web app", and it gets a public HTTPS URL. When our website sends a POST request to that URL, Google runs the script instantly in their cloud — no server, no hosting cost, no maintenance.</div></div>
+
+  <div class="cb">
+    <div class="cb-head">Google Apps Script — deployed as web app (runs on Google's servers)</div>
+    <pre><span class="cm">// doPost() is called automatically when a POST request arrives</span>
+<span class="kw">function</span> <span class="fn">doPost</span>(e) {
+  <span class="cm">// Get the active Google Sheet (the one this script is attached to)</span>
+  <span class="kw">const</span> sheet = <span class="fn">SpreadsheetApp</span>.<span class="fn">getActiveSpreadsheet</span>().<span class="fn">getActiveSheet</span>();
+
+  <span class="cm">// Parse the JSON string sent by our website back to a JS object</span>
+  <span class="kw">const</span> data = <span class="fn">JSON.parse</span>(e.postData.contents);
+  <span class="cm">// data is now: { name: "Raj", attendance: "yes", guests: "3" }</span>
+
+  <span class="cm">// Add a new row to the spreadsheet with 4 values</span>
+  sheet.<span class="fn">appendRow</span>([<span class="kw">new</span> <span class="fn">Date</span>(), data.name, data.attendance, data.guests]);
+  <span class="cm">//              ↑ current timestamp  ↑ name      ↑ yes/no/maybe  ↑ count</span>
+
+  <span class="cm">// Send back a JSON success response to the website</span>
+  <span class="kw">return</span> ContentService.<span class="fn">createTextOutput</span>(<span class="fn">JSON.stringify</span>({ status: <span class="str">'ok'</span> }))
+    .<span class="fn">setMimeType</span>(ContentService.MimeType.JSON);
+}
+
+<span class="cm">// doGet() is called when the dashboard page loads data</span>
+<span class="kw">function</span> <span class="fn">doGet</span>(e) {
+  <span class="kw">const</span> sheet = <span class="fn">SpreadsheetApp</span>.<span class="fn">getActiveSpreadsheet</span>().<span class="fn">getActiveSheet</span>();
+  <span class="kw">const</span> rows  = sheet.<span class="fn">getDataRange</span>().<span class="fn">getValues</span>(); <span class="cm">// all rows as 2D array</span>
+  <span class="kw">const</span> keys  = rows[<span class="nm">0</span>].<span class="fn">map</span>(k => k.<span class="fn">toString</span>().<span class="fn">toLowerCase</span>()); <span class="cm">// header row</span>
+
+  <span class="cm">// Convert rows to objects: [ {timestamp:…, name:…, attendance:…}, … ]</span>
+  <span class="kw">const</span> result = rows.<span class="fn">slice</span>(<span class="nm">1</span>).<span class="fn">map</span>(r =>
+    <span class="fn">Object.fromEntries</span>(keys.<span class="fn">map</span>((k, i) => [k, r[i]]))
+  );
+  <span class="kw">return</span> ContentService.<span class="fn">createTextOutput</span>(<span class="fn">JSON.stringify</span>(result))
+    .<span class="fn">setMimeType</span>(ContentService.MimeType.JSON);
+}</pre>
   </div>
 
-  <!-- File structure -->
-  <div class="code-block" style="margin-bottom:20px">
-    <div class="code-label">File Structure — GitHub Repository</div>
-    <pre><span class="str">sanya/</span>
-├── <span class="fn">index.html</span>          <span class="cm">← Main invitation (v2 Botanical Garden)</span>
-├── <span class="fn">.nojekyll</span>           <span class="cm">← Tells GitHub: don't process, just serve</span>
-├── <span class="str">photo/</span>
-│   ├── <span class="fn">vintage.jpg</span>     <span class="cm">← Hero circle photo</span>
-│   ├── <span class="fn">traditional.jpg</span>
-│   ├── <span class="fn">candid.jpg</span>
-│   └── <span class="fn">casual.jpg</span>
-├── <span class="str">audio/</span>
-│   └── <span class="fn">saathiya.mp3</span>    <span class="cm">← Background music</span>
-├── <span class="str">v1/</span> … <span class="str">v10/</span>         <span class="cm">← 10 alternate designs</span>
-└── <span class="str">dataofsanya/</span>
-    └── <span class="fn">index.html</span>      <span class="cm">← Live RSVP dashboard</span></pre>
+</div></div>
+
+
+<!-- ═══════ PAGE 6 — DASHBOARD & DEPLOYMENT ═══════ -->
+<div class="page"><div class="pi">
+  <div class="ph"><span class="ph-t">Technical Deep-Dive — Ruta &amp; Anant Invitation</span><span class="ph-n">06</span></div>
+
+  <h2 class="h2">Dashboard &amp; <span>Deployment</span></h2>
+  <p class="intro">How the /dataofsanya admin page reads and displays all RSVP data, and how GitHub Pages serves the site to the world for free.</p>
+
+  <h3 class="h3">dataofsanya/index.html — RSVP Dashboard</h3>
+  <div class="cb">
+    <div class="cb-head">JavaScript — loadData() in dataofsanya/index.html</div>
+    <pre><span class="kw">async function</span> <span class="fn">loadData</span>() {
+  <span class="kw">try</span> {
+    <span class="cm">// Send GET request to Apps Script — gets all sheet rows as JSON</span>
+    <span class="kw">const</span> res  = <span class="kw">await</span> <span class="fn">fetch</span>(APPS_SCRIPT_URL);  <span class="cm">// wait for response</span>
+    <span class="kw">const</span> data = <span class="kw">await</span> res.<span class="fn">json</span>();              <span class="cm">// parse JSON → JS array</span>
+
+    document.<span class="fn">getElementById</span>(<span class="str">'loading'</span>).style.display = <span class="str">'none'</span>; <span class="cm">// hide spinner</span>
+
+    <span class="kw">if</span> (!data.length) { <span class="cm">/* show "no responses" message */</span> <span class="kw">return</span>; }
+
+    <span class="kw">let</span> yes = <span class="nm">0</span>, no = <span class="nm">0</span>, guests = <span class="nm">0</span>;
+    <span class="kw">const</span> tbody = document.<span class="fn">getElementById</span>(<span class="str">'rsvp-tbody'</span>);
+
+    data.<span class="fn">forEach</span>((row, i) => {
+      <span class="kw">const</span> att = (row.attendance || <span class="str">''</span>).<span class="fn">toLowerCase</span>();
+      <span class="kw">if</span> (att === <span class="str">'yes'</span>) yes++;   <span class="cm">// count attending</span>
+      <span class="kw">if</span> (att === <span class="str">'no'</span>)  no++;    <span class="cm">// count not attending</span>
+      guests += <span class="fn">parseInt</span>(row.guests) || <span class="nm">0</span>; <span class="cm">// total guest count</span>
+
+      <span class="cm">// Create a table row element dynamically</span>
+      <span class="kw">const</span> tr = document.<span class="fn">createElement</span>(<span class="str">'tr'</span>);
+      <span class="kw">const</span> date = <span class="kw">new</span> <span class="fn">Date</span>(row.timestamp)
+        .<span class="fn">toLocaleDateString</span>(<span class="str">'en-IN'</span>, {…}); <span class="cm">// format: "15 Mar 2025, 3:42 PM"</span>
+
+      tr.innerHTML = <span class="str">`&lt;td&gt;${i+1}&lt;/td&gt;&lt;td&gt;${row.name}&lt;/td&gt;
+         &lt;td&gt;&lt;span class="badge badge-${att}"&gt;${att}&lt;/span&gt;&lt;/td&gt;
+         &lt;td&gt;${row.guests}&lt;/td&gt;&lt;td&gt;${date}&lt;/td&gt;`</span>;
+      tbody.<span class="fn">appendChild</span>(tr); <span class="cm">// add row to the &lt;tbody&gt; in the HTML</span>
+    });
+
+    <span class="cm">// Update the 4 stat boxes at the top</span>
+    document.<span class="fn">getElementById</span>(<span class="str">'count-total'</span>).textContent  = data.length;
+    document.<span class="fn">getElementById</span>(<span class="str">'count-yes'</span>).textContent    = yes;
+    document.<span class="fn">getElementById</span>(<span class="str">'count-no'</span>).textContent     = no;
+    document.<span class="fn">getElementById</span>(<span class="str">'count-guests'</span>).textContent = guests;
+
+    document.<span class="fn">getElementById</span>(<span class="str">'rsvp-table'</span>).style.display = <span class="str">'table'</span>; <span class="cm">// show table</span>
+
+  } <span class="kw">catch</span> (err) {
+    <span class="cm">// If fetch fails (offline, script error), show error message</span>
+    document.<span class="fn">getElementById</span>(<span class="str">'error-msg'</span>).style.display = <span class="str">'block'</span>;
+  }
+}
+<span class="fn">loadData</span>(); <span class="cm">// runs immediately when page opens</span></pre>
   </div>
 
-  <!-- Closing -->
-  <div class="closing" style="margin-top:auto">
-    <blockquote>
-      "In the garden of life, the most beautiful blooms are those<br>
-      nurtured with patience, tended with love, and shared<br>
-      across twenty-five golden seasons."
-    </blockquote>
-    <cite>— From the Invitation · smashco.github.io/sanya</cite>
+  <h3 class="h3">GitHub Pages — Free Hosting Forever</h3>
+  <table class="lbl">
+    <thead><tr><th>Concept</th><th>Plain explanation</th></tr></thead>
+    <tbody>
+      <tr><td>Git</td><td>A tool that tracks every change to every file with timestamps and messages. Like "undo" for an entire project, permanently. Every push is logged.</td></tr>
+      <tr><td>GitHub repository</td><td>An online storage locker for the project files. Our repository is at github.com/smashco/sanya — public, so anyone can visit.</td></tr>
+      <tr><td>GitHub Pages</td><td>A free service by GitHub: if your repo has an index.html, GitHub automatically publishes it as a live website at username.github.io/repo-name. No server configuration needed.</td></tr>
+      <tr><td>.nojekyll file</td><td>By default GitHub Pages runs Jekyll (a blog-building tool) on every file. Jekyll got confused by special characters in other files and crashed. An empty file named ".nojekyll" tells GitHub to skip Jekyll and serve files directly.</td></tr>
+      <tr><td>git add + commit + push</td><td>Three commands to save changes: <code>add</code> stages files, <code>commit</code> saves them locally with a message, <code>push</code> sends to GitHub. Site updates within ~90 seconds of pushing.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="sr">
+    <div class="sp"><div class="sp-n">&lt;90s</div><div class="sp-l">Deploy time</div></div>
+    <div class="sp"><div class="sp-n">₹0</div><div class="sp-l">Monthly cost</div></div>
+    <div class="sp"><div class="sp-n">∞</div><div class="sp-l">Uptime</div></div>
+    <div class="sp"><div class="sp-n">HTTPS</div><div class="sp-l">Secure by default</div></div>
   </div>
 
-  <div style="text-align:center;margin-top:24px">
-    <svg width="100" height="20" viewBox="0 0 100 20" fill="none">
-      <path d="M0 10 Q25 3 50 10 Q75 17 100 10" stroke="#C9A96E" stroke-width="1" fill="none"/>
-      <circle cx="50" cy="10" r="2.5" fill="#C9A96E"/>
-      <path d="M46 6 Q50 0 54 6 Q50 8 46 6Z" fill="#5C7A3E"/>
-    </svg>
-    <div style="font-size:0.58rem;letter-spacing:0.28em;text-transform:uppercase;color:rgba(44,26,16,0.3);margin-top:10px">
-      HTML · CSS · JavaScript · SVG · GitHub Pages · Google Sheets
-    </div>
+  <div class="cl">
+    <blockquote>"Every element on this page — the colours, the fonts, the animations, the music, the photo blur trick, the RSVP form, the live data dashboard — is written by hand, line by line, with intention."</blockquote>
+    <cite>smashco.github.io/sanya · HTML · CSS · JavaScript · Google Apps Script · GitHub Pages</cite>
   </div>
 
-</div>
-</div>
+  <div style="text-align:center;margin-top:22px">
+    <svg width="90" height="18" viewBox="0 0 90 18" fill="none"><path d="M0 9 Q22 3 45 9 Q68 15 90 9" stroke="#C9A96E" stroke-width="1" fill="none"/><circle cx="45" cy="9" r="2.2" fill="#C9A96E"/><path d="M42 6 Q45 1 48 6 Q45 7.5 42 6Z" fill="#5C7A3E"/></svg>
+  </div>
+</div></div>
 
 
 </body>
