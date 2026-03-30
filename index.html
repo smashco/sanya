@@ -1,1202 +1,873 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Silver Jubilee — Ruta & Anant Todkar</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Cinzel:wght@400;500;600&family=Noto+Serif+Devanagari:wght@300;400;500&display=swap" rel="stylesheet"/>
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+<style>
+/* ══════════════════════════
+   RESET & ROOT
+══════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gold:#C9A96E; --gold-l:#E8D5A3; --gold-b:#F5E6B8; --gold-d:#8B6914;
+  --bg:#070608;   --cream:#F5ECD7;  --muted:#9A8866;
+  --maroon:#7B1A1A; --saffron:#C85A10;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--cream);font-family:'Cormorant Garamond',serif;overflow-x:hidden}
 
-    :root {
-      --gold:        #C9A96E;
-      --gold-light:  #E8D5A3;
-      --gold-bright: #F5E6B8;
-      --gold-dark:   #8B6914;
-      --bg:          #080705;
-      --bg-mid:      #0F0D09;
-      --cream:       #F5ECD7;
-      --muted:       #9A8866;
-      --maroon:      #7B1A1A;
-      --maroon-light:#B04040;
-      --saffron:     #C85A10;
-    }
+/* ══════════════════════════
+   CINEMATIC INTRO OVERLAY
+══════════════════════════ */
+#intro{
+  position:fixed;inset:0;z-index:9000;background:#000;overflow:hidden;
+  transition:transform 1s cubic-bezier(.77,0,.18,1);
+}
+#intro.exit{transform:translateY(-100%)}
 
-    /* ── Devanagari typography ── */
-    .deva {
-      font-family: 'Noto Serif Devanagari', serif;
-      font-weight: 400;
-    }
-    .shri-line {
-      text-align: center;
-      font-family: 'Noto Serif Devanagari', serif;
-      font-size: 1.1rem;
-      color: var(--gold);
-      letter-spacing: .15em;
-      margin-bottom: 8px;
-      opacity: .85;
-    }
-    .marathi-sub {
-      text-align: center;
-      font-family: 'Noto Serif Devanagari', serif;
-      font-size: .95rem;
-      color: var(--gold-light);
-      letter-spacing: .05em;
-      margin-top: 5px;
-      opacity: .8;
-    }
-    .name-deva {
-      display: block;
-      font-family: 'Noto Serif Devanagari', serif;
-      font-size: clamp(.95rem, 2.5vw, 1.25rem);
-      color: var(--gold);
-      opacity: .75;
-      letter-spacing: .05em;
-      margin-top: 3px;
-      font-weight: 300;
-    }
-    .welcome-deva {
-      text-align: center;
-      font-family: 'Noto Serif Devanagari', serif;
-      font-size: 1rem;
-      color: var(--muted);
-      margin-bottom: 32px;
-      font-weight: 300;
-      letter-spacing: .04em;
-    }
+/* slides */
+.i-slide{position:absolute;inset:0;opacity:0;transition:opacity .7s ease}
+.i-slide.active{opacity:1}
+.i-slide img{
+  width:100%;height:100%;object-fit:cover;object-position:top center;
+  animation:iBurns 10s ease-in-out infinite alternate;will-change:transform;
+}
+@keyframes iBurns{
+  from{transform:scale(1) translate(0,0)}
+  to  {transform:scale(1.09) translate(-8px,-4px)}
+}
+.i-slide:nth-child(even) img{animation-direction:alternate-reverse}
 
-    /* ── Paithani side bands ── */
-    .paithani-band {
-      position: absolute;
-      top: 14px; bottom: 14px;
-      width: 18px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 0;
-      overflow: hidden;
-    }
-    .paithani-band.left  { left: 12px; }
-    .paithani-band.right { right: 12px; transform: scaleX(-1); }
-    .paithani-band svg { flex-shrink: 0; }
+/* vignette per slide */
+.i-slide::before{
+  content:'';position:absolute;inset:0;z-index:1;
+  background:linear-gradient(to bottom,
+    rgba(0,0,0,.52) 0%,rgba(0,0,0,.08) 40%,rgba(0,0,0,.72) 100%);
+}
 
-    /* ── Torana arch ── */
-    .torana-wrap { text-align: center; margin-bottom: 20px; }
+/* gold line at very top */
+.i-slide::after{
+  content:'';position:absolute;top:0;left:0;right:0;height:2px;z-index:2;
+  background:linear-gradient(to right,transparent,var(--gold),transparent);
+  opacity:.6;
+}
 
-    /* ── Kalash ── */
-    .kalash-wrap { text-align: center; margin-bottom: 12px; }
+/* text block per slide */
+.i-text{
+  position:absolute;inset:0;z-index:3;
+  display:flex;flex-direction:column;align-items:center;justify-content:flex-end;
+  padding-bottom:90px;text-align:center;
+  opacity:0;transform:translateY(16px);
+  transition:opacity .55s .35s ease, transform .55s .35s ease;
+}
+.i-slide.active .i-text{opacity:1;transform:translateY(0)}
 
-    /* ── maroon frame accent ── */
-    .frame-border {
-      border-color: var(--maroon) !important;
-    }
+.i-eyebrow{
+  font-family:'Cinzel',serif;font-size:.62rem;letter-spacing:.42em;
+  text-transform:uppercase;color:var(--gold);margin-bottom:10px;
+}
+.i-headline{
+  font-family:'Cormorant Garamond',serif;font-style:italic;font-weight:300;
+  font-size:clamp(1.5rem,5vw,2.6rem);color:#fff;line-height:1.35;
+}
+.i-names{
+  font-family:'Cinzel',serif;font-size:clamp(1.2rem,3.5vw,1.8rem);
+  color:var(--gold-b);letter-spacing:.08em;margin-top:10px;
+}
+.i-deva{
+  font-family:'Noto Serif Devanagari',serif;font-size:.95rem;
+  color:var(--gold);opacity:.85;margin-top:6px;
+}
 
-    html { scroll-behavior: smooth; }
+/* ॥ श्री ॥ at top of intro */
+.i-shri{
+  position:absolute;top:22px;left:50%;transform:translateX(-50%);
+  font-family:'Noto Serif Devanagari',serif;font-size:1rem;
+  color:var(--gold);opacity:.75;z-index:4;letter-spacing:.15em;
+  pointer-events:none;
+}
 
-    body {
-      background: var(--bg);
-      color: var(--cream);
-      font-family: 'Cormorant Garamond', serif;
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
+/* progress bar */
+.i-bar{
+  position:absolute;bottom:0;left:0;height:2px;background:var(--gold);
+  width:0;z-index:5;transition:width linear;
+}
 
-    /* ── grain texture overlay ── */
-    body::before {
-      content: '';
-      position: fixed; inset: 0; z-index: 0;
-      opacity: .04;
-      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-      pointer-events: none;
-    }
+/* nav dots */
+.i-dots{
+  position:absolute;bottom:32px;left:50%;transform:translateX(-50%);
+  display:flex;gap:10px;z-index:5;
+}
+.i-dot{
+  width:6px;height:6px;border-radius:50%;
+  background:rgba(201,169,110,.3);transition:background .3s,transform .3s;
+}
+.i-dot.on{background:var(--gold);transform:scale(1.4)}
 
-    /* ── floating gold dust ── */
-    .dust { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
-    .dust span {
-      position: absolute;
-      width: 2px; height: 2px;
-      border-radius: 50%;
-      background: var(--gold-light);
-      animation: float linear infinite;
-      opacity: 0;
-    }
-    @keyframes float {
-      0%   { transform: translateY(100vh) translateX(0); opacity: 0; }
-      10%  { opacity: .6; }
-      90%  { opacity: .3; }
-      100% { transform: translateY(-10vh) translateX(40px); opacity: 0; }
-    }
+/* skip button */
+.i-skip{
+  position:absolute;top:18px;right:18px;z-index:5;
+  background:rgba(0,0,0,.35);border:1px solid rgba(201,169,110,.4);
+  color:var(--gold-l);font-family:'Cinzel',serif;font-size:.58rem;
+  letter-spacing:.25em;text-transform:uppercase;padding:8px 18px;
+  cursor:pointer;transition:border-color .3s,color .3s;
+}
+.i-skip:hover{border-color:var(--gold);color:var(--gold-b)}
 
-    /* ── outer border frame ── */
-    .page-frame {
-      position: relative; z-index: 1;
-      max-width: 760px;
-      margin: 0 auto;
-      padding: 10px;
-    }
-    .frame-border {
-      border: 1px solid var(--gold-dark);
-      padding: 6px;
-    }
-    .frame-inner {
-      border: 1px solid var(--gold);
-      padding: 60px 48px 50px;
-      position: relative;
-    }
+/* ══════════════════════════
+   BODY DUST & GRAIN
+══════════════════════════ */
+body::before{
+  content:'';position:fixed;inset:0;z-index:0;opacity:.038;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+.dust{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden}
+.dust span{
+  position:absolute;border-radius:50%;background:var(--gold-l);
+  animation:dustF linear infinite;opacity:0;
+}
+@keyframes dustF{
+  0%  {transform:translateY(100vh);opacity:0}
+  10% {opacity:.5}
+  90% {opacity:.2}
+  100%{transform:translateY(-10vh) translateX(35px);opacity:0}
+}
 
-    /* corner ornaments */
-    .corner {
-      position: absolute;
-      width: 40px; height: 40px;
-    }
-    .corner svg { width: 100%; height: 100%; }
-    .corner.tl { top: -1px; left: -1px; }
-    .corner.tr { top: -1px; right: -1px; transform: scaleX(-1); }
-    .corner.bl { bottom: -1px; left: -1px; transform: scaleY(-1); }
-    .corner.br { bottom: -1px; right: -1px; transform: scale(-1); }
+/* ══════════════════════════
+   PAGE FRAME (triple border)
+══════════════════════════ */
+.page-frame{position:relative;z-index:1;max-width:760px;margin:0 auto;padding:12px}
+.f-out{border:1px solid var(--maroon);padding:5px}
+.f-mid{border:1px solid rgba(201,169,110,.28);padding:4px}
+.f-in {border:1px solid var(--gold);padding:58px 50px 52px;position:relative}
 
-    /* ── header area ── */
-    .pre-header {
-      text-align: center;
-      font-family: 'Cinzel', serif;
-      font-size: .7rem;
-      letter-spacing: .35em;
-      color: var(--gold);
-      text-transform: uppercase;
-      margin-bottom: 28px;
-    }
+/* corner ornaments */
+.corner{position:absolute;width:44px;height:44px}
+.corner svg{width:100%;height:100%}
+.corner.tl{top:-1px;left:-1px}
+.corner.tr{top:-1px;right:-1px;transform:scaleX(-1)}
+.corner.bl{bottom:-1px;left:-1px;transform:scaleY(-1)}
+.corner.br{bottom:-1px;right:-1px;transform:scale(-1)}
 
-    .rings-svg { display: block; margin: 0 auto 32px; }
+/* paithani bands */
+.pb{
+  position:absolute;top:14px;bottom:14px;width:18px;
+  overflow:hidden;display:flex;flex-direction:column;align-items:center;
+}
+.pb.l{left:12px} .pb.r{right:12px;transform:scaleX(-1)}
+.pb svg{flex-shrink:0}
 
-    .year-badge {
-      display: flex; align-items: center; justify-content: center; gap: 18px;
-      margin-bottom: 36px;
-    }
-    .year-line { flex: 1; height: 1px; background: linear-gradient(to right, transparent, var(--gold)); }
-    .year-line.rev { background: linear-gradient(to left, transparent, var(--gold)); }
-    .year-num {
-      font-family: 'Cinzel', serif;
-      font-size: 2.8rem;
-      font-weight: 600;
-      color: var(--gold-bright);
-      line-height: 1;
-      letter-spacing: .05em;
-    }
+/* ══════════════════════════
+   TORANA
+══════════════════════════ */
+.torana-wrap{text-align:center;margin-bottom:18px}
 
-    .headline {
-      text-align: center;
-      font-size: 1rem;
-      font-weight: 300;
-      letter-spacing: .2em;
-      text-transform: uppercase;
-      color: var(--gold-light);
-      margin-bottom: 10px;
-    }
+/* ══════════════════════════
+   TYPOGRAPHY HELPERS
+══════════════════════════ */
+.shri-line{
+  text-align:center;font-family:'Noto Serif Devanagari',serif;
+  font-size:1.05rem;color:var(--gold);letter-spacing:.18em;
+  margin-bottom:10px;opacity:.85;
+}
+.pre-header{
+  text-align:center;font-family:'Cinzel',serif;font-size:.68rem;
+  letter-spacing:.35em;color:var(--gold);text-transform:uppercase;
+  margin-bottom:24px;
+}
+.marathi-sub{
+  text-align:center;font-family:'Noto Serif Devanagari',serif;
+  font-size:.92rem;color:var(--gold-l);letter-spacing:.04em;
+  margin-top:4px;opacity:.8;
+}
+.celebrating{
+  text-align:center;font-style:italic;font-size:1.05rem;
+  font-weight:300;color:var(--muted);margin-bottom:36px;
+}
+.welcome-deva{
+  text-align:center;font-family:'Noto Serif Devanagari',serif;
+  font-size:.98rem;color:var(--muted);margin-bottom:28px;
+  font-weight:300;letter-spacing:.04em;
+}
+.intro-text{
+  text-align:center;font-size:1.12rem;font-weight:300;
+  line-height:1.9;color:var(--cream);opacity:.88;
+  margin-bottom:42px;max-width:520px;margin-left:auto;margin-right:auto;
+}
+.tagline{
+  text-align:center;font-style:italic;font-size:1.08rem;
+  font-weight:300;color:var(--cream);opacity:.7;
+  margin-bottom:42px;line-height:1.75;
+}
 
-    .celebrating {
-      text-align: center;
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-size: 1.1rem;
-      font-weight: 300;
-      color: var(--muted);
-      margin-bottom: 40px;
-      letter-spacing: .04em;
-    }
+/* ══════════════════════════
+   YEAR BADGE
+══════════════════════════ */
+.year-badge{display:flex;align-items:center;justify-content:center;gap:18px;margin-bottom:32px}
+.year-line{flex:1;height:1px;background:linear-gradient(to right,transparent,var(--gold))}
+.year-line.r{background:linear-gradient(to left,transparent,var(--gold))}
+.year-num{
+  font-family:'Cinzel',serif;font-size:2.7rem;font-weight:600;
+  color:var(--gold-b);line-height:1;letter-spacing:.05em;
+}
 
-    /* ── names ── */
-    .names-block { text-align: center; margin-bottom: 46px; }
-    .names-block .and {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic;
-      font-size: 1rem;
-      color: var(--gold);
-      letter-spacing: .15em;
-      display: block;
-      margin-bottom: 4px;
-    }
-    .name {
-      font-family: 'Cinzel', serif;
-      font-size: clamp(1.6rem, 5vw, 2.5rem);
-      font-weight: 500;
-      color: var(--gold-bright);
-      line-height: 1.2;
-      letter-spacing: .06em;
-      display: block;
-    }
-    .name-sub {
-      font-size: clamp(1.3rem, 4vw, 2rem);
-      color: var(--gold-light);
-    }
+/* ══════════════════════════
+   HEADLINE & NAMES
+══════════════════════════ */
+.headline{
+  text-align:center;font-size:.98rem;font-weight:300;
+  letter-spacing:.2em;text-transform:uppercase;color:var(--gold-l);margin-bottom:8px;
+}
+.names-block{text-align:center;margin-bottom:44px}
+.names-block .and{
+  font-style:italic;font-size:.95rem;color:var(--gold);
+  letter-spacing:.15em;display:block;margin-bottom:2px;
+}
+.name{
+  font-family:'Cinzel',serif;font-size:clamp(1.65rem,4.5vw,2.45rem);
+  font-weight:500;color:var(--gold-b);line-height:1.2;
+  letter-spacing:.06em;display:block;
+  background:linear-gradient(90deg,var(--gold-l) 0%,var(--gold-b) 40%,#fff9e6 50%,var(--gold-b) 60%,var(--gold-l) 100%);
+  background-size:200% auto;
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  animation:shimmer 4s linear infinite 1.6s;
+}
+.name.sm{font-size:clamp(1.35rem,3.5vw,2rem)}
+.name-deva{
+  display:block;font-family:'Noto Serif Devanagari',serif;
+  font-size:clamp(.9rem,2vw,1.15rem);color:var(--gold);opacity:.7;
+  letter-spacing:.04em;margin-top:2px;font-weight:300;
+}
+@keyframes shimmer{to{background-position:200% center}}
 
-    /* ── ornamental divider ── */
-    .divider {
-      display: flex; align-items: center; justify-content: center;
-      gap: 14px; margin: 34px 0;
-    }
-    .divider-line {
-      flex: 1; height: 1px;
-      background: linear-gradient(to right, transparent, var(--gold-dark), var(--gold), var(--gold-dark), transparent);
-    }
-    .divider svg { flex-shrink: 0; }
+/* ══════════════════════════
+   DIVIDERS
+══════════════════════════ */
+.divider{display:flex;align-items:center;justify-content:center;gap:14px;margin:30px 0}
+.div-line{
+  flex:1;height:1px;
+  background:linear-gradient(to right,transparent,var(--gold-d),var(--gold),var(--gold-d),transparent);
+}
 
-    /* ── intro text ── */
-    .intro {
-      text-align: center;
-      font-size: 1.15rem;
-      font-weight: 300;
-      line-height: 1.85;
-      color: var(--cream);
-      opacity: .88;
-      margin-bottom: 44px;
-      max-width: 520px;
-      margin-left: auto; margin-right: auto;
-    }
+/* ══════════════════════════
+   HERO PHOTO
+══════════════════════════ */
+.hero-photo-wrap{text-align:center;margin:10px 0 28px}
+.hero-frame{
+  display:inline-block;position:relative;width:230px;overflow:hidden;
+  border-radius:130px 130px 8px 8px;border:1.5px solid var(--gold);
+  box-shadow:0 0 0 5px rgba(201,169,110,.07),0 0 48px rgba(201,169,110,.2),inset 0 0 28px rgba(0,0,0,.28);
+}
+.hero-frame::before{
+  content:'';position:absolute;inset:0;z-index:2;pointer-events:none;border-radius:inherit;
+  background:linear-gradient(to bottom,rgba(0,0,0,0) 55%,rgba(7,6,8,.9) 100%);
+}
+.hero-frame::after{
+  content:'';position:absolute;top:0;left:-80%;width:55%;height:100%;z-index:3;
+  background:linear-gradient(90deg,transparent,rgba(245,230,184,.2),transparent);
+  animation:sheen 7s ease 2s infinite;border-radius:inherit;
+}
+@keyframes sheen{0%{left:-80%}45%{left:130%}100%{left:130%}}
+.hero-frame img{
+  display:block;width:100%;height:300px;
+  object-fit:cover;object-position:top center;
+  filter:sepia(16%) contrast(1.06) brightness(.95);
+  animation:kBurns 14s ease-in-out infinite alternate;
+}
+@keyframes kBurns{from{transform:scale(1) translateY(0)}to{transform:scale(1.07) translateY(-5px)}}
+.hero-label{
+  position:absolute;bottom:12px;left:0;right:0;z-index:4;
+  font-family:'Cinzel',serif;font-size:.56rem;letter-spacing:.28em;
+  color:var(--gold-b);text-shadow:0 1px 12px rgba(0,0,0,.9);text-align:center;
+}
+.hero-ring{
+  position:absolute;inset:-7px;border-radius:140px 140px 12px 12px;
+  border:1px solid rgba(201,169,110,.25);pointer-events:none;
+}
 
-    /* ── event details ── */
-    .details-grid {
-      display: grid;
-      grid-template-columns: 1fr 1px 1fr 1px 1fr;
-      gap: 0;
-      margin-bottom: 46px;
-      position: relative;
-    }
-    .detail-sep {
-      background: linear-gradient(to bottom, transparent, var(--gold-dark), transparent);
-      width: 1px;
-    }
-    .detail-box { text-align: center; padding: 10px 18px; }
-    .detail-icon {
-      display: block;
-      margin: 0 auto 10px;
-      color: var(--gold);
-    }
-    .detail-label {
-      font-family: 'Cinzel', serif;
-      font-size: .6rem;
-      letter-spacing: .3em;
-      text-transform: uppercase;
-      color: var(--gold);
-      display: block;
-      margin-bottom: 6px;
-    }
-    .detail-value {
-      font-size: 1.15rem;
-      font-weight: 400;
-      color: var(--gold-bright);
-      display: block;
-      line-height: 1.4;
-    }
-    .detail-note {
-      font-size: .85rem;
-      color: var(--muted);
-      font-style: italic;
-      display: block;
-      margin-top: 3px;
-    }
+/* ══════════════════════════
+   THEN & NOW
+══════════════════════════ */
+.tn-section{
+  margin:10px 0 38px;
+  opacity:0;transform:translateY(22px);
+  transition:opacity .9s ease,transform .9s ease;
+}
+.tn-section.vis{opacity:1;transform:translateY(0)}
+.tn-label{
+  text-align:center;font-family:'Cinzel',serif;font-size:.6rem;
+  letter-spacing:.32em;text-transform:uppercase;color:var(--gold);margin-bottom:16px;
+}
+.tn-grid{display:grid;grid-template-columns:1fr 38px 1fr;align-items:center}
+.photo-card{position:relative;overflow:hidden;border:1px solid var(--gold-d);transition:border-color .4s}
+.photo-card:hover{border-color:var(--gold)}
+.photo-card img{
+  display:block;width:100%;height:240px;
+  object-fit:cover;object-position:top center;transition:transform .6s ease;
+}
+.photo-card:hover img{transform:scale(1.04)}
+.photo-card.then img{filter:sepia(40%) contrast(1.06) brightness(.93)}
+.photo-card.now  img{filter:brightness(1.02) saturate(1.06)}
+.photo-card::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:55%;
+  background:linear-gradient(transparent,rgba(7,6,8,.82));pointer-events:none;
+}
+.photo-cap{position:absolute;bottom:0;left:0;right:0;padding:8px 10px 10px;z-index:2;text-align:center}
+.photo-cap .yr{font-family:'Cinzel',serif;font-size:.6rem;letter-spacing:.22em;color:var(--gold);display:block}
+.photo-cap .lb{font-size:.8rem;font-style:italic;color:var(--cream);opacity:.72}
+.tn-mid{display:flex;flex-direction:column;align-items:center;gap:5px}
+.tn-vl{width:1px;height:58px;background:linear-gradient(to bottom,transparent,var(--gold),transparent)}
+.tn-hrt{color:var(--gold);font-size:1.1rem}
+.tn-yrs{font-family:'Cinzel',serif;font-size:.48rem;letter-spacing:.1em;color:var(--muted);writing-mode:vertical-rl}
 
-    /* ── tagline ── */
-    .tagline {
-      text-align: center;
-      font-style: italic;
-      font-size: 1.1rem;
-      font-weight: 300;
-      color: var(--cream);
-      opacity: .75;
-      margin-bottom: 46px;
-      line-height: 1.7;
-    }
+/* ══════════════════════════
+   KALASH
+══════════════════════════ */
+.kalash-wrap{text-align:center;margin-bottom:14px}
 
-    /* ── RSVP section ── */
-    .rsvp-wrap {
-      border: 1px solid var(--gold-dark);
-      padding: 38px 40px 36px;
-      position: relative;
-      background: linear-gradient(135deg, rgba(201,169,110,.05), rgba(0,0,0,0));
-    }
-    .rsvp-title {
-      font-family: 'Cinzel', serif;
-      font-size: .72rem;
-      letter-spacing: .35em;
-      text-transform: uppercase;
-      color: var(--gold);
-      text-align: center;
-      margin-bottom: 26px;
-    }
-    .rsvp-note {
-      text-align: center;
-      font-size: .95rem;
-      color: var(--muted);
-      font-style: italic;
-      margin-bottom: 28px;
-    }
+/* ══════════════════════════
+   EVENT DETAILS
+══════════════════════════ */
+.details-grid{
+  display:grid;grid-template-columns:1fr 1px 1fr 1px 1fr;
+  margin-bottom:44px;
+}
+.det-sep{background:linear-gradient(to bottom,transparent,var(--gold-d),transparent);width:1px}
+.det-box{text-align:center;padding:10px 16px}
+.det-icon{display:block;margin:0 auto 10px;color:var(--gold)}
+.det-label{
+  font-family:'Cinzel',serif;font-size:.58rem;letter-spacing:.3em;
+  text-transform:uppercase;color:var(--gold);display:block;margin-bottom:6px;
+}
+.det-val{font-size:1.1rem;font-weight:400;color:var(--gold-b);display:block;line-height:1.4}
+.det-note{font-size:.78rem;color:var(--muted);font-style:italic;display:block;margin-top:3px;line-height:1.5}
 
-    .rsvp-choices {
-      display: flex;
-      gap: 16px;
-      justify-content: center;
-      flex-wrap: wrap;
-    }
-    .rsvp-choice input { display: none; }
-    .rsvp-choice label {
-      display: flex; align-items: center; gap: 10px;
-      padding: 14px 28px;
-      border: 1px solid var(--gold-dark);
-      cursor: pointer;
-      font-family: 'Cinzel', serif;
-      font-size: .72rem;
-      letter-spacing: .2em;
-      text-transform: uppercase;
-      color: var(--gold-light);
-      transition: all .3s ease;
-      position: relative;
-      overflow: hidden;
-      user-select: none;
-      touch-action: manipulation;
-      -webkit-tap-highlight-color: transparent;
-      min-height: 48px;
-    }
-    .rsvp-choice label::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: linear-gradient(135deg, var(--gold-dark), transparent);
-      opacity: 0; transition: opacity .3s;
-    }
-    .rsvp-choice input:checked + label,
-    .rsvp-choice label:hover {
-      border-color: var(--gold);
-      color: var(--gold-bright);
-    }
-    .rsvp-choice input:checked + label::before,
-    .rsvp-choice label:hover::before { opacity: 1; }
-    .rsvp-choice label svg { flex-shrink: 0; position: relative; z-index: 1; }
-    .rsvp-choice label span { position: relative; z-index: 1; }
+/* ══════════════════════════
+   PHOTO DUO
+══════════════════════════ */
+.duo-section{
+  margin:0 0 40px;
+  opacity:0;transform:translateY(22px);
+  transition:opacity .9s .15s ease,transform .9s .15s ease;
+}
+.duo-section.vis{opacity:1;transform:translateY(0)}
+.duo-label{
+  text-align:center;font-family:'Cinzel',serif;font-size:.6rem;
+  letter-spacing:.32em;text-transform:uppercase;color:var(--gold);margin-bottom:14px;
+}
+.duo-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.duo-ph{position:relative;overflow:hidden;border:1px solid var(--gold-d);transition:border-color .4s}
+.duo-ph:hover{border-color:var(--gold)}
+.duo-ph img{
+  display:block;width:100%;height:215px;object-fit:cover;object-position:top center;
+  transition:transform .6s ease;filter:brightness(1.01) saturate(1.04);
+}
+.duo-ph:hover img{transform:scale(1.05)}
+.duo-ph::after{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background:linear-gradient(to bottom,transparent 50%,rgba(7,6,8,.55));
+}
 
-    .rsvp-btn-wrap { text-align: center; margin-top: 24px; }
-    .rsvp-btn {
-      display: inline-block;
-      padding: 14px 48px;
-      background: transparent;
-      border: 1px solid var(--gold);
-      color: var(--gold-bright);
-      font-family: 'Cinzel', serif;
-      font-size: .7rem;
-      letter-spacing: .3em;
-      text-transform: uppercase;
-      cursor: pointer;
-      position: relative;
-      overflow: hidden;
-      transition: color .3s;
-    }
-    .rsvp-btn::before {
-      content: '';
-      position: absolute;
-      bottom: 0; left: 50%;
-      width: 0; height: 100%;
-      background: linear-gradient(to right, var(--gold-dark), var(--gold));
-      transform: translateX(-50%);
-      transition: width .4s ease;
-      z-index: 0;
-    }
-    .rsvp-btn:hover::before { width: 100%; }
-    .rsvp-btn span { position: relative; z-index: 1; }
+/* ══════════════════════════
+   RSVP
+══════════════════════════ */
+.rsvp-wrap{
+  border:1px solid var(--gold-d);padding:36px 38px 34px;
+  background:linear-gradient(135deg,rgba(201,169,110,.05),transparent);
+  position:relative;
+}
+.rsvp-title{
+  font-family:'Cinzel',serif;font-size:.7rem;letter-spacing:.35em;
+  text-transform:uppercase;color:var(--gold);text-align:center;margin-bottom:10px;
+}
+.rsvp-deva{
+  text-align:center;font-family:'Noto Serif Devanagari',serif;
+  font-size:.85rem;color:var(--muted);margin-bottom:24px;
+}
+.rsvp-choices{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+.rsvp-choice input{display:none}
+.rsvp-choice label{
+  display:flex;align-items:center;gap:10px;padding:14px 26px;
+  border:1px solid var(--gold-d);cursor:pointer;font-family:'Cinzel',serif;
+  font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold-l);
+  transition:all .3s;position:relative;overflow:hidden;
+  user-select:none;touch-action:manipulation;min-height:48px;
+  -webkit-tap-highlight-color:transparent;
+}
+.rsvp-choice label::before{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(135deg,var(--gold-d),transparent);
+  opacity:0;transition:opacity .3s;
+}
+.rsvp-choice input:checked+label,.rsvp-choice label:hover{border-color:var(--gold);color:var(--gold-b)}
+.rsvp-choice input:checked+label::before,.rsvp-choice label:hover::before{opacity:1}
+.rsvp-choice label svg,.rsvp-choice label span{position:relative;z-index:1}
+.rsvp-btn-wrap{text-align:center;margin-top:22px}
+.rsvp-btn{
+  display:inline-block;padding:14px 46px;background:transparent;
+  border:1px solid var(--gold);color:var(--gold-b);font-family:'Cinzel',serif;
+  font-size:.68rem;letter-spacing:.3em;text-transform:uppercase;cursor:pointer;
+  position:relative;overflow:hidden;transition:color .3s;touch-action:manipulation;
+}
+.rsvp-btn::before{
+  content:'';position:absolute;bottom:0;left:50%;width:0;height:100%;
+  background:linear-gradient(to right,var(--gold-d),var(--gold));
+  transform:translateX(-50%);transition:width .4s;z-index:0;
+}
+.rsvp-btn:hover::before{width:100%}
+.rsvp-btn span{position:relative;z-index:1}
+.rsvp-confirm{display:none;text-align:center;padding:18px 0 6px}
+.rsvp-confirm.show{display:block}
+.rsvp-confirm p{font-size:1.08rem;font-style:italic;color:var(--gold-l)}
 
-    /* confirmation message */
-    .rsvp-confirm {
-      display: none;
-      text-align: center;
-      padding: 20px 0 10px;
-    }
-    .rsvp-confirm.show { display: block; }
-    .rsvp-confirm p {
-      font-size: 1.1rem;
-      font-style: italic;
-      color: var(--gold-light);
-    }
+/* ══════════════════════════
+   FOOTER
+══════════════════════════ */
+.footer-flourish{
+  text-align:center;margin-top:42px;font-family:'Cinzel',serif;
+  font-size:.56rem;letter-spacing:.38em;text-transform:uppercase;color:var(--gold-d);
+}
 
-    /* ── footer flourish ── */
-    .footer-flourish {
-      text-align: center;
-      margin-top: 44px;
-      font-family: 'Cinzel', serif;
-      font-size: .58rem;
-      letter-spacing: .4em;
-      text-transform: uppercase;
-      color: var(--gold-dark);
-    }
+/* ══════════════════════════
+   ENTRANCE ANIMATIONS
+══════════════════════════ */
+.fu{opacity:0;transform:translateY(20px);animation:fadeUp .9s ease forwards}
+.fu:nth-child(1){animation-delay:.08s} .fu:nth-child(2){animation-delay:.2s}
+.fu:nth-child(3){animation-delay:.32s} .fu:nth-child(4){animation-delay:.44s}
+.fu:nth-child(5){animation-delay:.56s} .fu:nth-child(6){animation-delay:.68s}
+.fu:nth-child(7){animation-delay:.8s}  .fu:nth-child(8){animation-delay:.92s}
+.fu:nth-child(9){animation-delay:1.04s} .fu:nth-child(10){animation-delay:1.16s}
+@keyframes fadeUp{to{opacity:1;transform:translateY(0)}}
 
-    /* ── entrance animations ── */
-    .fade-up {
-      opacity: 0;
-      transform: translateY(22px);
-      animation: fadeUp .9s ease forwards;
-    }
-    .fade-up:nth-child(1) { animation-delay: .1s; }
-    .fade-up:nth-child(2) { animation-delay: .25s; }
-    .fade-up:nth-child(3) { animation-delay: .4s; }
-    .fade-up:nth-child(4) { animation-delay: .55s; }
-    .fade-up:nth-child(5) { animation-delay: .7s; }
-    .fade-up:nth-child(6) { animation-delay: .85s; }
-    .fade-up:nth-child(7) { animation-delay: 1s; }
-    .fade-up:nth-child(8) { animation-delay: 1.15s; }
-    @keyframes fadeUp {
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* shimmer on names */
-    .shimmer {
-      background: linear-gradient(90deg,
-        var(--gold-light) 0%,
-        var(--gold-bright) 40%,
-        #fff9e6 50%,
-        var(--gold-bright) 60%,
-        var(--gold-light) 100%);
-      background-size: 200% auto;
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      animation: shimmer 4s linear infinite 1.5s;
-    }
-    @keyframes shimmer {
-      to { background-position: 200% center; }
-    }
-
-    /* ── Mobile optimisation ── */
-    @media (max-width: 600px) {
-      /* frame */
-      .page-frame  { padding: 6px; }
-      .frame-border { padding: 4px; }
-      .frame-inner  { padding: 32px 22px 30px; }
-
-      /* paithani bands overlap content on small screens — hide */
-      .paithani-band { display: none; }
-
-      /* torana: fluid width */
-      .torana-wrap svg { width: 100%; height: auto; }
-
-      /* header text */
-      .pre-header  { font-size: .6rem; letter-spacing: .22em; }
-      .shri-line   { font-size: 1rem; }
-      .year-num    { font-size: 2rem; }
-      .headline    { font-size: .85rem; letter-spacing: .14em; }
-      .marathi-sub { font-size: .85rem; }
-      .celebrating { font-size: 1rem; }
-
-      /* rings */
-      .rings-svg { width: 68px; height: auto; }
-
-      /* names */
-      .name      { font-size: 1.65rem !important; }
-      .name-sub  { font-size: 1.3rem  !important; }
-      .name-deva { font-size: .9rem;  }
-
-      /* intro / tagline */
-      .intro   { font-size: 1rem; }
-      .tagline { font-size: 1rem; line-height: 1.65; }
-      .welcome-deva { font-size: .9rem; }
-
-      /* details grid: single column */
-      .details-grid {
-        grid-template-columns: 1fr;
-        gap: 18px;
-      }
-      .detail-sep   { display: none; }
-      .detail-box   { padding: 6px 8px; }
-      .detail-value { font-size: 1rem; }
-      .detail-note  { font-size: .8rem; }
-
-      /* RSVP: stack cards, full-width tap targets */
-      .rsvp-wrap    { padding: 24px 16px 22px; }
-      .rsvp-choices { flex-direction: column; align-items: center; }
-      .rsvp-choice  { width: 100%; max-width: 290px; }
-      .rsvp-choice label {
-        justify-content: center;
-        min-height: 52px;
-        padding: 14px 20px;
-      }
-      .rsvp-btn {
-        width: 100%;
-        max-width: 290px;
-        padding: 16px 20px;
-        touch-action: manipulation;
-      }
-
-      /* footer */
-      .footer-flourish { font-size: .5rem; letter-spacing: .25em; margin-top: 32px; }
-    }
-
-    /* ══════════════════════════════
-       PHOTO SECTIONS
-    ══════════════════════════════ */
-
-    /* ── Hero photo: arched Mughal-arch frame ── */
-    .hero-photo-wrap {
-      text-align: center;
-      margin: 4px 0 30px;
-    }
-    .hero-frame {
-      display: inline-block;
-      position: relative;
-      width: 210px;
-      overflow: hidden;
-      border-radius: 120px 120px 6px 6px;
-      border: 1.5px solid var(--gold);
-      box-shadow:
-        0 0 0 4px rgba(201,169,110,.08),
-        0 0 40px rgba(201,169,110,.18),
-        inset 0 0 30px rgba(0,0,0,.3);
-    }
-    /* bottom-to-dark gradient overlay */
-    .hero-frame::before {
-      content: '';
-      position: absolute; inset: 0;
-      background: linear-gradient(to bottom,
-        rgba(0,0,0,.0) 55%,
-        rgba(8,7,5,.88) 100%);
-      z-index: 2; pointer-events: none;
-      border-radius: inherit;
-    }
-    /* gold sheen sweep */
-    .hero-frame::after {
-      content: '';
-      position: absolute;
-      top: 0; left: -80%;
-      width: 55%; height: 100%;
-      background: linear-gradient(90deg,
-        transparent,
-        rgba(245,230,184,.22),
-        transparent);
-      animation: sheenPhoto 6s ease 2s infinite;
-      z-index: 3; border-radius: inherit;
-    }
-    @keyframes sheenPhoto {
-      0%   { left: -80%; }
-      45%  { left: 130%; }
-      100% { left: 130%; }
-    }
-    .hero-frame img {
-      display: block;
-      width: 100%; height: 290px;
-      object-fit: cover; object-position: top center;
-      filter: sepia(18%) contrast(1.06) brightness(.96);
-      animation: kenBurns 12s ease-in-out infinite alternate;
-    }
-    @keyframes kenBurns {
-      from { transform: scale(1)    translateY(0); }
-      to   { transform: scale(1.07) translateY(-6px); }
-    }
-    .hero-label {
-      position: absolute;
-      bottom: 11px; left: 0; right: 0;
-      z-index: 4;
-      font-family: 'Cinzel', serif;
-      font-size: .58rem; letter-spacing: .28em;
-      color: var(--gold-bright);
-      text-shadow: 0 1px 10px rgba(0,0,0,.9);
-      text-align: center;
-    }
-    /* outer gold arch ring */
-    .hero-arch-ring {
-      position: absolute; inset: -6px;
-      border-radius: 128px 128px 10px 10px;
-      border: 1px solid rgba(201,169,110,.3);
-      pointer-events: none;
-    }
-
-    /* ── Then & Now ── */
-    .then-now-section {
-      margin: 8px 0 38px;
-      opacity: 0; transform: translateY(24px);
-      transition: opacity .9s ease, transform .9s ease;
-    }
-    .then-now-section.visible { opacity: 1; transform: translateY(0); }
-    .then-now-title {
-      text-align: center;
-      font-family: 'Cinzel', serif;
-      font-size: .62rem; letter-spacing: .32em;
-      text-transform: uppercase;
-      color: var(--gold); margin-bottom: 18px;
-    }
-    .then-now-grid {
-      display: grid;
-      grid-template-columns: 1fr 40px 1fr;
-      gap: 0; align-items: center;
-    }
-    .photo-card {
-      position: relative; overflow: hidden;
-      border: 1px solid var(--gold-dark);
-      transition: border-color .4s;
-    }
-    .photo-card:hover { border-color: var(--gold); }
-    .photo-card img {
-      display: block;
-      width: 100%; height: 230px;
-      object-fit: cover; object-position: top center;
-      transition: transform .6s ease;
-    }
-    .photo-card:hover img { transform: scale(1.04); }
-    .photo-card.then-card img {
-      filter: sepia(38%) contrast(1.06) brightness(.94);
-    }
-    .photo-card.now-card img {
-      filter: brightness(1.02) saturate(1.06);
-    }
-    /* bottom caption overlay */
-    .photo-card::after {
-      content: '';
-      position: absolute; bottom: 0; left: 0; right: 0;
-      height: 55%; pointer-events: none;
-      background: linear-gradient(transparent, rgba(8,7,5,.82));
-    }
-    .photo-caption {
-      position: absolute; bottom: 0; left: 0; right: 0;
-      padding: 8px 10px 10px;
-      z-index: 2; text-align: center;
-    }
-    .photo-caption .yr {
-      font-family: 'Cinzel', serif;
-      font-size: .62rem; letter-spacing: .22em;
-      color: var(--gold); display: block;
-    }
-    .photo-caption .lbl {
-      font-size: .82rem; font-style: italic;
-      color: var(--cream); opacity: .75;
-    }
-    .then-now-mid {
-      display: flex; flex-direction: column;
-      align-items: center; gap: 6px;
-    }
-    .tn-line { width: 1px; height: 60px;
-      background: linear-gradient(to bottom, transparent, var(--gold), transparent); }
-    .tn-heart { color: var(--gold); font-size: 1.1rem; }
-    .tn-yrs {
-      font-family: 'Cinzel', serif;
-      font-size: .5rem; letter-spacing: .1em;
-      color: var(--muted); writing-mode: vertical-rl;
-    }
-
-    /* ── Photo duo (bottom pair) ── */
-    .photo-duo-section {
-      margin: 0 0 38px;
-      opacity: 0; transform: translateY(24px);
-      transition: opacity .9s .15s ease, transform .9s .15s ease;
-    }
-    .photo-duo-section.visible { opacity: 1; transform: translateY(0); }
-    .photo-duo-title {
-      text-align: center;
-      font-family: 'Cinzel', serif;
-      font-size: .62rem; letter-spacing: .32em;
-      text-transform: uppercase;
-      color: var(--gold); margin-bottom: 16px;
-    }
-    .photo-duo-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 14px;
-    }
-    .duo-photo {
-      position: relative; overflow: hidden;
-      border: 1px solid var(--gold-dark);
-      transition: border-color .4s;
-    }
-    .duo-photo:hover { border-color: var(--gold); }
-    .duo-photo img {
-      display: block; width: 100%; height: 210px;
-      object-fit: cover; object-position: top center;
-      transition: transform .6s ease;
-      filter: brightness(1.01) saturate(1.05);
-    }
-    .duo-photo:hover img { transform: scale(1.05); }
-    .duo-photo::after {
-      content: '';
-      position: absolute; inset: 0; pointer-events: none;
-      background: linear-gradient(to bottom, transparent 50%, rgba(8,7,5,.55));
-    }
-
-    /* ── photo mobile ── */
-    @media (max-width: 600px) {
-      .hero-frame { width: 170px; }
-      .hero-frame img { height: 230px; }
-      .then-now-grid { grid-template-columns: 1fr 28px 1fr; }
-      .photo-card img { height: 170px; }
-      .duo-photo img { height: 160px; }
-      .tn-line { height: 40px; }
-    }
-
-    /* very small phones */
-    @media (max-width: 360px) {
-      .frame-inner { padding: 26px 16px 24px; }
-      .name { font-size: 1.35rem !important; }
-      .name-sub { font-size: 1.1rem !important; }
-      .year-num { font-size: 1.7rem; }
-    }
-  </style>
+/* ══════════════════════════
+   MOBILE
+══════════════════════════ */
+@media(max-width:600px){
+  .page-frame{padding:6px} .f-out{padding:4px} .f-mid{padding:3px}
+  .f-in{padding:30px 20px 28px}
+  .pb{display:none}
+  .torana-wrap svg{width:100%;height:auto}
+  .hero-frame{width:175px} .hero-frame img{height:240px}
+  .year-num{font-size:2rem}
+  .pre-header{font-size:.58rem;letter-spacing:.2em}
+  .shri-line{font-size:.95rem}
+  .headline{font-size:.82rem;letter-spacing:.14em}
+  .marathi-sub{font-size:.82rem}
+  .celebrating{font-size:.98rem}
+  .name{font-size:1.6rem!important} .name.sm{font-size:1.28rem!important}
+  .name-deva{font-size:.88rem}
+  .intro-text{font-size:1rem}
+  .tn-grid{grid-template-columns:1fr 26px 1fr}
+  .photo-card img{height:165px}
+  .tn-vl{height:38px} .tn-mid{gap:4px}
+  .details-grid{grid-template-columns:1fr;gap:16px}
+  .det-sep{display:none} .det-box{padding:6px 8px} .det-val{font-size:1rem}
+  .duo-ph img{height:155px} .duo-grid{gap:8px}
+  .rsvp-wrap{padding:22px 14px 20px}
+  .rsvp-choices{flex-direction:column;align-items:center}
+  .rsvp-choice{width:100%;max-width:285px}
+  .rsvp-choice label{justify-content:center}
+  .rsvp-btn{width:100%;max-width:285px;padding:16px}
+  .footer-flourish{font-size:.48rem;letter-spacing:.22em;margin-top:28px}
+}
+@media(max-width:360px){
+  .f-in{padding:24px 14px 22px}
+  .name{font-size:1.32rem!important} .name.sm{font-size:1.08rem!important}
+  .year-num{font-size:1.65rem}
+}
+</style>
 </head>
 <body>
 
-<!-- floating dust particles -->
+<!-- ═══════════════════════════════════
+     CINEMATIC INTRO OVERLAY
+═══════════════════════════════════ -->
+<div id="intro">
+  <div class="i-shri">॥ श्री ॥</div>
+
+  <!-- Slide 1: vintage B&W -->
+  <div class="i-slide active">
+    <img src="photo/vintage.jpg" alt=""/>
+    <div class="i-text">
+      <div class="i-eyebrow">Est. 2000 · It all began</div>
+      <div class="i-headline">A promise made,<br/>a love story written...</div>
+    </div>
+  </div>
+
+  <!-- Slide 2: traditional saree -->
+  <div class="i-slide">
+    <img src="photo/traditional.jpg" alt=""/>
+    <div class="i-text">
+      <div class="i-eyebrow">पंचवीस वर्षांचा प्रवास</div>
+      <div class="i-headline">Through every season,<br/>together — always</div>
+    </div>
+  </div>
+
+  <!-- Slide 3: candid selfie -->
+  <div class="i-slide">
+    <img src="photo/candid.jpg" alt=""/>
+    <div class="i-text">
+      <div class="i-eyebrow">Silver Jubilee · रौप्य महोत्सव</div>
+      <div class="i-names">Ruta &amp; Anant Todkar</div>
+      <div class="i-deva">रुता आणि अनंत तोडकर</div>
+    </div>
+  </div>
+
+  <!-- Slide 4: casual recent -->
+  <div class="i-slide">
+    <img src="photo/casual.jpg" alt=""/>
+    <div class="i-text">
+      <div class="i-eyebrow">You are cordially invited</div>
+      <div class="i-headline">Join us as we celebrate<br/>twenty-five beautiful years</div>
+      <div class="i-deva">आपले स्वागत आहे</div>
+    </div>
+  </div>
+
+  <!-- dots -->
+  <div class="i-dots">
+    <div class="i-dot on"></div>
+    <div class="i-dot"></div>
+    <div class="i-dot"></div>
+    <div class="i-dot"></div>
+  </div>
+
+  <!-- progress bar -->
+  <div class="i-bar" id="iBar"></div>
+
+  <!-- skip -->
+  <button class="i-skip" onclick="exitIntro()">Skip &rsaquo;</button>
+</div>
+
+<!-- ═══════════════════════════════════
+     FLOATING DUST
+═══════════════════════════════════ -->
 <div class="dust" id="dust"></div>
 
+<!-- ═══════════════════════════════════
+     INVITATION CARD
+═══════════════════════════════════ -->
 <div class="page-frame">
-  <div class="frame-border">
-    <div class="frame-inner">
+ <div class="f-out">
+  <div class="f-mid">
+   <div class="f-in">
 
-      <!-- corner ornaments — paisley style -->
-      <div class="corner tl">
-        <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M2 42 L2 2 L42 2" stroke="#C9A96E" stroke-width="1.2"/>
-          <!-- outer maroon accent line -->
-          <path d="M2 36 L2 8" stroke="#7B1A1A" stroke-width=".5" opacity=".6"/>
-          <path d="M8 2 L36 2"  stroke="#7B1A1A" stroke-width=".5" opacity=".6"/>
-          <!-- paisley teardrop -->
-          <path d="M6 6 C6 2 12 2 12 6 C12 12 6 14 6 6Z" fill="#C9A96E" opacity=".85"/>
-          <circle cx="9" cy="7" r="1.2" fill="#080705"/>
-          <!-- decorative dots -->
-          <circle cx="2"  cy="20" r=".9" fill="#8B6914"/>
-          <circle cx="2"  cy="26" r=".9" fill="#7B1A1A" opacity=".6"/>
-          <circle cx="20" cy="2"  r=".9" fill="#8B6914"/>
-          <circle cx="26" cy="2"  r=".9" fill="#7B1A1A" opacity=".6"/>
-        </svg>
-      </div>
-      <div class="corner tr">
-        <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M2 42 L2 2 L42 2" stroke="#C9A96E" stroke-width="1.2"/>
-          <path d="M2 36 L2 8" stroke="#7B1A1A" stroke-width=".5" opacity=".6"/>
-          <path d="M8 2 L36 2"  stroke="#7B1A1A" stroke-width=".5" opacity=".6"/>
-          <path d="M6 6 C6 2 12 2 12 6 C12 12 6 14 6 6Z" fill="#C9A96E" opacity=".85"/>
-          <circle cx="9" cy="7" r="1.2" fill="#080705"/>
-          <circle cx="2"  cy="20" r=".9" fill="#8B6914"/>
-          <circle cx="2"  cy="26" r=".9" fill="#7B1A1A" opacity=".6"/>
-          <circle cx="20" cy="2"  r=".9" fill="#8B6914"/>
-          <circle cx="26" cy="2"  r=".9" fill="#7B1A1A" opacity=".6"/>
-        </svg>
-      </div>
-      <div class="corner bl">
-        <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M2 42 L2 2 L42 2" stroke="#C9A96E" stroke-width="1.2"/>
-          <path d="M2 36 L2 8" stroke="#7B1A1A" stroke-width=".5" opacity=".6"/>
-          <path d="M8 2 L36 2"  stroke="#7B1A1A" stroke-width=".5" opacity=".6"/>
-          <path d="M6 6 C6 2 12 2 12 6 C12 12 6 14 6 6Z" fill="#C9A96E" opacity=".85"/>
-          <circle cx="9" cy="7" r="1.2" fill="#080705"/>
-          <circle cx="2"  cy="20" r=".9" fill="#8B6914"/>
-          <circle cx="2"  cy="26" r=".9" fill="#7B1A1A" opacity=".6"/>
-          <circle cx="20" cy="2"  r=".9" fill="#8B6914"/>
-          <circle cx="26" cy="2"  r=".9" fill="#7B1A1A" opacity=".6"/>
-        </svg>
-      </div>
-      <div class="corner br">
-        <svg viewBox="0 0 44 44" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <path d="M2 42 L2 2 L42 2" stroke="#C9A96E" stroke-width="1.2"/>
-          <path d="M2 36 L2 8" stroke="#7B1A1A" stroke-width=".5" opacity=".6"/>
-          <path d="M8 2 L36 2"  stroke="#7B1A1A" stroke-width=".5" opacity=".6"/>
-          <path d="M6 6 C6 2 12 2 12 6 C12 12 6 14 6 6Z" fill="#C9A96E" opacity=".85"/>
-          <circle cx="9" cy="7" r="1.2" fill="#080705"/>
-          <circle cx="2"  cy="20" r=".9" fill="#8B6914"/>
-          <circle cx="2"  cy="26" r=".9" fill="#7B1A1A" opacity=".6"/>
-          <circle cx="20" cy="2"  r=".9" fill="#8B6914"/>
-          <circle cx="26" cy="2"  r=".9" fill="#7B1A1A" opacity=".6"/>
-        </svg>
-      </div>
+    <!-- paisley corners -->
+    <div class="corner tl"><svg viewBox="0 0 44 44" fill="none"><path d="M2 42L2 2L42 2" stroke="#C9A96E" stroke-width="1.2"/><path d="M2 36L2 8" stroke="#7B1A1A" stroke-width=".5" opacity=".55"/><path d="M8 2L36 2" stroke="#7B1A1A" stroke-width=".5" opacity=".55"/><path d="M6 6C6 2 12 2 12 6C12 12 6 14 6 6Z" fill="#C9A96E" opacity=".85"/><circle cx="9" cy="7" r="1.2" fill="#070608"/><circle cx="2" cy="20" r=".9" fill="#8B6914"/><circle cx="2" cy="26" r=".9" fill="#7B1A1A" opacity=".6"/><circle cx="20" cy="2" r=".9" fill="#8B6914"/><circle cx="26" cy="2" r=".9" fill="#7B1A1A" opacity=".6"/></svg></div>
+    <div class="corner tr"><svg viewBox="0 0 44 44" fill="none"><path d="M2 42L2 2L42 2" stroke="#C9A96E" stroke-width="1.2"/><path d="M2 36L2 8" stroke="#7B1A1A" stroke-width=".5" opacity=".55"/><path d="M8 2L36 2" stroke="#7B1A1A" stroke-width=".5" opacity=".55"/><path d="M6 6C6 2 12 2 12 6C12 12 6 14 6 6Z" fill="#C9A96E" opacity=".85"/><circle cx="9" cy="7" r="1.2" fill="#070608"/><circle cx="2" cy="20" r=".9" fill="#8B6914"/><circle cx="2" cy="26" r=".9" fill="#7B1A1A" opacity=".6"/><circle cx="20" cy="2" r=".9" fill="#8B6914"/><circle cx="26" cy="2" r=".9" fill="#7B1A1A" opacity=".6"/></svg></div>
+    <div class="corner bl"><svg viewBox="0 0 44 44" fill="none"><path d="M2 42L2 2L42 2" stroke="#C9A96E" stroke-width="1.2"/><path d="M2 36L2 8" stroke="#7B1A1A" stroke-width=".5" opacity=".55"/><path d="M8 2L36 2" stroke="#7B1A1A" stroke-width=".5" opacity=".55"/><path d="M6 6C6 2 12 2 12 6C12 12 6 14 6 6Z" fill="#C9A96E" opacity=".85"/><circle cx="9" cy="7" r="1.2" fill="#070608"/><circle cx="2" cy="20" r=".9" fill="#8B6914"/><circle cx="2" cy="26" r=".9" fill="#7B1A1A" opacity=".6"/><circle cx="20" cy="2" r=".9" fill="#8B6914"/><circle cx="26" cy="2" r=".9" fill="#7B1A1A" opacity=".6"/></svg></div>
+    <div class="corner br"><svg viewBox="0 0 44 44" fill="none"><path d="M2 42L2 2L42 2" stroke="#C9A96E" stroke-width="1.2"/><path d="M2 36L2 8" stroke="#7B1A1A" stroke-width=".5" opacity=".55"/><path d="M8 2L36 2" stroke="#7B1A1A" stroke-width=".5" opacity=".55"/><path d="M6 6C6 2 12 2 12 6C12 12 6 14 6 6Z" fill="#C9A96E" opacity=".85"/><circle cx="9" cy="7" r="1.2" fill="#070608"/><circle cx="2" cy="20" r=".9" fill="#8B6914"/><circle cx="2" cy="26" r=".9" fill="#7B1A1A" opacity=".6"/><circle cx="20" cy="2" r=".9" fill="#8B6914"/><circle cx="26" cy="2" r=".9" fill="#7B1A1A" opacity=".6"/></svg></div>
 
-      <!-- Paithani side bands -->
-      <div class="paithani-band left">
-        <svg width="18" height="1200" viewBox="0 0 18 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- repeating paithani motif: alternating diamond + paisley dot -->
-          <defs>
-            <pattern id="pait" x="0" y="0" width="18" height="36" patternUnits="userSpaceOnUse">
-              <!-- vertical gold line -->
-              <line x1="9" y1="0" x2="9" y2="36" stroke="#8B6914" stroke-width=".8"/>
-              <!-- small diamond -->
-              <polygon points="9,4 12,10 9,16 6,10" fill="none" stroke="#C9A96E" stroke-width=".9"/>
-              <circle cx="9" cy="10" r="1.2" fill="#C9A96E"/>
-              <!-- tiny maroon dot -->
-              <circle cx="9" cy="26" r="1.8" fill="#7B1A1A" opacity=".7"/>
-              <circle cx="9" cy="26" r=".8" fill="#C9A96E"/>
-            </pattern>
-          </defs>
-          <rect width="18" height="1200" fill="url(#pait)"/>
-        </svg>
-      </div>
-      <div class="paithani-band right">
-        <svg width="18" height="1200" viewBox="0 0 18 1200" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <pattern id="pait2" x="0" y="0" width="18" height="36" patternUnits="userSpaceOnUse">
-              <line x1="9" y1="0" x2="9" y2="36" stroke="#8B6914" stroke-width=".8"/>
-              <polygon points="9,4 12,10 9,16 6,10" fill="none" stroke="#C9A96E" stroke-width=".9"/>
-              <circle cx="9" cy="10" r="1.2" fill="#C9A96E"/>
-              <circle cx="9" cy="26" r="1.8" fill="#7B1A1A" opacity=".7"/>
-              <circle cx="9" cy="26" r=".8" fill="#C9A96E"/>
-            </pattern>
-          </defs>
-          <rect width="18" height="1200" fill="url(#pait2)"/>
-        </svg>
-      </div>
+    <!-- paithani bands -->
+    <div class="pb l"><svg width="18" height="1400" viewBox="0 0 18 1400" fill="none"><defs><pattern id="p1" x="0" y="0" width="18" height="36" patternUnits="userSpaceOnUse"><line x1="9" y1="0" x2="9" y2="36" stroke="#8B6914" stroke-width=".8"/><polygon points="9,4 12,10 9,16 6,10" fill="none" stroke="#C9A96E" stroke-width=".9"/><circle cx="9" cy="10" r="1.2" fill="#C9A96E"/><circle cx="9" cy="26" r="1.8" fill="#7B1A1A" opacity=".7"/><circle cx="9" cy="26" r=".8" fill="#C9A96E"/></pattern></defs><rect width="18" height="1400" fill="url(#p1)"/></svg></div>
+    <div class="pb r"><svg width="18" height="1400" viewBox="0 0 18 1400" fill="none"><defs><pattern id="p2" x="0" y="0" width="18" height="36" patternUnits="userSpaceOnUse"><line x1="9" y1="0" x2="9" y2="36" stroke="#8B6914" stroke-width=".8"/><polygon points="9,4 12,10 9,16 6,10" fill="none" stroke="#C9A96E" stroke-width=".9"/><circle cx="9" cy="10" r="1.2" fill="#C9A96E"/><circle cx="9" cy="26" r="1.8" fill="#7B1A1A" opacity=".7"/><circle cx="9" cy="26" r=".8" fill="#C9A96E"/></pattern></defs><rect width="18" height="1400" fill="url(#p2)"/></svg></div>
 
-      <!-- ॥ श्री ॥ auspicious opening -->
-      <div class="fade-up shri-line">॥ श्री ॥</div>
+    <!-- ॥ श्री ॥ -->
+    <div class="fu shri-line">॥ श्री ॥</div>
 
-      <!-- Torana arch -->
-      <div class="fade-up torana-wrap">
-        <svg width="320" height="60" viewBox="0 0 320 60" fill="none" xmlns="http://www.w3.org/2000/svg" style="max-width:100%;height:auto;">
-          <defs>
-            <linearGradient id="tg" x1="0" y1="0" x2="1" y2="0">
-              <stop offset="0%" stop-color="transparent"/>
-              <stop offset="20%" stop-color="#8B6914"/>
-              <stop offset="50%" stop-color="#C9A96E"/>
-              <stop offset="80%" stop-color="#8B6914"/>
-              <stop offset="100%" stop-color="transparent"/>
-            </linearGradient>
-          </defs>
-          <!-- arch rope -->
-          <path d="M20 8 Q160 52 300 8" stroke="url(#tg)" stroke-width="1.4" fill="none"/>
-          <!-- hanging marigold tassels -->
-          <g opacity=".85">
-            <!-- tassel 1 -->
-            <line x1="60"  y1="14" x2="60"  y2="34" stroke="#C9A96E" stroke-width=".8"/>
-            <circle cx="60"  cy="37" r="4" fill="#C85A10" opacity=".7"/>
-            <circle cx="60"  cy="37" r="2" fill="#E8D5A3"/>
-            <!-- tassel 2 -->
-            <line x1="100" y1="22" x2="100" y2="44" stroke="#C9A96E" stroke-width=".8"/>
-            <circle cx="100" cy="47" r="4" fill="#7B1A1A" opacity=".7"/>
-            <circle cx="100" cy="47" r="2" fill="#E8D5A3"/>
-            <!-- tassel 3 (center) -->
-            <line x1="160" y1="28" x2="160" y2="52" stroke="#C9A96E" stroke-width=".8"/>
-            <circle cx="160" cy="55" r="4.5" fill="#C85A10" opacity=".75"/>
-            <circle cx="160" cy="55" r="2.2" fill="#F5E6B8"/>
-            <!-- tassel 4 -->
-            <line x1="220" y1="22" x2="220" y2="44" stroke="#C9A96E" stroke-width=".8"/>
-            <circle cx="220" cy="47" r="4" fill="#7B1A1A" opacity=".7"/>
-            <circle cx="220" cy="47" r="2" fill="#E8D5A3"/>
-            <!-- tassel 5 -->
-            <line x1="260" y1="14" x2="260" y2="34" stroke="#C9A96E" stroke-width=".8"/>
-            <circle cx="260" cy="37" r="4" fill="#C85A10" opacity=".7"/>
-            <circle cx="260" cy="37" r="2" fill="#E8D5A3"/>
-          </g>
-          <!-- small leaf shapes on arch -->
-          <ellipse cx="40"  cy="11" rx="5" ry="2.5" fill="#8B6914" opacity=".6" transform="rotate(-30 40 11)"/>
-          <ellipse cx="280" cy="11" rx="5" ry="2.5" fill="#8B6914" opacity=".6" transform="rotate(30 280 11)"/>
-        </svg>
+    <!-- Torana arch -->
+    <div class="fu torana-wrap">
+      <svg width="320" height="58" viewBox="0 0 320 58" fill="none" style="max-width:100%;height:auto;">
+        <defs><linearGradient id="tg" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="transparent"/><stop offset="20%" stop-color="#8B6914"/><stop offset="50%" stop-color="#C9A96E"/><stop offset="80%" stop-color="#8B6914"/><stop offset="100%" stop-color="transparent"/></linearGradient></defs>
+        <path d="M20 8 Q160 50 300 8" stroke="url(#tg)" stroke-width="1.4" fill="none"/>
+        <g opacity=".85">
+          <line x1="60"  y1="14" x2="60"  y2="32" stroke="#C9A96E" stroke-width=".8"/><circle cx="60"  cy="35" r="4" fill="#C85A10" opacity=".7"/><circle cx="60"  cy="35" r="2" fill="#E8D5A3"/>
+          <line x1="100" y1="21" x2="100" y2="41" stroke="#C9A96E" stroke-width=".8"/><circle cx="100" cy="44" r="4" fill="#7B1A1A" opacity=".7"/><circle cx="100" cy="44" r="2" fill="#E8D5A3"/>
+          <line x1="160" y1="26" x2="160" y2="49" stroke="#C9A96E" stroke-width=".8"/><circle cx="160" cy="52" r="4.5" fill="#C85A10" opacity=".75"/><circle cx="160" cy="52" r="2.2" fill="#F5E6B8"/>
+          <line x1="220" y1="21" x2="220" y2="41" stroke="#C9A96E" stroke-width=".8"/><circle cx="220" cy="44" r="4" fill="#7B1A1A" opacity=".7"/><circle cx="220" cy="44" r="2" fill="#E8D5A3"/>
+          <line x1="260" y1="14" x2="260" y2="32" stroke="#C9A96E" stroke-width=".8"/><circle cx="260" cy="35" r="4" fill="#C85A10" opacity=".7"/><circle cx="260" cy="35" r="2" fill="#E8D5A3"/>
+        </g>
+        <ellipse cx="40"  cy="11" rx="5" ry="2.5" fill="#8B6914" opacity=".6" transform="rotate(-30 40 11)"/>
+        <ellipse cx="280" cy="11" rx="5" ry="2.5" fill="#8B6914" opacity=".6" transform="rotate(30 280 11)"/>
+      </svg>
+    </div>
+
+    <!-- hero photo -->
+    <div class="fu hero-photo-wrap">
+      <div class="hero-frame">
+        <div class="hero-ring"></div>
+        <img src="photo/vintage.jpg" alt="Ruta & Anant" loading="eager"/>
+        <div class="hero-label">२५ वर्षांचा प्रवास · Est. 2000</div>
       </div>
+    </div>
 
-      <!-- Hero vintage photo -->
-      <div class="fade-up hero-photo-wrap">
-        <div class="hero-frame">
-          <div class="hero-arch-ring"></div>
-          <img src="photo/vintage.jpg" alt="Ruta & Anant — Then" loading="eager"/>
-          <div class="hero-label">२५ वर्षांचा प्रवास · Est. 2000</div>
+    <!-- pre-header -->
+    <div class="fu pre-header">With Hearts Full of Gratitude &amp; Joy</div>
+
+    <!-- rings -->
+    <div class="fu" style="text-align:center;margin-bottom:28px">
+      <svg width="86" height="46" viewBox="0 0 86 46" fill="none">
+        <defs>
+          <linearGradient id="rg1" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#E8D5A3"/><stop offset="50%" stop-color="#F5E6B8"/><stop offset="100%" stop-color="#8B6914"/></linearGradient>
+          <linearGradient id="rg2" x1="1" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#8B6914"/><stop offset="50%" stop-color="#F5E6B8"/><stop offset="100%" stop-color="#E8D5A3"/></linearGradient>
+        </defs>
+        <circle cx="27" cy="23" r="17" stroke="url(#rg1)" stroke-width="3.5" fill="none"/>
+        <circle cx="59" cy="23" r="17" stroke="url(#rg2)" stroke-width="3.5" fill="none"/>
+        <path d="M43 11 Q48 23 43 35 Q38 23 43 11Z" fill="#070608"/>
+        <path d="M40 23 Q43 20 46 23 Q43 26 40 23Z" fill="#F5E6B8" opacity=".7"/>
+        <polygon points="27,7 30,13 27,16 24,13" fill="#F5E6B8" opacity=".85"/>
+        <polygon points="27,7 30,13 27,10" fill="#fff" opacity=".4"/>
+      </svg>
+    </div>
+
+    <!-- XXV badge -->
+    <div class="fu year-badge">
+      <div class="year-line"></div>
+      <div class="year-num">XXV</div>
+      <div class="year-line r"></div>
+    </div>
+
+    <div class="fu headline">Silver Jubilee Anniversary</div>
+    <div class="fu marathi-sub">शुभ रौप्य महोत्सव</div>
+    <div class="fu celebrating">Twenty-Five Years of Beautiful Love</div>
+
+    <!-- lotus divider -->
+    <div class="fu divider">
+      <div class="div-line"></div>
+      <svg width="34" height="22" viewBox="0 0 34 22" fill="none">
+        <ellipse cx="17" cy="14" rx="3.5" ry="7" fill="#C9A96E" opacity=".9"/>
+        <ellipse cx="11" cy="15" rx="3" ry="6" fill="#C9A96E" opacity=".65" transform="rotate(-20 11 15)"/>
+        <ellipse cx="23" cy="15" rx="3" ry="6" fill="#C9A96E" opacity=".65" transform="rotate(20 23 15)"/>
+        <ellipse cx="6"  cy="17" rx="2.5" ry="5" fill="#8B6914" opacity=".5" transform="rotate(-38 6 17)"/>
+        <ellipse cx="28" cy="17" rx="2.5" ry="5" fill="#8B6914" opacity=".5" transform="rotate(38 28 17)"/>
+        <circle cx="17" cy="9" r="2.2" fill="#F5E6B8"/>
+        <circle cx="17" cy="9" r="1" fill="#C85A10" opacity=".8"/>
+        <path d="M2 21 Q17 18 32 21" stroke="#8B6914" stroke-width=".8" fill="none"/>
+      </svg>
+      <div class="div-line"></div>
+    </div>
+
+    <!-- names -->
+    <div class="fu names-block">
+      <span class="name">Ruta Todkar</span>
+      <span class="name-deva">रुता तोडकर</span>
+      <span class="and">&amp;</span>
+      <span class="name sm">Anant Todkar</span>
+      <span class="name-deva">अनंत तोडकर</span>
+    </div>
+
+    <!-- lotus divider 2 -->
+    <div class="fu divider">
+      <div class="div-line"></div>
+      <svg width="34" height="22" viewBox="0 0 34 22" fill="none">
+        <ellipse cx="17" cy="14" rx="3.5" ry="7" fill="#C9A96E" opacity=".9"/>
+        <ellipse cx="11" cy="15" rx="3" ry="6" fill="#C9A96E" opacity=".65" transform="rotate(-20 11 15)"/>
+        <ellipse cx="23" cy="15" rx="3" ry="6" fill="#C9A96E" opacity=".65" transform="rotate(20 23 15)"/>
+        <ellipse cx="6"  cy="17" rx="2.5" ry="5" fill="#8B6914" opacity=".5" transform="rotate(-38 6 17)"/>
+        <ellipse cx="28" cy="17" rx="2.5" ry="5" fill="#8B6914" opacity=".5" transform="rotate(38 28 17)"/>
+        <circle cx="17" cy="9" r="2.2" fill="#F5E6B8"/>
+        <circle cx="17" cy="9" r="1" fill="#7B1A1A" opacity=".8"/>
+        <path d="M2 21 Q17 18 32 21" stroke="#8B6914" stroke-width=".8" fill="none"/>
+      </svg>
+      <div class="div-line"></div>
+    </div>
+
+    <!-- Then & Now -->
+    <div class="tn-section" id="tnSec">
+      <div class="tn-label">Then &amp; Now</div>
+      <div class="tn-grid">
+        <div class="photo-card then">
+          <img src="photo/vintage.jpg" alt="Then 2000"/>
+          <div class="photo-cap"><span class="yr">2000</span><span class="lb">How it began</span></div>
+        </div>
+        <div class="tn-mid">
+          <div class="tn-vl"></div>
+          <div class="tn-hrt">♥</div>
+          <div class="tn-yrs">25 Years</div>
+          <div class="tn-hrt">♥</div>
+          <div class="tn-vl"></div>
+        </div>
+        <div class="photo-card now">
+          <img src="photo/traditional.jpg" alt="Now 2025"/>
+          <div class="photo-cap"><span class="yr">2025</span><span class="lb">Still going strong</span></div>
         </div>
       </div>
+    </div>
 
-      <!-- content -->
-      <div class="fade-up pre-header">With Hearts Full of Gratitude &amp; Joy</div>
+    <!-- welcome & intro -->
+    <div class="fu welcome-deva">आपले स्वागत आहे</div>
+    <p class="fu intro-text">
+      We joyfully invite you to celebrate with us as we mark
+      twenty-five years of love, laughter, and life together.
+      Your presence is our greatest gift.
+    </p>
 
-      <!-- wedding rings SVG -->
-      <div class="fade-up">
-        <svg class="rings-svg" width="90" height="48" viewBox="0 0 90 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="rg1" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stop-color="#E8D5A3"/>
-              <stop offset="50%" stop-color="#F5E6B8"/>
-              <stop offset="100%" stop-color="#8B6914"/>
-            </linearGradient>
-            <linearGradient id="rg2" x1="1" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#8B6914"/>
-              <stop offset="50%" stop-color="#F5E6B8"/>
-              <stop offset="100%" stop-color="#E8D5A3"/>
-            </linearGradient>
-          </defs>
-          <!-- left ring -->
-          <circle cx="28" cy="24" r="18" stroke="url(#rg1)" stroke-width="3.5" fill="none"/>
-          <!-- right ring -->
-          <circle cx="62" cy="24" r="18" stroke="url(#rg2)" stroke-width="3.5" fill="none"/>
-          <!-- overlap mask for depth -->
-          <path d="M45 11.5 Q50 24 45 36.5 Q40 24 45 11.5Z" fill="#080705"/>
-          <!-- center link glint -->
-          <path d="M42 24 Q45 21 48 24 Q45 27 42 24Z" fill="#F5E6B8" opacity=".7"/>
-          <!-- diamond on left ring -->
-          <polygon points="28,8 31,14 28,17 25,14" fill="#F5E6B8" opacity=".85"/>
-          <polygon points="28,8 31,14 28,10.5" fill="#fff" opacity=".4"/>
-        </svg>
+    <!-- kalash -->
+    <div class="fu kalash-wrap">
+      <svg width="48" height="56" viewBox="0 0 48 56" fill="none">
+        <defs><linearGradient id="kg" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#E8D5A3"/><stop offset="100%" stop-color="#8B6914"/></linearGradient></defs>
+        <rect x="10" y="50" width="28" height="3" rx="1.5" fill="#8B6914" opacity=".8"/>
+        <path d="M14 48 C8 44 6 34 8 24 C10 14 16 10 24 10 C32 10 38 14 40 24 C42 34 40 44 34 48Z" fill="url(#kg)" opacity=".9"/>
+        <rect x="16" y="6" width="16" height="6" rx="2" fill="#C9A96E"/>
+        <ellipse cx="24" cy="6" rx="10" ry="3" fill="#E8D5A3"/>
+        <ellipse cx="24" cy="3" rx="5" ry="4" fill="#8B6914" opacity=".8"/>
+        <ellipse cx="24" cy="2" rx="3" ry="2" fill="#C9A96E" opacity=".7"/>
+        <path d="M19 6 C15 0 10 2 12 6 C14 8 18 7 19 6Z" fill="#8B6914" opacity=".7"/>
+        <path d="M29 6 C33 0 38 2 36 6 C34 8 30 7 29 6Z" fill="#8B6914" opacity=".7"/>
+        <circle cx="20" cy="32" r="1.5" fill="#F5E6B8" opacity=".6"/>
+        <circle cx="24" cy="28" r="1.5" fill="#F5E6B8" opacity=".6"/>
+        <circle cx="28" cy="32" r="1.5" fill="#F5E6B8" opacity=".6"/>
+        <path d="M10 38 Q24 42 38 38" stroke="#7B1A1A" stroke-width="2" fill="none" opacity=".5"/>
+      </svg>
+    </div>
+
+    <!-- event details -->
+    <div class="fu details-grid">
+      <div class="det-box">
+        <svg class="det-icon" width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="2" y="4" width="18" height="16" rx="1" stroke="#C9A96E" stroke-width="1.2"/><path d="M2 9L20 9" stroke="#C9A96E" stroke-width="1"/><path d="M7 2L7 6M15 2L15 6" stroke="#C9A96E" stroke-width="1.4" stroke-linecap="round"/><text x="11" y="17" text-anchor="middle" font-size="5" fill="#C9A96E" font-family="Cinzel,serif">12</text></svg>
+        <span class="det-label">Date</span>
+        <span class="det-val">12th April</span>
+        <span class="det-note">Saturday, 2025</span>
       </div>
+      <div class="det-sep"></div>
+      <div class="det-box">
+        <svg class="det-icon" width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 2C7 2 4 5 4 9C4 14 11 20 11 20C11 20 18 14 18 9C18 5 15 2 11 2Z" stroke="#C9A96E" stroke-width="1.2" fill="none"/><circle cx="11" cy="9" r="2.5" stroke="#C9A96E" stroke-width="1"/></svg>
+        <span class="det-label">Venue</span>
+        <span class="det-val">Midland, Ghansoli</span>
+        <span class="det-note">Manoshi Complex, Plot 5&amp;6,<br/>Sector 3, Ghansoli,<br/>Navi Mumbai 400701</span>
+      </div>
+      <div class="det-sep"></div>
+      <div class="det-box">
+        <svg class="det-icon" width="22" height="22" viewBox="0 0 22 22" fill="none"><circle cx="11" cy="11" r="8" stroke="#C9A96E" stroke-width="1.2"/><path d="M11 7L11 11L14 13" stroke="#C9A96E" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        <span class="det-label">Time</span>
+        <span class="det-val">To Be Announced</span>
+        <span class="det-note">Stay tuned</span>
+      </div>
+    </div>
 
-      <!-- 25 years badge -->
-      <div class="fade-up year-badge">
-        <div class="year-line"></div>
-        <div>
-          <div class="year-num">XXV</div>
+    <!-- tagline -->
+    <p class="fu tagline">
+      "To love and to cherish — for twenty-five years and forever more."<br/>
+      <span style="font-family:'Noto Serif Devanagari',serif;font-size:.9em;opacity:.62;letter-spacing:.03em;">
+        प्रेम, विश्वास आणि साथ — पंचवीस वर्षांचा सुंदर प्रवास
+      </span>
+    </p>
+
+    <!-- photo duo -->
+    <div class="duo-section" id="duoSec">
+      <div class="duo-label">Moments Together</div>
+      <div class="duo-grid">
+        <div class="duo-ph"><img src="photo/candid.jpg" alt="Ruta & Anant"/></div>
+        <div class="duo-ph"><img src="photo/casual.jpg" alt="Ruta & Anant"/></div>
+      </div>
+    </div>
+
+    <!-- RSVP -->
+    <div class="fu rsvp-wrap">
+      <div class="rsvp-title">Kindly Confirm Your Presence</div>
+      <div class="rsvp-deva">आपल्या उपस्थितीची पुष्टी करा</div>
+      <div class="rsvp-choices">
+        <div class="rsvp-choice">
+          <input type="radio" name="rsvp" id="att" value="attend"/>
+          <label for="att">
+            <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M2 7.5L5.5 11L13 4" stroke="#C9A96E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <span>Will Attend</span>
+          </label>
         </div>
-        <div class="year-line rev"></div>
-      </div>
-
-      <div class="fade-up headline">Silver Jubilee Anniversary</div>
-      <div class="fade-up marathi-sub">शुभ रौप्य महोत्सव</div>
-      <div class="fade-up celebrating">Twenty-Five Years of Beautiful Love</div>
-
-      <!-- lotus divider -->
-      <div class="fade-up divider">
-        <div class="divider-line"></div>
-        <svg width="34" height="22" viewBox="0 0 34 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- lotus petals -->
-          <ellipse cx="17" cy="14" rx="3.5" ry="7"   fill="#C9A96E" opacity=".9"/>
-          <ellipse cx="11" cy="15" rx="3"   ry="6"   fill="#C9A96E" opacity=".65" transform="rotate(-20 11 15)"/>
-          <ellipse cx="23" cy="15" rx="3"   ry="6"   fill="#C9A96E" opacity=".65" transform="rotate(20 23 15)"/>
-          <ellipse cx="6"  cy="17" rx="2.5" ry="5"   fill="#8B6914" opacity=".5"  transform="rotate(-38 6 17)"/>
-          <ellipse cx="28" cy="17" rx="2.5" ry="5"   fill="#8B6914" opacity=".5"  transform="rotate(38 28 17)"/>
-          <!-- stamen -->
-          <circle cx="17" cy="9" r="2.2" fill="#F5E6B8"/>
-          <circle cx="17" cy="9" r="1"   fill="#C85A10" opacity=".8"/>
-          <!-- water line -->
-          <path d="M2 21 Q17 18 32 21" stroke="#8B6914" stroke-width=".8" fill="none"/>
-        </svg>
-        <div class="divider-line"></div>
-      </div>
-
-      <!-- names -->
-      <div class="fade-up names-block">
-        <span class="name shimmer">Ruta Todkar</span>
-        <span class="name-deva">रुता तोडकर</span>
-        <span class="and">&amp;</span>
-        <span class="name name-sub shimmer">Anant Todkar</span>
-        <span class="name-deva">अनंत तोडकर</span>
-      </div>
-
-      <!-- lotus divider 2 -->
-      <div class="fade-up divider">
-        <div class="divider-line"></div>
-        <svg width="34" height="22" viewBox="0 0 34 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <ellipse cx="17" cy="14" rx="3.5" ry="7"   fill="#C9A96E" opacity=".9"/>
-          <ellipse cx="11" cy="15" rx="3"   ry="6"   fill="#C9A96E" opacity=".65" transform="rotate(-20 11 15)"/>
-          <ellipse cx="23" cy="15" rx="3"   ry="6"   fill="#C9A96E" opacity=".65" transform="rotate(20 23 15)"/>
-          <ellipse cx="6"  cy="17" rx="2.5" ry="5"   fill="#8B6914" opacity=".5"  transform="rotate(-38 6 17)"/>
-          <ellipse cx="28" cy="17" rx="2.5" ry="5"   fill="#8B6914" opacity=".5"  transform="rotate(38 28 17)"/>
-          <circle cx="17" cy="9" r="2.2" fill="#F5E6B8"/>
-          <circle cx="17" cy="9" r="1"   fill="#7B1A1A" opacity=".8"/>
-          <path d="M2 21 Q17 18 32 21" stroke="#8B6914" stroke-width=".8" fill="none"/>
-        </svg>
-        <div class="divider-line"></div>
-      </div>
-
-      <!-- Then & Now -->
-      <div class="then-now-section" id="thenNow">
-        <div class="then-now-title">Then &amp; Now</div>
-        <div class="then-now-grid">
-          <div class="photo-card then-card">
-            <img src="photo/vintage.jpg" alt="Then — 2000"/>
-            <div class="photo-caption">
-              <span class="yr">2000</span>
-              <span class="lbl">How it began</span>
-            </div>
-          </div>
-          <div class="then-now-mid">
-            <div class="tn-line"></div>
-            <div class="tn-heart">♥</div>
-            <div class="tn-yrs">25 Years</div>
-            <div class="tn-heart">♥</div>
-            <div class="tn-line"></div>
-          </div>
-          <div class="photo-card now-card">
-            <img src="photo/traditional.jpg" alt="Now — 2025"/>
-            <div class="photo-caption">
-              <span class="yr">2025</span>
-              <span class="lbl">Still going strong</span>
-            </div>
-          </div>
+        <div class="rsvp-choice">
+          <input type="radio" name="rsvp" id="dec" value="decline"/>
+          <label for="dec">
+            <svg width="15" height="15" viewBox="0 0 15 15" fill="none"><path d="M3 3L12 12M12 3L3 12" stroke="#9A8866" stroke-width="1.3" stroke-linecap="round"/></svg>
+            <span>Cannot Attend</span>
+          </label>
         </div>
       </div>
-
-      <!-- intro -->
-      <div class="fade-up welcome-deva">आपले स्वागत आहे</div>
-      <p class="fade-up intro">
-        We joyfully invite you to celebrate with us as we mark
-        twenty-five years of love, laughter, and life together.
-        Your presence is our greatest gift.
-      </p>
-
-      <!-- kalash -->
-      <div class="fade-up kalash-wrap">
-        <svg width="48" height="56" viewBox="0 0 48 56" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="kg" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#E8D5A3"/>
-              <stop offset="100%" stop-color="#8B6914"/>
-            </linearGradient>
-          </defs>
-          <!-- base plate -->
-          <rect x="10" y="50" width="28" height="3" rx="1.5" fill="#8B6914" opacity=".8"/>
-          <!-- pot body -->
-          <path d="M14 48 C8 44 6 34 8 24 C10 14 16 10 24 10 C32 10 38 14 40 24 C42 34 40 44 34 48 Z" fill="url(#kg)" opacity=".9"/>
-          <!-- pot neck -->
-          <rect x="16" y="6" width="16" height="6" rx="2" fill="#C9A96E"/>
-          <!-- rim -->
-          <ellipse cx="24" cy="6" rx="10" ry="3" fill="#E8D5A3"/>
-          <!-- coconut top -->
-          <ellipse cx="24" cy="3"  rx="5"  ry="4"  fill="#8B6914" opacity=".8"/>
-          <ellipse cx="24" cy="2"  rx="3"  ry="2"  fill="#C9A96E" opacity=".7"/>
-          <!-- mango leaves -->
-          <path d="M19 6 C15 0 10 2 12 6 C14 8 18 7 19 6Z" fill="#8B6914" opacity=".7"/>
-          <path d="M29 6 C33 0 38 2 36 6 C34 8 30 7 29 6Z" fill="#8B6914" opacity=".7"/>
-          <!-- pot design dots -->
-          <circle cx="20" cy="32" r="1.5" fill="#F5E6B8" opacity=".6"/>
-          <circle cx="24" cy="28" r="1.5" fill="#F5E6B8" opacity=".6"/>
-          <circle cx="28" cy="32" r="1.5" fill="#F5E6B8" opacity=".6"/>
-          <!-- maroon band on pot -->
-          <path d="M10 38 Q24 42 38 38" stroke="#7B1A1A" stroke-width="2" fill="none" opacity=".5"/>
-        </svg>
+      <div class="rsvp-btn-wrap">
+        <button class="rsvp-btn" onclick="submitRSVP()"><span>Confirm Response</span></button>
       </div>
-
-      <!-- event details -->
-      <div class="fade-up details-grid">
-        <div class="detail-box">
-          <svg class="detail-icon" width="22" height="22" viewBox="0 0 22 22" fill="none">
-            <rect x="2" y="4" width="18" height="16" rx="1" stroke="#C9A96E" stroke-width="1.2"/>
-            <path d="M2 9 L20 9" stroke="#C9A96E" stroke-width="1"/>
-            <path d="M7 2 L7 6 M15 2 L15 6" stroke="#C9A96E" stroke-width="1.4" stroke-linecap="round"/>
-            <text x="11" y="17" text-anchor="middle" font-size="5" fill="#C9A96E" font-family="Cinzel,serif">12</text>
-          </svg>
-          <span class="detail-label">Date</span>
-          <span class="detail-value">12th April</span>
-          <span class="detail-note">Saturday</span>
-        </div>
-        <div class="detail-sep"></div>
-        <div class="detail-box">
-          <svg class="detail-icon" width="22" height="22" viewBox="0 0 22 22" fill="none">
-            <path d="M11 2 C7 2 4 5 4 9 C4 14 11 20 11 20 C11 20 18 14 18 9 C18 5 15 2 11 2Z" stroke="#C9A96E" stroke-width="1.2" fill="none"/>
-            <circle cx="11" cy="9" r="2.5" stroke="#C9A96E" stroke-width="1"/>
-          </svg>
-          <span class="detail-label">Venue</span>
-          <span class="detail-value">Midland, Ghansoli</span>
-          <span class="detail-note" style="font-size:.75rem;line-height:1.5;">Manoshi Complex, Plot 5&6,<br/>Sector 3, Ghansoli,<br/>Navi Mumbai 400701</span>
-        </div>
-        <div class="detail-sep"></div>
-        <div class="detail-box">
-          <svg class="detail-icon" width="22" height="22" viewBox="0 0 22 22" fill="none">
-            <circle cx="11" cy="11" r="8" stroke="#C9A96E" stroke-width="1.2"/>
-            <path d="M11 7 L11 11 L14 13" stroke="#C9A96E" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-          <span class="detail-label">Time</span>
-          <span class="detail-value">To Be Announced</span>
-          <span class="detail-note">Stay tuned</span>
-        </div>
+      <div class="rsvp-confirm" id="rsvpConfirm">
+        <p id="rsvpMsg">Thank you — we look forward to celebrating with you.</p>
       </div>
+    </div>
 
-      <!-- tagline -->
-      <p class="fade-up tagline">
-        "To love and to cherish — for twenty-five years and forever more."<br/>
-        <span style="font-family:'Noto Serif Devanagari',serif; font-size:.9em; opacity:.65; letter-spacing:.03em;">
-          प्रेम, विश्वास आणि साथ — पंचवीस वर्षांचा सुंदर प्रवास
-        </span>
-      </p>
+    <!-- footer -->
+    <div class="fu footer-flourish">
+      ✦ &nbsp; Ruta &amp; Anant Todkar &nbsp; · &nbsp; 25 Years &nbsp; · &nbsp; 2000 — 2025 &nbsp; ✦
+      <br/><span style="font-family:'Noto Serif Devanagari',serif;font-size:.9em;letter-spacing:.12em;opacity:.5;">॥ शुभं भवतु ॥</span>
+    </div>
 
-      <!-- Photo duo -->
-      <div class="photo-duo-section" id="photoDuo">
-        <div class="photo-duo-title">Moments Together</div>
-        <div class="photo-duo-grid">
-          <div class="duo-photo">
-            <img src="photo/candid.jpg" alt="Ruta & Anant"/>
-          </div>
-          <div class="duo-photo">
-            <img src="photo/casual.jpg" alt="Ruta & Anant"/>
-          </div>
-        </div>
-      </div>
-
-      <!-- RSVP -->
-      <div class="fade-up rsvp-wrap">
-        <div class="rsvp-title">Kindly Confirm Your Presence</div>
-        <p class="rsvp-note">Your response means the world to us</p>
-
-        <div class="rsvp-choices">
-          <div class="rsvp-choice">
-            <input type="radio" name="rsvp" id="attend" value="attend"/>
-            <label for="attend">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <path d="M2 8 L6 12 L14 4" stroke="#C9A96E" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-              <span>Will Attend</span>
-            </label>
-          </div>
-          <div class="rsvp-choice">
-            <input type="radio" name="rsvp" id="decline" value="decline"/>
-            <label for="decline">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <path d="M4 4 L12 12 M12 4 L4 12" stroke="#9A8866" stroke-width="1.3" stroke-linecap="round"/>
-              </svg>
-              <span>Cannot Attend</span>
-            </label>
-          </div>
-        </div>
-
-        <div class="rsvp-btn-wrap">
-          <button class="rsvp-btn" onclick="submitRSVP()"><span>Confirm Response</span></button>
-        </div>
-
-        <div class="rsvp-confirm" id="rsvpConfirm">
-          <p id="rsvpMsg">Thank you — we look forward to celebrating with you.</p>
-        </div>
-      </div>
-
-      <!-- footer -->
-      <div class="footer-flourish fade-up">
-        ✦ &nbsp; Ruta &amp; Anant Todkar &nbsp; · &nbsp; 25 Years &nbsp; · &nbsp; 2000 — 2025 &nbsp; ✦
-        <br/>
-        <span style="font-family:'Noto Serif Devanagari',serif; font-size:.9em; letter-spacing:.12em; opacity:.55;">
-          ॥ शुभं भवतु ॥
-        </span>
-      </div>
-
-    </div><!-- /frame-inner -->
-  </div><!-- /frame-border -->
-</div><!-- /page-frame -->
+   </div><!-- f-in -->
+  </div><!-- f-mid -->
+ </div><!-- f-out -->
+</div><!-- page-frame -->
 
 <script>
-  /* dust particles */
-  const dust = document.getElementById('dust');
-  for (let i = 0; i < 28; i++) {
-    const s = document.createElement('span');
-    const size = Math.random() * 2.5 + 1;
-    s.style.cssText = `
-      left: ${Math.random() * 100}%;
-      width: ${size}px; height: ${size}px;
-      animation-duration: ${Math.random() * 18 + 12}s;
-      animation-delay: ${Math.random() * 14}s;
-      opacity: 0;
-    `;
-    dust.appendChild(s);
+/* ── INTRO CONTROLLER ── */
+(function(){
+  const slides    = document.querySelectorAll('.i-slide');
+  const dots      = document.querySelectorAll('.i-dot');
+  const bar       = document.getElementById('iBar');
+  const DUR       = [2000, 2000, 2200, 2200]; // ms per slide
+  const TOTAL     = DUR.reduce((a,b)=>a+b,0);
+  let   cur = 0, timer;
+
+  /* animate bar from 0 → (DUR[0]/TOTAL)% */
+  requestAnimationFrame(()=>{
+    bar.style.transitionDuration = DUR[0]+'ms';
+    bar.style.width = (DUR[0]/TOTAL*100)+'%';
+  });
+
+  function advance(){
+    if(cur >= slides.length-1){ setTimeout(exitIntro, DUR[cur]); return; }
+    slides[cur].classList.remove('active'); dots[cur].classList.remove('on');
+    cur++;
+    slides[cur].classList.add('active'); dots[cur].classList.add('on');
+    const elapsed = DUR.slice(0,cur+1).reduce((a,b)=>a+b,0);
+    bar.style.transitionDuration = DUR[cur]+'ms';
+    bar.style.width = (elapsed/TOTAL*100)+'%';
+    timer = setTimeout(advance, DUR[cur]);
   }
+  timer = setTimeout(advance, DUR[0]);
 
-  /* scroll reveal for photo sections */
-  const revealEls = document.querySelectorAll('.then-now-section, .photo-duo-section');
-  const revealIO = new IntersectionObserver(entries => {
-    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
-  }, { threshold: 0.12 });
-  revealEls.forEach(el => revealIO.observe(el));
+  window.exitIntro = function(){
+    clearTimeout(timer);
+    document.getElementById('intro').classList.add('exit');
+    document.body.style.overflow='auto';
+  };
 
-  /* RSVP logic */
-  function submitRSVP() {
-    const choice = document.querySelector('input[name="rsvp"]:checked');
-    const confirmEl = document.getElementById('rsvpConfirm');
-    const msgEl = document.getElementById('rsvpMsg');
+  document.body.style.overflow='hidden';
+})();
 
-    if (!choice) {
-      msgEl.textContent = 'Please select your response above.';
-      msgEl.style.color = '#9A8866';
-      confirmEl.classList.add('show');
-      return;
-    }
-
-    const attending = choice.value === 'attend';
-    msgEl.innerHTML = attending
-      ? 'Wonderful! We are so glad you will join us. See you on the 12th of April! 💛<br><span style="font-family:\'Noto Serif Devanagari\',serif;font-size:.85em;opacity:.7;">आपण येणार याचा आम्हाला आनंद आहे!</span>'
-      : 'We understand and will truly miss your presence. Thank you for letting us know.<br><span style="font-family:\'Noto Serif Devanagari\',serif;font-size:.85em;opacity:.7;">आपण सांगितल्याबद्दल आभारी आहोत.</span>';
-    msgEl.style.color = attending ? '#E8D5A3' : '#9A8866';
-    confirmEl.classList.add('show');
-
-    document.querySelector('.rsvp-choices').style.opacity = '.5';
-    document.querySelector('.rsvp-btn').style.opacity = '.4';
-    document.querySelector('.rsvp-btn').disabled = true;
+/* ── DUST PARTICLES ── */
+(function(){
+  const d = document.getElementById('dust');
+  for(let i=0;i<26;i++){
+    const s=document.createElement('span');
+    const sz=Math.random()*2.4+.8;
+    s.style.cssText=`left:${Math.random()*100}%;width:${sz}px;height:${sz}px;animation-duration:${Math.random()*18+12}s;animation-delay:${Math.random()*16}s`;
+    d.appendChild(s);
   }
+})();
+
+/* ── SCROLL REVEAL ── */
+(function(){
+  const els = document.querySelectorAll('.tn-section,.duo-section');
+  const io  = new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting)e.target.classList.add('vis')})},{threshold:.12});
+  els.forEach(el=>io.observe(el));
+})();
+
+/* ── RSVP ── */
+function submitRSVP(){
+  const choice = document.querySelector('input[name="rsvp"]:checked');
+  const conf   = document.getElementById('rsvpConfirm');
+  const msg    = document.getElementById('rsvpMsg');
+  if(!choice){
+    msg.textContent='Please select your response above.';
+    msg.style.color='#9A8866'; conf.classList.add('show'); return;
+  }
+  const yes = choice.value==='attend';
+  msg.innerHTML = yes
+    ? 'Wonderful! We are so glad you will join us. See you on the 12th of April! 💛<br><span style="font-family:\'Noto Serif Devanagari\',serif;font-size:.85em;opacity:.72;">आपण येणार याचा आम्हाला आनंद आहे!</span>'
+    : 'We understand and will truly miss your presence. Thank you for letting us know.<br><span style="font-family:\'Noto Serif Devanagari\',serif;font-size:.85em;opacity:.72;">आपण सांगितल्याबद्दल आभारी आहोत.</span>';
+  msg.style.color = yes ? '#E8D5A3':'#9A8866';
+  conf.classList.add('show');
+  document.querySelector('.rsvp-choices').style.opacity='.45';
+  const btn = document.querySelector('.rsvp-btn');
+  btn.style.opacity='.4'; btn.disabled=true;
+}
 </script>
 </body>
 </html>
