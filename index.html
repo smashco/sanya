@@ -527,6 +527,204 @@
       .footer-flourish { font-size: .5rem; letter-spacing: .25em; margin-top: 32px; }
     }
 
+    /* ══════════════════════════════
+       PHOTO SECTIONS
+    ══════════════════════════════ */
+
+    /* ── Hero photo: arched Mughal-arch frame ── */
+    .hero-photo-wrap {
+      text-align: center;
+      margin: 4px 0 30px;
+    }
+    .hero-frame {
+      display: inline-block;
+      position: relative;
+      width: 210px;
+      overflow: hidden;
+      border-radius: 120px 120px 6px 6px;
+      border: 1.5px solid var(--gold);
+      box-shadow:
+        0 0 0 4px rgba(201,169,110,.08),
+        0 0 40px rgba(201,169,110,.18),
+        inset 0 0 30px rgba(0,0,0,.3);
+    }
+    /* bottom-to-dark gradient overlay */
+    .hero-frame::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom,
+        rgba(0,0,0,.0) 55%,
+        rgba(8,7,5,.88) 100%);
+      z-index: 2; pointer-events: none;
+      border-radius: inherit;
+    }
+    /* gold sheen sweep */
+    .hero-frame::after {
+      content: '';
+      position: absolute;
+      top: 0; left: -80%;
+      width: 55%; height: 100%;
+      background: linear-gradient(90deg,
+        transparent,
+        rgba(245,230,184,.22),
+        transparent);
+      animation: sheenPhoto 6s ease 2s infinite;
+      z-index: 3; border-radius: inherit;
+    }
+    @keyframes sheenPhoto {
+      0%   { left: -80%; }
+      45%  { left: 130%; }
+      100% { left: 130%; }
+    }
+    .hero-frame img {
+      display: block;
+      width: 100%; height: 290px;
+      object-fit: cover; object-position: top center;
+      filter: sepia(18%) contrast(1.06) brightness(.96);
+      animation: kenBurns 12s ease-in-out infinite alternate;
+    }
+    @keyframes kenBurns {
+      from { transform: scale(1)    translateY(0); }
+      to   { transform: scale(1.07) translateY(-6px); }
+    }
+    .hero-label {
+      position: absolute;
+      bottom: 11px; left: 0; right: 0;
+      z-index: 4;
+      font-family: 'Cinzel', serif;
+      font-size: .58rem; letter-spacing: .28em;
+      color: var(--gold-bright);
+      text-shadow: 0 1px 10px rgba(0,0,0,.9);
+      text-align: center;
+    }
+    /* outer gold arch ring */
+    .hero-arch-ring {
+      position: absolute; inset: -6px;
+      border-radius: 128px 128px 10px 10px;
+      border: 1px solid rgba(201,169,110,.3);
+      pointer-events: none;
+    }
+
+    /* ── Then & Now ── */
+    .then-now-section {
+      margin: 8px 0 38px;
+      opacity: 0; transform: translateY(24px);
+      transition: opacity .9s ease, transform .9s ease;
+    }
+    .then-now-section.visible { opacity: 1; transform: translateY(0); }
+    .then-now-title {
+      text-align: center;
+      font-family: 'Cinzel', serif;
+      font-size: .62rem; letter-spacing: .32em;
+      text-transform: uppercase;
+      color: var(--gold); margin-bottom: 18px;
+    }
+    .then-now-grid {
+      display: grid;
+      grid-template-columns: 1fr 40px 1fr;
+      gap: 0; align-items: center;
+    }
+    .photo-card {
+      position: relative; overflow: hidden;
+      border: 1px solid var(--gold-dark);
+      transition: border-color .4s;
+    }
+    .photo-card:hover { border-color: var(--gold); }
+    .photo-card img {
+      display: block;
+      width: 100%; height: 230px;
+      object-fit: cover; object-position: top center;
+      transition: transform .6s ease;
+    }
+    .photo-card:hover img { transform: scale(1.04); }
+    .photo-card.then-card img {
+      filter: sepia(38%) contrast(1.06) brightness(.94);
+    }
+    .photo-card.now-card img {
+      filter: brightness(1.02) saturate(1.06);
+    }
+    /* bottom caption overlay */
+    .photo-card::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 55%; pointer-events: none;
+      background: linear-gradient(transparent, rgba(8,7,5,.82));
+    }
+    .photo-caption {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 8px 10px 10px;
+      z-index: 2; text-align: center;
+    }
+    .photo-caption .yr {
+      font-family: 'Cinzel', serif;
+      font-size: .62rem; letter-spacing: .22em;
+      color: var(--gold); display: block;
+    }
+    .photo-caption .lbl {
+      font-size: .82rem; font-style: italic;
+      color: var(--cream); opacity: .75;
+    }
+    .then-now-mid {
+      display: flex; flex-direction: column;
+      align-items: center; gap: 6px;
+    }
+    .tn-line { width: 1px; height: 60px;
+      background: linear-gradient(to bottom, transparent, var(--gold), transparent); }
+    .tn-heart { color: var(--gold); font-size: 1.1rem; }
+    .tn-yrs {
+      font-family: 'Cinzel', serif;
+      font-size: .5rem; letter-spacing: .1em;
+      color: var(--muted); writing-mode: vertical-rl;
+    }
+
+    /* ── Photo duo (bottom pair) ── */
+    .photo-duo-section {
+      margin: 0 0 38px;
+      opacity: 0; transform: translateY(24px);
+      transition: opacity .9s .15s ease, transform .9s .15s ease;
+    }
+    .photo-duo-section.visible { opacity: 1; transform: translateY(0); }
+    .photo-duo-title {
+      text-align: center;
+      font-family: 'Cinzel', serif;
+      font-size: .62rem; letter-spacing: .32em;
+      text-transform: uppercase;
+      color: var(--gold); margin-bottom: 16px;
+    }
+    .photo-duo-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .duo-photo {
+      position: relative; overflow: hidden;
+      border: 1px solid var(--gold-dark);
+      transition: border-color .4s;
+    }
+    .duo-photo:hover { border-color: var(--gold); }
+    .duo-photo img {
+      display: block; width: 100%; height: 210px;
+      object-fit: cover; object-position: top center;
+      transition: transform .6s ease;
+      filter: brightness(1.01) saturate(1.05);
+    }
+    .duo-photo:hover img { transform: scale(1.05); }
+    .duo-photo::after {
+      content: '';
+      position: absolute; inset: 0; pointer-events: none;
+      background: linear-gradient(to bottom, transparent 50%, rgba(8,7,5,.55));
+    }
+
+    /* ── photo mobile ── */
+    @media (max-width: 600px) {
+      .hero-frame { width: 170px; }
+      .hero-frame img { height: 230px; }
+      .then-now-grid { grid-template-columns: 1fr 28px 1fr; }
+      .photo-card img { height: 170px; }
+      .duo-photo img { height: 160px; }
+      .tn-line { height: 40px; }
+    }
+
     /* very small phones */
     @media (max-width: 360px) {
       .frame-inner { padding: 26px 16px 24px; }
@@ -682,6 +880,15 @@
         </svg>
       </div>
 
+      <!-- Hero vintage photo -->
+      <div class="fade-up hero-photo-wrap">
+        <div class="hero-frame">
+          <div class="hero-arch-ring"></div>
+          <img src="photo/vintage.jpg" alt="Ruta & Anant — Then" loading="eager"/>
+          <div class="hero-label">२५ वर्षांचा प्रवास · Est. 2000</div>
+        </div>
+      </div>
+
       <!-- content -->
       <div class="fade-up pre-header">With Hearts Full of Gratitude &amp; Joy</div>
 
@@ -771,6 +978,34 @@
         <div class="divider-line"></div>
       </div>
 
+      <!-- Then & Now -->
+      <div class="then-now-section" id="thenNow">
+        <div class="then-now-title">Then &amp; Now</div>
+        <div class="then-now-grid">
+          <div class="photo-card then-card">
+            <img src="photo/vintage.jpg" alt="Then — 2000"/>
+            <div class="photo-caption">
+              <span class="yr">2000</span>
+              <span class="lbl">How it began</span>
+            </div>
+          </div>
+          <div class="then-now-mid">
+            <div class="tn-line"></div>
+            <div class="tn-heart">♥</div>
+            <div class="tn-yrs">25 Years</div>
+            <div class="tn-heart">♥</div>
+            <div class="tn-line"></div>
+          </div>
+          <div class="photo-card now-card">
+            <img src="photo/traditional.jpg" alt="Now — 2025"/>
+            <div class="photo-caption">
+              <span class="yr">2025</span>
+              <span class="lbl">Still going strong</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
       <!-- intro -->
       <div class="fade-up welcome-deva">आपले स्वागत आहे</div>
       <p class="fade-up intro">
@@ -831,8 +1066,8 @@
             <circle cx="11" cy="9" r="2.5" stroke="#C9A96E" stroke-width="1"/>
           </svg>
           <span class="detail-label">Venue</span>
-          <span class="detail-value">To Be Announced</span>
-          <span class="detail-note">Details to follow</span>
+          <span class="detail-value">Midland, Ghansoli</span>
+          <span class="detail-note" style="font-size:.75rem;line-height:1.5;">Manoshi Complex, Plot 5&6,<br/>Sector 3, Ghansoli,<br/>Navi Mumbai 400701</span>
         </div>
         <div class="detail-sep"></div>
         <div class="detail-box">
@@ -853,6 +1088,19 @@
           प्रेम, विश्वास आणि साथ — पंचवीस वर्षांचा सुंदर प्रवास
         </span>
       </p>
+
+      <!-- Photo duo -->
+      <div class="photo-duo-section" id="photoDuo">
+        <div class="photo-duo-title">Moments Together</div>
+        <div class="photo-duo-grid">
+          <div class="duo-photo">
+            <img src="photo/candid.jpg" alt="Ruta & Anant"/>
+          </div>
+          <div class="duo-photo">
+            <img src="photo/casual.jpg" alt="Ruta & Anant"/>
+          </div>
+        </div>
+      </div>
 
       <!-- RSVP -->
       <div class="fade-up rsvp-wrap">
@@ -917,6 +1165,13 @@
     `;
     dust.appendChild(s);
   }
+
+  /* scroll reveal for photo sections */
+  const revealEls = document.querySelectorAll('.then-now-section, .photo-duo-section');
+  const revealIO = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => revealIO.observe(el));
 
   /* RSVP logic */
   function submitRSVP() {
