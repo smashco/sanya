@@ -465,9 +465,11 @@ footer{
   .names{margin-bottom:8px}
 
   /* ── THEN & NOW — stack vertically ── */
+  .then-now{padding:0 16px 44px}
+  .tn-title{padding:0;margin-bottom:16px}
   .tn-split{
     display:flex;flex-direction:column;align-items:stretch;
-    gap:10px;padding:0 16px;
+    gap:10px;padding:0;max-width:100%;
   }
   .tn-photo img{height:clamp(200px,62vw,270px)}
   .tn-mid{
@@ -486,11 +488,12 @@ footer{
 
   /* ── EVENT DETAILS ── */
   .ev-section{padding:0 16px 44px}
-  .ev-grid{grid-template-columns:1fr;padding:0}
+  .ev-grid{grid-template-columns:1fr;padding:0;margin:0}
   .ev-sep{display:none}
   .ev-box{
-    padding:14px 8px;
+    padding:16px 0;
     border-bottom:1px solid rgba(139,105,20,.18);
+    text-align:center;
   }
   .ev-box:last-child{border-bottom:none}
   .maps-link{margin-top:10px;font-size:.58rem}
@@ -500,7 +503,7 @@ footer{
 
   /* ── MOMENTS — single column ── */
   .moments{padding:0 16px 44px}
-  .mom-grid{grid-template-columns:1fr;gap:10px}
+  .mom-grid{grid-template-columns:1fr;gap:10px;margin:0}
   .mom-ph img{height:clamp(220px,66vw,320px);object-position:center center}
 
   /* ── RSVP ── */
