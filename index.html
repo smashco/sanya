@@ -404,7 +404,7 @@
       gap: 0;
       max-width: 860px;
       margin: 0 auto;
-      align-items: center;
+      align-items: stretch;
     }
 
     .detail-card {
@@ -414,6 +414,9 @@
       border: 1px solid rgba(201,169,110,0.2);
       border-radius: 8px;
       transition: border-color 0.3s, box-shadow 0.3s;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
     .detail-card:hover {
@@ -809,6 +812,36 @@
       transform: translateX(0);
     }
 
+    /* ===================== VENUE LIGHTBOX ===================== */
+    #venue-lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      z-index: 9999;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      cursor: zoom-out;
+    }
+    #venue-lightbox img {
+      max-width: 92vw;
+      max-height: 88vh;
+      border-radius: 12px;
+      box-shadow: 0 8px 48px rgba(0,0,0,0.5);
+      object-fit: contain;
+    }
+    #venue-lightbox-close {
+      position: absolute;
+      top: 18px;
+      right: 22px;
+      color: white;
+      font-size: 2rem;
+      cursor: pointer;
+      line-height: 1;
+      opacity: 0.8;
+    }
+
     /* ===================== RESPONSIVE ===================== */
     @media (max-width: 600px) {
       .botanical-border-top,
@@ -1130,7 +1163,7 @@
 
       <div class="detail-card reveal-right">
         <div class="detail-icon-wrap">
-          <img src="photo/venue.jpeg" alt="Grand Mookambika" style="width:100%;max-width:220px;border-radius:8px;display:block;margin:0 auto 4px;box-shadow:0 2px 12px rgba(0,0,0,0.1)"/>
+          <img src="photo/venue.jpeg" alt="Grand Mookambika" onclick="document.getElementById('venue-lightbox').style.display='flex'" style="width:100%;max-width:220px;border-radius:8px;display:block;margin:0 auto 4px;box-shadow:0 2px 12px rgba(0,0,0,0.1);cursor:zoom-in;transition:transform 0.2s" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'"/>
         </div>
         <h3>Venue</h3>
         <div class="detail-main">Grand Mookambika</div>
@@ -1293,6 +1326,12 @@
   </div>
   <div class="footer-tagline reveal">25 Years of Love in Bloom · शुभ रौप्य महोत्सव</div>
 </footer>
+
+<!-- ======================== VENUE LIGHTBOX ======================== -->
+<div id="venue-lightbox" onclick="this.style.display='none'">
+  <span id="venue-lightbox-close" onclick="document.getElementById('venue-lightbox').style.display='none'">&times;</span>
+  <img src="photo/venue.jpeg" alt="Grand Mookambika" />
+</div>
 
 <!-- ======================== SCRIPTS ======================== -->
 <script>
